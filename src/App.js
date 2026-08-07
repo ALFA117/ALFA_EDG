@@ -12,7 +12,7 @@ function App() {
       <div className="bg-glow bg-glow--purple" aria-hidden="true" />
 
       <header className="nav">
-        <span className="nav__brand">ALFA_EDG</span>
+        <span className="nav__brand">ALFA-EDG</span>
         <a className="nav__cta" href="#contacto">Contacto</a>
       </header>
 
@@ -53,7 +53,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <span>ALFA_EDG © {new Date().getFullYear()}</span>
+        <span>ALFA-EDG © {new Date().getFullYear()}</span>
       </footer>
     </div>
   );
