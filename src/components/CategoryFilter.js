@@ -1,15 +1,18 @@
 import React from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 function CategoryFilter({ categories, activeCategory, onCategoryChange }) {
+  const { categories: labels } = useLanguage();
+
   return (
-    <div className="category-filter" role="group" aria-label="Filtrar por categoría">
+    <div className="category-filter" role="group" aria-label={labels.all}>
       <button
         type="button"
         className={'category-filter__chip' + (activeCategory === null ? ' is-active' : '')}
         onClick={() => onCategoryChange(null)}
         aria-pressed={activeCategory === null}
       >
-        Todo
+        {labels.all}
       </button>
       {categories.map((category) => (
         <button
@@ -21,7 +24,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange }) {
           onClick={() => onCategoryChange(category)}
           aria-pressed={activeCategory === category}
         >
-          {category}
+          {labels[category] || category}
         </button>
       ))}
     </div>

@@ -1,8 +1,11 @@
 import React from 'react';
 import { ExternalLinkIcon } from './Icons';
 import SwapKnot from './SwapKnot';
+import { useLanguage } from '../i18n/LanguageContext';
 
 function ProjectRow({ name, alias, tag, description, url, showKnot, index }) {
+  const { t } = useLanguage();
+
   return (
     <a
       className="project-row"
@@ -13,7 +16,7 @@ function ProjectRow({ name, alias, tag, description, url, showKnot, index }) {
     >
       <span className="project-row__status">
         <span className="project-row__dot" aria-hidden="true" />
-        <span className="project-row__status-label">En vivo</span>
+        <span className="project-row__status-label">{t.projectRow.live}</span>
       </span>
 
       <span className="project-row__main">

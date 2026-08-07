@@ -38,7 +38,7 @@
 .nav__brand .swap-knot {
   color: var(--color-signal);
   filter: drop-shadow(0 0 0 transparent);
-  transition: filter 250ms ease;
+  transition: filter 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav__brand:hover .swap-knot,
@@ -63,7 +63,7 @@
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--color-ink);
-  transition: color 200ms ease, border-color 200ms ease, background 200ms ease;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms cubic-bezier(0.16, 1, 0.3, 1), background 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav__link:hover,
@@ -80,7 +80,7 @@
   border-radius: 50%;
   background: var(--color-circuit);
   margin-right: 9px;
-  transition: background 200ms ease, box-shadow 200ms ease;
+  transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav__link:hover,
@@ -92,6 +92,41 @@
 .nav__link.is-active::before {
   background: var(--color-signal);
   box-shadow: 0 0 6px var(--color-signal);
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: none;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lang-toggle:hover {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
+  box-shadow: 0 0 10px rgba(var(--color-signal-rgb), 0.25);
+}
+
+.lang-toggle:active {
+  transform: scale(0.94);
 }
 
 /* ---------- Layout ---------- */
@@ -190,7 +225,7 @@ section {
   font-weight: 500;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn--primary {
@@ -207,7 +242,7 @@ section {
 
 .btn__arrow {
   display: inline-block;
-  transition: transform 200ms ease;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn--primary:hover .btn__arrow,
@@ -242,6 +277,23 @@ section {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible .ethos__item {
+  animation: ethos-in 550ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes ethos-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ethos__item:hover {
+  transform: translateY(-3px);
 }
 
 .ethos__dot {
@@ -344,7 +396,7 @@ section {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   cursor: pointer;
-  transition: border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  transition: border-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .category-filter__chip:hover {
@@ -376,7 +428,7 @@ section {
   border-bottom: 1px solid var(--color-border);
   animation: row-in 400ms ease backwards;
   animation-delay: var(--delay, 0ms);
-  transition: background 200ms ease;
+  transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes row-in {
@@ -443,7 +495,7 @@ section {
 .project-row__knot {
   color: var(--color-signal);
   filter: drop-shadow(0 0 0 transparent);
-  transition: filter 250ms ease;
+  transition: filter 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-row:hover .project-row__knot {
@@ -474,7 +526,7 @@ section {
 
 .project-row__link-icon {
   color: var(--color-circuit);
-  transition: color 200ms ease, transform 200ms ease;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-row:hover .project-row__link-icon {
@@ -487,7 +539,7 @@ section {
 .swap-knot__arc,
 .swap-knot__pin {
   transform-origin: 24px 24px;
-  transition: transform 250ms ease;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav__brand:hover .swap-knot__arc--a,
@@ -568,7 +620,7 @@ section {
   color: var(--color-ink);
   font-size: 1.05rem;
   cursor: pointer;
-  transition: border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  transition: border-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .photo-reel__nav:hover {
@@ -617,7 +669,7 @@ section {
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--color-ink);
-  transition: border-color 200ms ease, color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  transition: border-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .social-bar__link:hover,
@@ -662,8 +714,15 @@ section {
 
 @media (max-width: 640px) {
   .nav {
+    flex-wrap: wrap;
+    row-gap: 10px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .nav__right {
+    flex-basis: 100%;
+    justify-content: flex-end;
   }
 
   .nav__brand {
@@ -672,16 +731,23 @@ section {
   }
 
   .nav__links {
-    gap: 2px;
+    gap: 6px;
   }
 
   .nav__link {
-    padding: 0 5px;
-    font-size: 0.7rem;
+    padding: 0 10px;
+    font-size: 0.82rem;
   }
 
-  .nav__link::before {
-    margin-right: 4px;
+  .nav__right {
+    gap: 10px;
+  }
+
+  .lang-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 0.78rem;
   }
 
   .ethos__grid {

@@ -47,7 +47,4 @@ export const photos = [
   { src: p21, width: 1013, height: 1800, ratio: 0.5628 },
   { src: p22, width: 1350, height: 1800, ratio: 0.75 },
   { src: p23, width: 1013, height: 1800, ratio: 0.5628 },
-].map((photo, index) => ({
-  ...photo,
-  alt: `ALFA-EDG — registro fotográfico ${index + 1}`,
-}));
+];

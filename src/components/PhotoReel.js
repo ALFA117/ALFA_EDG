@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 function shuffle(array) {
   const copy = [...array];
@@ -16,6 +17,7 @@ function prefersReducedMotion() {
 const AUTOPLAY_MS = 5000;
 
 function PhotoReel({ photos }) {
+  const { t } = useLanguage();
   const orderRef = useRef(shuffle(photos));
   const order = orderRef.current;
   const keyCounter = useRef(1);
@@ -74,7 +76,7 @@ function PhotoReel({ photos }) {
         className="photo-reel__frame"
         style={{ '--ratio': current.photo.ratio }}
         role="region"
-        aria-label="Registro fotográfico"
+        aria-label={t.photoReel.region}
         tabIndex={0}
         onKeyDown={handleKeyDown}
       >
@@ -92,21 +94,21 @@ function PhotoReel({ photos }) {
           key={`cur-${current.key}`}
           className="photo-reel__image photo-reel__image--in"
           src={current.photo.src}
-          alt={current.photo.alt}
+          alt={`${t.photoReel.altPrefix} ${index + 1}`}
           width={current.photo.width}
           height={current.photo.height}
         />
       </div>
 
       <div className="photo-reel__controls">
-        <button type="button" className="photo-reel__nav" onClick={() => step(-1)} aria-label="Foto anterior">
+        <button type="button" className="photo-reel__nav" onClick={() => step(-1)} aria-label={t.photoReel.prev}>
           ←
         </button>
         <button
           type="button"
           className="photo-reel__nav"
           onClick={() => setIsPlaying((p) => !p)}
-          aria-label={isPlaying ? 'Pausar carrusel' : 'Reproducir carrusel'}
+          aria-label={isPlaying ? t.photoReel.pause : t.photoReel.play}
           aria-pressed={isPlaying}
         >
           {isPlaying ? '❙❙' : '▶'}
@@ -114,7 +116,7 @@ function PhotoReel({ photos }) {
         <span className="photo-reel__counter">
           {String(index + 1).padStart(2, '0')} / {String(order.length).padStart(2, '0')}
         </span>
-        <button type="button" className="photo-reel__nav" onClick={() => step(1)} aria-label="Siguiente foto">
+        <button type="button" className="photo-reel__nav" onClick={() => step(1)} aria-label={t.photoReel.next}>
           →
         </button>
       </div>

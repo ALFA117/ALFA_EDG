@@ -9,6 +9,8 @@ const LINK_DISTANCE = 140;
 const DENSITY = 1 / 9000;
 const MIN_PARTICLES = 24;
 const MAX_PARTICLES = 90;
+const PARALLAX_STRENGTH = 16;
+const PARALLAX_EASE = 0.06;
 
 function ParticleField() {
   const canvasRef = useRef(null);
@@ -24,6 +26,11 @@ function ParticleField() {
     let particles = [];
     let animationId = null;
     let resizeTimeout = null;
+
+    let targetX = 0;
+    let targetY = 0;
+    let offsetX = 0;
+    let offsetY = 0;
 
     function createParticle() {
       const depth = 0.4 + Math.random() * 0.6;
@@ -51,10 +58,16 @@ function ParticleField() {
     function draw() {
       ctx.clearRect(0, 0, width, height);
 
-      for (let i = 0; i < particles.length; i += 1) {
-        for (let j = i + 1; j < particles.length; j += 1) {
-          const a = particles[i];
-          const b = particles[j];
+      const positions = particles.map((p) => ({
+        x: p.x + offsetX * p.depth,
+        y: p.y + offsetY * p.depth,
+        depth: p.depth,
+      }));
+
+      for (let i = 0; i < positions.length; i += 1) {
+        for (let j = i + 1; j < positions.length; j += 1) {
+          const a = positions[i];
+          const b = positions[j];
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
@@ -70,7 +83,7 @@ function ParticleField() {
         }
       }
 
-      particles.forEach((p) => {
+      positions.forEach((p) => {
         const r = 1 + p.depth * 1.4;
         ctx.beginPath();
         ctx.fillStyle = `rgba(${PARTICLE_RGB}, ${0.25 + p.depth * 0.35})`;
@@ -86,6 +99,8 @@ function ParticleField() {
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
       });
+      offsetX += (targetX - offsetX) * PARALLAX_EASE;
+      offsetY += (targetY - offsetY) * PARALLAX_EASE;
       draw();
       animationId = requestAnimationFrame(step);
     }
@@ -98,11 +113,17 @@ function ParticleField() {
       }, 200);
     }
 
+    function handlePointerMove(event) {
+      targetX = ((event.clientX / width) * 2 - 1) * PARALLAX_STRENGTH;
+      targetY = ((event.clientY / height) * 2 - 1) * PARALLAX_STRENGTH;
+    }
+
     resize();
     if (reduced) {
       draw();
     } else {
       step();
+      window.addEventListener('pointermove', handlePointerMove);
     }
     window.addEventListener('resize', handleResize);
 
@@ -110,6 +131,7 @@ function ParticleField() {
       if (animationId) cancelAnimationFrame(animationId);
       clearTimeout(resizeTimeout);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('pointermove', handlePointerMove);
     };
   }, []);
 
