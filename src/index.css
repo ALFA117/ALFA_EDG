@@ -24,7 +24,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-void);
+  background: var(--color-void) url('./assets/alfa-pattern.svg') repeat;
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;

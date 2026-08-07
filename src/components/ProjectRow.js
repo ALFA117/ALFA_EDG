@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLinkIcon } from './Icons';
-import SwapKnot from './SwapKnot';
+import AlfaMark from './AlfaMark';
 import { useLanguage } from '../i18n/LanguageContext';
 
 function ProjectRow({ name, alias, tag, description, url, showKnot, index }) {
@@ -23,7 +23,7 @@ function ProjectRow({ name, alias, tag, description, url, showKnot, index }) {
         <span className="project-row__name">
           {name}
           {alias && <span className="project-row__alias"> · {alias}</span>}
-          {showKnot && <SwapKnot className="project-row__knot" size={18} />}
+          {showKnot && <AlfaMark className="project-row__knot" />}
         </span>
         <span className="project-row__description">{description}</span>
       </span>

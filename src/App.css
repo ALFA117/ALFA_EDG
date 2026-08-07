@@ -8,6 +8,40 @@
   display: block;
 }
 
+/* ---------- Alfa mark ---------- */
+
+.alfa-mark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.alfa-mark--badge {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--color-signal);
+  color: var(--color-void);
+  font-size: 17px;
+  transition: box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav__brand:hover .alfa-mark--badge,
+.nav__brand:focus-visible .alfa-mark--badge {
+  box-shadow: 0 0 14px rgba(var(--color-signal-rgb), 0.6);
+  transform: scale(1.08);
+}
+
+.alfa-mark--ghost {
+  font-size: clamp(220px, 30vw, 460px);
+}
+
 /* ---------- Nav ---------- */
 
 .nav {
@@ -33,17 +67,6 @@
   font-size: 1.1rem;
   letter-spacing: 0.01em;
   color: var(--color-ink);
-}
-
-.nav__brand .swap-knot {
-  color: var(--color-signal);
-  filter: drop-shadow(0 0 0 transparent);
-  transition: filter 250ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav__brand:hover .swap-knot,
-.nav__brand:focus-visible .swap-knot {
-  filter: drop-shadow(0 0 6px var(--color-signal));
 }
 
 .nav__links {
@@ -154,7 +177,7 @@ section {
   top: -30px;
   right: -20px;
   color: var(--color-circuit);
-  opacity: 0.55;
+  opacity: 0.3;
   z-index: 0;
   pointer-events: none;
 }
@@ -493,13 +516,16 @@ section {
 }
 
 .project-row__knot {
-  color: var(--color-signal);
-  filter: drop-shadow(0 0 0 transparent);
-  transition: filter 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  box-shadow: 0 0 0 transparent;
 }
 
 .project-row:hover .project-row__knot {
-  filter: drop-shadow(0 0 5px var(--color-signal));
+  box-shadow: 0 0 10px rgba(var(--color-signal-rgb), 0.55);
+  transform: scale(1.08);
 }
 
 .project-row__description {
@@ -532,24 +558,6 @@ section {
 .project-row:hover .project-row__link-icon {
   color: var(--color-signal);
   transform: translate(2px, -2px);
-}
-
-/* ---------- Swap Knot motion ---------- */
-
-.swap-knot__arc,
-.swap-knot__pin {
-  transform-origin: 24px 24px;
-  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav__brand:hover .swap-knot__arc--a,
-.project-row:hover .project-row__knot .swap-knot__arc--a {
-  transform: rotate(10deg);
-}
-
-.nav__brand:hover .swap-knot__arc--b,
-.project-row:hover .project-row__knot .swap-knot__arc--b {
-  transform: rotate(-10deg);
 }
 
 /* ---------- Photo reel ---------- */

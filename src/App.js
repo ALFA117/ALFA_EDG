@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import './App.css';
 import { projects, socials } from './projectsData';
 import { photos } from './photosData';
-import SwapKnot from './components/SwapKnot';
+import AlfaMark from './components/AlfaMark';
 import ParticleField from './components/ParticleField';
 import ProjectRow from './components/ProjectRow';
 import CategoryFilter from './components/CategoryFilter';
@@ -56,7 +56,7 @@ function App() {
       <ParticleField />
       <header className="nav">
         <a href="#top" className="nav__brand">
-          <SwapKnot size={22} />
+          <AlfaMark />
           ALFA-EDG
         </a>
         <div className="nav__right">
@@ -86,7 +86,7 @@ function App() {
 
       <main>
         <section id="top" className="hero">
-          <SwapKnot className="hero__watermark" size={280} />
+          <AlfaMark variant="ghost" className="hero__watermark" />
           <span className="hero__eyebrow">{t.hero.eyebrow}</span>
           <h1 className="hero__title">{t.hero.title}</h1>
           <p className="hero__subtitle">{t.hero.subtitle(projects.length)}</p>
