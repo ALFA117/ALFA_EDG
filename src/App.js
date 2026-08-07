@@ -61,18 +61,21 @@ function App() {
       <main>
         <section id="top" className="hero">
           <SwapKnot className="hero__watermark" size={280} />
-          <span className="hero__eyebrow">Full-stack · Web3 + IA</span>
+          <span className="hero__eyebrow">
+            Full-Stack · Web3 + IA · Mobile · Frontend · Backend · Bases de datos
+          </span>
           <h1 className="hero__title">
-            Construyo infraestructura para mover valor sin custodios.
+            Construyo apps para mover tu dinero sin intermediarios.
           </h1>
           <p className="hero__subtitle">
-            Sling Chain: swaps cross-chain atómicos vía HTLC, sin KYC ni
-            custodios. Además, agentes de IA on-device, DeFi, seguridad
-            on-chain y gaming — {projects.length} proyectos en producción.
+            Con Sling Chain cambias una cripto por otra directo con otra
+            persona, sin bancos ni nadie más controlando tu dinero. También
+            hago apps con inteligencia artificial, juegos y herramientas de
+            seguridad — ya son {projects.length} proyectos funcionando de verdad.
           </p>
           <div className="hero__actions">
             <a className="btn btn--primary" href="#proyectos">
-              Ver el registro <span className="btn__arrow">→</span>
+              Ver mis proyectos <span className="btn__arrow">→</span>
             </a>
           </div>
         </section>
