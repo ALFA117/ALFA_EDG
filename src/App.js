@@ -1,56 +1,107 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css';
 import { projects, socials } from './projectsData';
-import ProjectCard from './components/ProjectCard';
+import { photos } from './photosData';
+import SwapKnot from './components/SwapKnot';
+import IndexRail from './components/IndexRail';
+import ProjectRow from './components/ProjectRow';
+import PhotoReel from './components/PhotoReel';
 import SocialBar from './components/SocialBar';
+import Reveal from './components/Reveal';
+import { useScrollSpy } from './hooks/useScrollSpy';
+
+const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Freelance', 'Otros'];
 
 function App() {
+  const [activeCategory, setActiveCategory] = useState(null);
+  const activeSection = useScrollSpy(['proyectos', 'fotos', 'contacto']);
+
+  const categories = useMemo(() => {
+    const present = new Set(projects.map((p) => p.bucket));
+    return BUCKET_ORDER.filter((bucket) => present.has(bucket));
+  }, []);
+
+  const filteredProjects = useMemo(
+    () =>
+      activeCategory
+        ? projects.filter((p) => p.bucket === activeCategory)
+        : projects,
+    [activeCategory]
+  );
+
   return (
     <div className="page">
-      <div className="bg-grid" aria-hidden="true" />
-      <div className="bg-glow bg-glow--cyan" aria-hidden="true" />
-      <div className="bg-glow bg-glow--purple" aria-hidden="true" />
-
       <header className="nav">
-        <span className="nav__brand">ALFA-EDG</span>
-        <a className="nav__cta" href="#contacto">Contacto</a>
+        <a href="#top" className="nav__brand">
+          <SwapKnot size={22} />
+          ALFA-EDG
+        </a>
+        <a className="nav__cta" href="#contacto">
+          Contacto
+        </a>
       </header>
 
-      <main>
-        <section className="hero">
-          <span className="hero__eyebrow">Desarrollador · IA &amp; Web3</span>
-          <h1 className="hero__title">
-            Construyo productos digitales
-            <span className="hero__title-accent"> en producción.</span>
-          </h1>
-          <p className="hero__subtitle">
-            Portafolio de proyectos activos: IA, Web3 y aplicaciones full-stack
-            desplegadas y funcionando en vivo.
-          </p>
-          <div className="hero__actions">
-            <a className="btn btn--primary" href="#proyectos">Ver proyectos</a>
-            <a className="btn btn--ghost" href="#contacto">Hablemos</a>
-          </div>
-        </section>
+      <div className="layout">
+        <IndexRail
+          activeSection={activeSection}
+          categories={categories}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
 
-        <section className="projects" id="proyectos">
-          <div className="section-heading">
-            <h2>Proyectos</h2>
-            <span className="section-heading__count">{projects.length} en vivo</span>
-          </div>
-          <div className="projects__grid">
-            {projects.map((project, index) => (
-              <ProjectCard key={`${project.url}-${index}`} index={index} {...project} />
-            ))}
-          </div>
-        </section>
+        <main>
+          <section id="top" className="hero">
+            <SwapKnot className="hero__watermark" size={280} />
+            <span className="hero__eyebrow">Full-stack · Web3 + IA</span>
+            <h1 className="hero__title">
+              Construyo infraestructura para mover valor sin custodios.
+            </h1>
+            <p className="hero__subtitle">
+              Sling Chain: swaps cross-chain atómicos vía HTLC, sin KYC ni
+              custodios. Además, agentes de IA on-device, DeFi, seguridad
+              on-chain y gaming — {projects.length} proyectos en producción.
+            </p>
+            <div className="hero__actions">
+              <a className="btn btn--primary" href="#proyectos">
+                Ver el registro →
+              </a>
+            </div>
+          </section>
 
-        <section className="contact" id="contacto">
-          <h2>Conectemos</h2>
-          <p>Sígueme o escríbeme directo por WhatsApp para hablar de tu proyecto.</p>
-          <SocialBar items={socials} />
-        </section>
-      </main>
+          <Reveal as="section" id="proyectos" className="registry">
+            <div className="section-heading">
+              <h2>Registro de proyectos</h2>
+              <span className="section-heading__stamp">
+                {projects.length} activos
+              </span>
+            </div>
+            <div className="registry__list">
+              {filteredProjects.map((project, index) => (
+                <ProjectRow
+                  key={`${project.url}-${index}`}
+                  index={index}
+                  showKnot={project.name === 'AVAL'}
+                  {...project}
+                />
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal as="section" id="fotos" className="field">
+            <div className="section-heading">
+              <h2>En campo</h2>
+              <span className="section-heading__stamp">{photos.length} fotos</span>
+            </div>
+            <PhotoReel photos={photos} />
+          </Reveal>
+
+          <Reveal as="section" id="contacto" className="contact">
+            <h2>Contacto</h2>
+            <p>Sígueme o escríbeme directo por WhatsApp para hablar de tu proyecto.</p>
+            <SocialBar items={socials} />
+          </Reveal>
+        </main>
+      </div>
 
       <footer className="footer">
         <span>ALFA-EDG © {new Date().getFullYear()}</span>

@@ -1,15 +1,17 @@
 :root {
-  --color-primary: #00ffff;
-  --color-secondary: #7b61ff;
-  --color-accent: #ff00ff;
-  --color-background: #050510;
-  --color-surface: #101823;
-  --color-surface-2: #161f2e;
-  --color-foreground: #e0e0ff;
-  --color-muted: #94a3b8;
-  --color-border: #333344;
-  --font-heading: 'Space Grotesk', 'Segoe UI', sans-serif;
-  --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+  --color-ink: #16130f;
+  --color-vault: #221d17;
+  --color-vault-2: #2c251c;
+  --color-brass: #c99a3e;
+  --color-steel: #5b6b7a;
+  --color-steel-soft: #a79b8c;
+  --color-ember: #d96c3f;
+  --color-parchment: #ede6da;
+  --color-border: #3a332a;
+
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Public Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
 }
 
 * {
@@ -22,8 +24,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--color-ink);
+  color: var(--color-parchment);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,9 +37,9 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-brass);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,10 +50,10 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--font-mono);
 }

@@ -1,6 +1,6 @@
 {
   "short_name": "ALFA-EDG",
-  "name": "ALFA-EDG — Portafolio",
+  "name": "ALFA-EDG — Registro de proyectos",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#050510",
-  "background_color": "#050510"
+  "theme_color": "#16130F",
+  "background_color": "#16130F"
 }

@@ -38,6 +38,31 @@ export function WhatsAppIcon(props) {
   );
 }
 
+export function TelegramIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="m21 4-3 16.5-6-4.8-3 2.8v-4.4L18.5 6.5 6.5 12.8 3 11.5Z" />
+    </svg>
+  );
+}
+
+export function MailIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 6.5 8 6.5 8-6.5" />
+    </svg>
+  );
+}
+
+export function FacebookIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M15 8h-2c-1.1 0-2 .9-2 2v2H9v3h2v6h3v-6h2.2l.5-3H14v-1.6c0-.5.4-.9.9-.9H16V8Z" />
+    </svg>
+  );
+}
+
 export function ExternalLinkIcon(props) {
   return (
     <svg {...base} width={16} height={16} {...props} aria-hidden="true">
@@ -51,4 +76,7 @@ export const socialIcons = {
   instagram: InstagramIcon,
   x: XIcon,
   whatsapp: WhatsAppIcon,
+  telegram: TelegramIcon,
+  mail: MailIcon,
+  facebook: FacebookIcon,
 };
