@@ -14,9 +14,14 @@ function ProjectRow({ name, alias, tag, description, url, showKnot, index }) {
       rel="noopener noreferrer"
       style={{ '--delay': `${Math.min(index * 30, 300)}ms` }}
     >
-      <span className="project-row__status">
-        <span className="project-row__dot" aria-hidden="true" />
-        <span className="project-row__status-label">{t.projectRow.live}</span>
+      <span className="project-row__status-col">
+        <span className="project-row__index" aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <span className="project-row__status">
+          <span className="project-row__dot" aria-hidden="true" />
+          <span className="project-row__status-label">{t.projectRow.live}</span>
+        </span>
       </span>
 
       <span className="project-row__main">
