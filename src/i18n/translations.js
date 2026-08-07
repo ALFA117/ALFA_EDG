@@ -31,7 +31,7 @@ export const strings = {
       eyebrow: 'Full-Stack · Web3 + AI · Mobile · Frontend · Backend · Databases',
       title: 'I build apps that move your money without middlemen.',
       subtitle: (n) =>
-        `With Sling Chain you swap one crypto for another directly with someone else — no banks, no one else holding your funds. I also build AI-powered apps, games, and security tools — ${n} projects already live.`,
+        `With Sling Chain you swap one crypto for another directly with someone else — no banks, no one else holding your funds. I also build AI-powered apps, games, security tools, and websites for businesses — ${n} projects already live. Need a site for your business? I build those too.`,
       cta: 'See my projects',
     },
     ethos: {
@@ -79,7 +79,7 @@ export const strings = {
       eyebrow: 'Full-Stack · Web3 + IA · Mobile · Frontend · Backend · Bases de datos',
       title: 'Construyo apps para mover tu dinero sin intermediarios.',
       subtitle: (n) =>
-        `Con Sling Chain cambias una cripto por otra directo con otra persona, sin bancos ni nadie más controlando tu dinero. También hago apps con inteligencia artificial, juegos y herramientas de seguridad — ya son ${n} proyectos funcionando de verdad.`,
+        `Con Sling Chain cambias una cripto por otra directo con otra persona, sin bancos ni nadie más controlando tu dinero. También hago apps con inteligencia artificial, juegos, herramientas de seguridad y páginas web para negocios — ya son ${n} proyectos funcionando de verdad. ¿Necesitas una página para tu negocio? También te la construyo.`,
       cta: 'Ver mis proyectos',
     },
     ethos: {
