@@ -72,10 +72,40 @@ function App() {
           </p>
           <div className="hero__actions">
             <a className="btn btn--primary" href="#proyectos">
-              Ver el registro →
+              Ver el registro <span className="btn__arrow">→</span>
             </a>
           </div>
         </section>
+
+        <Reveal as="section" className="ethos">
+          <span className="ethos__kicker">Cómo construyo</span>
+          <div className="ethos__grid">
+            <div className="ethos__item">
+              <span className="ethos__dot" aria-hidden="true" />
+              <h3>Sin custodios</h3>
+              <p>
+                Los contratos y los HTLC son la única autoridad. Si un swap
+                falla, el timeout regresa los fondos — no un ticket de soporte.
+              </p>
+            </div>
+            <div className="ethos__item">
+              <span className="ethos__dot" aria-hidden="true" />
+              <h3>Producción, no demos</h3>
+              <p>
+                Cada proyecto del registro está deployado y en uso — no es
+                un mockup ni un pitch deck.
+              </p>
+            </div>
+            <div className="ethos__item">
+              <span className="ethos__dot" aria-hidden="true" />
+              <h3>Full-stack real</h3>
+              <p>
+                De la lógica on-chain al frontend que la gente usa: construyo
+                el stack completo, no solo el contrato.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
         <Reveal as="section" id="proyectos" className="registry">
           <div className="section-heading">

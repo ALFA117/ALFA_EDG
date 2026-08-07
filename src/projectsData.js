@@ -38,7 +38,7 @@ export const projects = [
     tag: 'Web3 · Seguridad',
     bucket: 'Seguridad',
     description:
-      'Revisión de contratos y permisos on-chain para detectar exposiciones antes de firmarlas.',
+      'Escanea contratos y permisos on-chain para exponer riesgos de aprobación antes de que se conviertan en un exploit.',
   },
   {
     name: 'Mongli Agent',
@@ -46,7 +46,7 @@ export const projects = [
     tag: 'IA · Agentes',
     bucket: 'IA',
     description:
-      'Agente de IA que automatiza tareas repetitivas sobre datos propios.',
+      'Agente de IA que corre tareas y automatizaciones sobre datos propios, sin flujos manuales de por medio.',
   },
   {
     name: 'Tianguis IA',
@@ -61,7 +61,7 @@ export const projects = [
     url: 'https://mongli-pool.vercel.app/',
     tag: 'Web3 · Pool',
     bucket: 'Infra',
-    description: 'Mecanismo de pool dentro del ecosistema Mongli.',
+    description: 'Mecánica de pool colectivo dentro del ecosistema Mongli.',
   },
   {
     name: 'Mongli Pool',
@@ -69,21 +69,21 @@ export const projects = [
     url: 'https://presentacionde-monglipool.vercel.app/',
     tag: 'Presentación',
     bucket: 'Infra',
-    description: 'Deck de producto de Mongli Pool.',
+    description: 'Deck de producto de Mongli Pool, para llevar el mecanismo a inversores y early users.',
   },
   {
     name: 'Mongli Game',
     url: 'https://mongli-game.vercel.app/',
     tag: 'Gaming',
     bucket: 'Gaming',
-    description: 'Capa gaming del ecosistema Mongli.',
+    description: 'La mecánica de draft de Mongli, llevada a un formato jugable.',
   },
   {
     name: 'Kivo App',
     url: 'https://kivo-app-five.vercel.app/',
     tag: 'Web3 · Stellar',
     bucket: 'Infra',
-    description: 'Aplicación construida sobre la red Stellar.',
+    description: 'App construida sobre la red Stellar, dentro del stack de proyectos Web3 del builder.',
   },
   {
     name: 'Crystal Vanilla',
