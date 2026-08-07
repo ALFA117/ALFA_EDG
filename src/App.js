@@ -3,6 +3,7 @@ import './App.css';
 import { projects, socials } from './projectsData';
 import { photos } from './photosData';
 import SwapKnot from './components/SwapKnot';
+import ParticleField from './components/ParticleField';
 import ProjectRow from './components/ProjectRow';
 import CategoryFilter from './components/CategoryFilter';
 import PhotoReel from './components/PhotoReel';
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <div className="page">
+      <ParticleField />
       <header className="nav">
         <a href="#top" className="nav__brand">
           <SwapKnot size={22} />

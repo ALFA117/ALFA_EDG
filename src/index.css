@@ -1,12 +1,13 @@
 :root {
-  --color-void: #07070c;
-  --color-surface: #10101a;
-  --color-surface-2: #161624;
-  --color-signal: #33f0d6;
-  --color-circuit: #3a4152;
-  --color-ink: #e8ecf2;
-  --color-muted: #8b93a7;
-  --color-border: #22273a;
+  --color-void: #0a0708;
+  --color-surface: #150f10;
+  --color-surface-2: #1c1415;
+  --color-signal: #ff2a4d;
+  --color-signal-rgb: 255, 42, 77;
+  --color-circuit: #3d3438;
+  --color-ink: #f2eaea;
+  --color-muted: #a89b9d;
+  --color-border: #2a2224;
 
   --font-display: 'Syne', 'Segoe UI', sans-serif;
   --font-body: 'Public Sans', 'Segoe UI', sans-serif;
