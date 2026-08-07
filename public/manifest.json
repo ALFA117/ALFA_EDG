@@ -1,6 +1,6 @@
 {
   "short_name": "ALFA-EDG",
-  "name": "ALFA-EDG — Registro de proyectos",
+  "name": "ALFA-EDG — Builder Web3 + IA",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#16130F",
-  "background_color": "#16130F"
+  "theme_color": "#07070C",
+  "background_color": "#07070C"
 }

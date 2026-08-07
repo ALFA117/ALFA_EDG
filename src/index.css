@@ -1,15 +1,14 @@
 :root {
-  --color-ink: #16130f;
-  --color-vault: #221d17;
-  --color-vault-2: #2c251c;
-  --color-brass: #c99a3e;
-  --color-steel: #5b6b7a;
-  --color-steel-soft: #a79b8c;
-  --color-ember: #d96c3f;
-  --color-parchment: #ede6da;
-  --color-border: #3a332a;
+  --color-void: #07070c;
+  --color-surface: #10101a;
+  --color-surface-2: #161624;
+  --color-signal: #33f0d6;
+  --color-circuit: #3a4152;
+  --color-ink: #e8ecf2;
+  --color-muted: #8b93a7;
+  --color-border: #22273a;
 
-  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-display: 'Syne', 'Segoe UI', sans-serif;
   --font-body: 'Public Sans', 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
 }
@@ -24,8 +23,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-ink);
-  color: var(--color-parchment);
+  background: var(--color-void);
+  color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,7 +36,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brass);
+  outline: 2px solid var(--color-signal);
   outline-offset: 3px;
   border-radius: 2px;
 }
