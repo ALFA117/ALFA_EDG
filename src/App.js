@@ -17,13 +17,13 @@ const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Freelance', 'Otros'
 function App() {
   const { language, setLanguage, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
-  const activeSection = useScrollSpy(['proyectos', 'fotos', 'contacto']);
+  const activeSection = useScrollSpy(['fotos', 'contacto', 'proyectos']);
 
   const navLinks = useMemo(
     () => [
-      { id: 'proyectos', label: t.nav.projects },
       { id: 'fotos', label: t.nav.photos },
       { id: 'contacto', label: t.nav.contact },
+      { id: 'proyectos', label: t.nav.projects },
     ],
     [t]
   );
@@ -114,6 +114,20 @@ function App() {
           </div>
         </Reveal>
 
+        <Reveal as="section" id="fotos" className="field">
+          <div className="section-heading">
+            <h2>{t.field.heading}</h2>
+            <span className="section-heading__stamp">{t.field.stamp(photos.length)}</span>
+          </div>
+          <PhotoReel photos={photos} />
+        </Reveal>
+
+        <Reveal as="section" id="contacto" className="contact">
+          <h2>{t.contact.heading}</h2>
+          <p>{t.contact.body}</p>
+          <SocialBar items={socials} />
+        </Reveal>
+
         <Reveal as="section" id="proyectos" className="registry">
           <div className="section-heading">
             <h2>{t.registry.heading}</h2>
@@ -136,20 +150,6 @@ function App() {
               />
             ))}
           </div>
-        </Reveal>
-
-        <Reveal as="section" id="fotos" className="field">
-          <div className="section-heading">
-            <h2>{t.field.heading}</h2>
-            <span className="section-heading__stamp">{t.field.stamp(photos.length)}</span>
-          </div>
-          <PhotoReel photos={photos} />
-        </Reveal>
-
-        <Reveal as="section" id="contacto" className="contact">
-          <h2>{t.contact.heading}</h2>
-          <p>{t.contact.body}</p>
-          <SocialBar items={socials} />
         </Reveal>
       </main>
 
