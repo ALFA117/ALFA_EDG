@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import './App.css';
 import { projects, socials } from './projectsData';
 import { photos } from './photosData';
@@ -14,10 +14,20 @@ import { useLanguage } from './i18n/LanguageContext';
 
 const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Freelance', 'Otros'];
 
+// Three.js/WebGPU es pesado (~400KB) — solo se descarga en navegadores que
+// realmente pueden usarlo, así el resto del sitio no paga ese costo.
+const Hero3D = lazy(() => import('./components/Hero3D'));
+
 function App() {
   const { language, setLanguage, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
   const activeSection = useScrollSpy(['fotos', 'contacto', 'proyectos']);
+  const [hero3dEnabled, setHero3dEnabled] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setHero3dEnabled(!reducedMotion && typeof navigator !== 'undefined' && !!navigator.gpu);
+  }, []);
 
   const navLinks = useMemo(
     () => [
@@ -86,6 +96,11 @@ function App() {
 
       <main>
         <section id="top" className="hero">
+          {hero3dEnabled && (
+            <Suspense fallback={null}>
+              <Hero3D />
+            </Suspense>
+          )}
           <AlfaMark variant="ghost" className="hero__watermark" />
           <span className="hero__eyebrow">{t.hero.eyebrow}</span>
           <h1 className="hero__title">{t.hero.title}</h1>
