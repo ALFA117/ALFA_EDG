@@ -63,7 +63,13 @@ function App() {
 
   return (
     <div className="page">
-      <ParticleField />
+      {hero3dEnabled ? (
+        <Suspense fallback={<ParticleField />}>
+          <Hero3D />
+        </Suspense>
+      ) : (
+        <ParticleField />
+      )}
       <header className="nav">
         <a href="#top" className="nav__brand">
           <AlfaMark />
@@ -96,11 +102,6 @@ function App() {
 
       <main>
         <section id="top" className="hero">
-          {hero3dEnabled && (
-            <Suspense fallback={null}>
-              <Hero3D />
-            </Suspense>
-          )}
           <AlfaMark variant="ghost" className="hero__watermark" />
           <span className="hero__eyebrow">{t.hero.eyebrow}</span>
           <h1 className="hero__title">{t.hero.title}</h1>

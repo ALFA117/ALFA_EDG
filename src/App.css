@@ -8,6 +8,25 @@
   display: block;
 }
 
+.hero3d-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero3d-bg canvas {
+  display: block;
+}
+
+.hero3d-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(10, 7, 8, 0.6);
+}
+
 /* ---------- Alfa mark ---------- */
 
 .alfa-mark {
@@ -174,17 +193,6 @@ section {
   padding-top: clamp(56px, 9vh, 96px);
   padding-bottom: clamp(48px, 7vh, 80px);
   overflow: hidden;
-}
-
-.hero3d {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero3d canvas {
-  display: block;
 }
 
 .hero__watermark {

@@ -29,7 +29,35 @@ extend(THREE);
 const WIDTH = 300;
 const HEIGHT = 300;
 
-function PostProcessing({ strength = 1, threshold = 1, fullScreenEffect = true }) {
+// Cuánto pesa el scroll vs. la deriva "idle" en la animación (0 = solo idle, 1 = solo scroll).
+const SCROLL_INFLUENCE = 0.7;
+
+function useNormalizedScroll() {
+  const scrollRef = useRef(0);
+
+  useEffect(() => {
+    function update() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      scrollRef.current = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  return scrollRef;
+}
+
+function driveValue(clock, scrollRef) {
+  const idle = Math.sin(clock.getElapsedTime() * 0.3) * 0.5 + 0.5;
+  return THREE.MathUtils.lerp(idle, scrollRef.current, SCROLL_INFLUENCE);
+}
+
+function PostProcessing({ scrollRef, strength = 0.6, threshold = 1.1, fullScreenEffect = true }) {
   const { gl, scene, camera } = useThree();
   const progressRef = useRef({ value: 0 });
 
@@ -46,7 +74,7 @@ function PostProcessing({ strength = 1, threshold = 1, fullScreenEffect = true }
     const uvY = uv().y;
     const scanWidth = float(0.05);
     const scanLine = smoothstep(0, scanWidth, abs(uvY.sub(scanPos)));
-    const redOverlay = vec3(1, 0, 0).mul(oneMinus(scanLine)).mul(0.4);
+    const redOverlay = vec3(1, 0, 0).mul(oneMinus(scanLine)).mul(0.25);
 
     const withScanEffect = mix(
       scenePassColor,
@@ -60,14 +88,14 @@ function PostProcessing({ strength = 1, threshold = 1, fullScreenEffect = true }
   }, [camera, gl, scene, strength, threshold, fullScreenEffect]);
 
   useFrame(({ clock }) => {
-    progressRef.current.value = Math.sin(clock.getElapsedTime() * 0.5) * 0.5 + 0.5;
+    progressRef.current.value = driveValue(clock, scrollRef);
     render.renderAsync();
   }, 1);
 
   return null;
 }
 
-function Scene() {
+function Scene({ scrollRef }) {
   const [rawMap, depthMap] = useTexture([TEXTUREMAP_SRC, DEPTHMAP_SRC]);
   const meshRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -79,7 +107,7 @@ function Scene() {
   const { material, uniforms } = useMemo(() => {
     const uPointer = uniform(new THREE.Vector2(0));
     const uProgress = uniform(0);
-    const strength = 0.01;
+    const strength = 0.012;
 
     const tDepthMap = texture(depthMap);
     const tMap = texture(rawMap, uv().add(tDepthMap.r.mul(uPointer).mul(strength)));
@@ -96,7 +124,7 @@ function Scene() {
     const dot = float(smoothstep(0.5, 0.49, dist)).mul(brightness);
 
     const flow = oneMinus(smoothstep(0, 0.02, abs(tDepthMap.sub(uProgress))));
-    const mask = dot.mul(flow).mul(vec3(10, 0, 0));
+    const mask = dot.mul(flow).mul(vec3(5, 0, 0));
     const final = blendScreen(tMap, mask);
 
     const material = new THREE.MeshBasicNodeMaterial({
@@ -111,10 +139,10 @@ function Scene() {
   const [w, h] = useAspect(WIDTH, HEIGHT);
 
   useFrame(({ clock }) => {
-    uniforms.uProgress.value = Math.sin(clock.getElapsedTime() * 0.5) * 0.5 + 0.5;
+    uniforms.uProgress.value = driveValue(clock, scrollRef);
     if (meshRef.current && meshRef.current.material) {
       const mat = meshRef.current.material;
-      mat.opacity = THREE.MathUtils.lerp(mat.opacity, visible ? 1 : 0, 0.07);
+      mat.opacity = THREE.MathUtils.lerp(mat.opacity, visible ? 0.85 : 0, 0.07);
     }
   });
 
@@ -122,7 +150,8 @@ function Scene() {
     uniforms.uPointer.value = pointer;
   });
 
-  const scaleFactor = 0.68;
+  // >1 para cubrir toda la pantalla (antes vivía solo dentro del hero).
+  const scaleFactor = 1.15;
   return (
     <mesh ref={meshRef} scale={[w * scaleFactor, h * scaleFactor, 1]} material={material}>
       <planeGeometry />
@@ -143,6 +172,7 @@ function prefersReducedMotion() {
 
 function Hero3D() {
   const [supported, setSupported] = useState(false);
+  const scrollRef = useNormalizedScroll();
 
   useEffect(() => {
     setSupported(isWebGPUSupported() && !prefersReducedMotion());
@@ -151,21 +181,26 @@ function Hero3D() {
   if (!supported) return null;
 
   return (
-    <div className="hero3d" aria-hidden="true">
-      <Canvas
-        flat
-        gl={async (props) => {
-          const renderer = new THREE.WebGPURenderer(props);
-          await renderer.init();
-          return renderer;
-        }}
-      >
-        <Suspense fallback={null}>
-          <PostProcessing fullScreenEffect />
-          <Scene />
-        </Suspense>
-      </Canvas>
-    </div>
+    <>
+      <div className="hero3d-bg" aria-hidden="true">
+        <Canvas
+          flat
+          eventSource={document.body}
+          eventPrefix="client"
+          gl={async (props) => {
+            const renderer = new THREE.WebGPURenderer(props);
+            await renderer.init();
+            return renderer;
+          }}
+        >
+          <Suspense fallback={null}>
+            <PostProcessing fullScreenEffect scrollRef={scrollRef} />
+            <Scene scrollRef={scrollRef} />
+          </Suspense>
+        </Canvas>
+      </div>
+      <div className="hero3d-scrim" aria-hidden="true" />
+    </>
   );
 }
 
