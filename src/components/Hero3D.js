@@ -76,9 +76,14 @@ function PostProcessing({ scrollRef, strength = 0.6, threshold = 1.1, fullScreen
     const scanLine = smoothstep(0, scanWidth, abs(uvY.sub(scanPos)));
     const redOverlay = vec3(1, 0, 0).mul(oneMinus(scanLine)).mul(0.25);
 
+    // Segunda línea de escaneo, más tenue, moviéndose en espejo — le da más vida.
+    const scanPos2 = float(1).sub(scanPos);
+    const scanLine2 = smoothstep(0, scanWidth, abs(uvY.sub(scanPos2)));
+    const redOverlay2 = vec3(1, 0, 0).mul(oneMinus(scanLine2)).mul(0.12);
+
     const withScanEffect = mix(
       scenePassColor,
-      add(scenePassColor, redOverlay),
+      add(scenePassColor, redOverlay.add(redOverlay2)),
       fullScreenEffect ? smoothstep(0.9, 1.0, oneMinus(scanLine)) : 1.0
     );
 
@@ -137,21 +142,31 @@ function Scene({ scrollRef }) {
   }, [rawMap, depthMap]);
 
   const [w, h] = useAspect(WIDTH, HEIGHT);
+  const scaleFactor = 0.5;
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, pointer }) => {
+    const t = clock.getElapsedTime();
+
     uniforms.uProgress.value = driveValue(clock, scrollRef);
-    if (meshRef.current && meshRef.current.material) {
-      const mat = meshRef.current.material;
-      mat.opacity = THREE.MathUtils.lerp(mat.opacity, visible ? 0.85 : 0, 0.07);
-    }
-  });
-
-  useFrame(({ pointer }) => {
     uniforms.uPointer.value = pointer;
+
+    const mesh = meshRef.current;
+    if (!mesh) return;
+
+    if (mesh.material) {
+      mesh.material.opacity = THREE.MathUtils.lerp(mesh.material.opacity, visible ? 0.85 : 0, 0.07);
+    }
+
+    // Flotación libre + leve inclinación hacia el puntero + respiración de escala.
+    mesh.position.y = Math.sin(t * 0.6) * 0.18;
+    mesh.position.x = Math.cos(t * 0.35) * 0.12;
+    mesh.rotation.z = Math.sin(t * 0.22) * 0.06 + pointer.x * 0.05;
+    mesh.rotation.x = pointer.y * -0.04;
+
+    const breathe = 1 + Math.sin(t * 0.7) * 0.05;
+    mesh.scale.set(w * scaleFactor * breathe, h * scaleFactor * breathe, 1);
   });
 
-  // >1 para cubrir toda la pantalla (antes vivía solo dentro del hero).
-  const scaleFactor = 1.15;
   return (
     <mesh ref={meshRef} scale={[w * scaleFactor, h * scaleFactor, 1]} material={material}>
       <planeGeometry />
