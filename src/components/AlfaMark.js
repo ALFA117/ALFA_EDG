@@ -7,13 +7,16 @@ import React from 'react';
  * "badge" is a filled, colored monogram (nav, project rows).
  * "ghost" is a bare oversized glyph used as a soft background watermark.
  */
-function AlfaMark({ variant = 'badge', className = '', size }) {
+function AlfaMark({ variant = 'badge', className = '', size, title }) {
   const style = size ? { '--alfa-size': `${size}px` } : undefined;
   return (
     <span
       className={`alfa-mark alfa-mark--${variant} ${className}`}
       style={style}
-      aria-hidden="true"
+      title={title}
+      aria-hidden={title ? undefined : 'true'}
+      role={title ? 'img' : undefined}
+      aria-label={title}
     >
       α
     </span>

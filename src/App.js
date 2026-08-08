@@ -5,7 +5,7 @@ import { photos } from './photosData';
 import AlfaMark from './components/AlfaMark';
 import ParticleField from './components/ParticleField';
 import ProjectRow from './components/ProjectRow';
-import CategoryFilter from './components/CategoryFilter';
+import CategoryTabs from './components/CategoryTabs';
 import PhotoReel from './components/PhotoReel';
 import SocialBar from './components/SocialBar';
 import Reveal from './components/Reveal';
@@ -31,9 +31,9 @@ function App() {
 
   const navLinks = useMemo(
     () => [
-      { id: 'fotos', label: t.nav.photos },
-      { id: 'contacto', label: t.nav.contact },
       { id: 'proyectos', label: t.nav.projects },
+      { id: 'contacto', label: t.nav.contact },
+      { id: 'fotos', label: t.nav.photos },
     ],
     [t]
   );
@@ -135,6 +135,7 @@ function App() {
             <h2>{t.field.heading}</h2>
             <span className="section-heading__stamp">{t.field.stamp(photos.length)}</span>
           </div>
+          <p className="field__subtitle">{t.field.subtitle}</p>
           <PhotoReel photos={photos} />
         </Reveal>
 
@@ -151,7 +152,7 @@ function App() {
               {t.registry.stamp(projects.length)}
             </span>
           </div>
-          <CategoryFilter
+          <CategoryTabs
             categories={categories}
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}

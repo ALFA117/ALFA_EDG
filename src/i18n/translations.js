@@ -52,12 +52,16 @@ export const strings = {
       ],
     },
     registry: { heading: 'Project Registry', stamp: (n) => `${n} live` },
-    field: { heading: 'In the Field', stamp: (n) => `${n} photos` },
+    field: {
+      heading: 'In the Field',
+      subtitle: 'Behind the scenes at hackathons and work sessions.',
+      stamp: (n) => `${n} photos`,
+    },
     contact: {
       heading: 'Contact',
       body: 'Follow me or message me directly on WhatsApp to talk about your project.',
     },
-    projectRow: { live: 'Live' },
+    projectRow: { live: 'Live', flagship: 'Flagship project' },
     photoReel: {
       prev: 'Previous photo',
       next: 'Next photo',
@@ -100,12 +104,16 @@ export const strings = {
       ],
     },
     registry: { heading: 'Registro de proyectos', stamp: (n) => `${n} activos` },
-    field: { heading: 'En campo', stamp: (n) => `${n} fotos` },
+    field: {
+      heading: 'En campo',
+      subtitle: 'Detrás de cámaras en hackathons y sesiones de trabajo.',
+      stamp: (n) => `${n} fotos`,
+    },
     contact: {
       heading: 'Contacto',
       body: 'Sígueme o escríbeme directo por WhatsApp para hablar de tu proyecto.',
     },
-    projectRow: { live: 'En vivo' },
+    projectRow: { live: 'En vivo', flagship: 'Proyecto insignia' },
     photoReel: {
       prev: 'Foto anterior',
       next: 'Siguiente foto',

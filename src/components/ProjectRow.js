@@ -28,7 +28,7 @@ function ProjectRow({ name, alias, tag, description, url, showKnot, index }) {
         <span className="project-row__name">
           {name}
           {alias && <span className="project-row__alias"> · {alias}</span>}
-          {showKnot && <AlfaMark className="project-row__knot" />}
+          {showKnot && <AlfaMark className="project-row__knot" title={t.projectRow.flagship} />}
         </span>
         <span className="project-row__description">{description}</span>
       </span>
