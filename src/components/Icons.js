@@ -63,6 +63,18 @@ export function FacebookIcon(props) {
   );
 }
 
+export function LinkedInIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <line x1="7.5" y1="10" x2="7.5" y2="17" />
+      <circle cx="7.5" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+      <path d="M11.5 17v-4.5c0-1.4 1-2.5 2.5-2.5s2.5 1.1 2.5 2.5V17" />
+      <line x1="11.5" y1="10" x2="11.5" y2="17" />
+    </svg>
+  );
+}
+
 export function ExternalLinkIcon(props) {
   return (
     <svg {...base} width={16} height={16} {...props} aria-hidden="true">
@@ -79,4 +91,5 @@ export const socialIcons = {
   telegram: TelegramIcon,
   mail: MailIcon,
   facebook: FacebookIcon,
+  linkedin: LinkedInIcon,
 };

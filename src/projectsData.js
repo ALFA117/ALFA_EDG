@@ -174,4 +174,9 @@ export const socials = [
     url: 'https://www.facebook.com/edgar.lopez.58747?locale=es_LA',
     icon: 'facebook',
   },
+  {
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/edgar-lopez-baeza-6b5a22353',
+    icon: 'linkedin',
+  },
 ];

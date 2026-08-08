@@ -142,7 +142,7 @@ function Scene({ scrollRef }) {
   }, [rawMap, depthMap]);
 
   const [w, h] = useAspect(WIDTH, HEIGHT);
-  const scaleFactor = 1.4;
+  const scaleFactor = 0.9;
 
   useFrame(({ clock, pointer }) => {
     const t = clock.getElapsedTime();
