@@ -24,7 +24,7 @@ export const strings = {
     meta: {
       title: 'ALFA-EDG — Web3 + AI Builder',
       description:
-        'ALFA-EDG — Web3 + AI infrastructure: Sling Chain (cross-chain atomic swaps via HTLC, no KYC, no custodians) and 14 more live projects.',
+        'ALFA-EDG — Web3 + AI infrastructure: Sling Chain (cross-chain atomic swaps via HTLC, no KYC, no custodians) and 15 more live projects.',
     },
     nav: { projects: 'Projects', photos: 'Photos', contact: 'Contact' },
     hero: {
@@ -76,7 +76,7 @@ export const strings = {
     meta: {
       title: 'ALFA-EDG — Builder Web3 + IA',
       description:
-        'ALFA-EDG — Infraestructura Web3 e IA: Sling Chain (swaps cross-chain vía HTLC, sin KYC ni custodios) y 14 proyectos más en producción.',
+        'ALFA-EDG — Infraestructura Web3 e IA: Sling Chain (swaps cross-chain vía HTLC, sin KYC ni custodios) y 15 proyectos más en producción.',
     },
     nav: { projects: 'Proyectos', photos: 'Fotos', contact: 'Contacto' },
     hero: {

@@ -1,5 +1,16 @@
 export const projects = [
   {
+    name: 'AVS',
+    alias: 'Anonymous Venture Syndicate',
+    url: 'https://avs-mou.vercel.app/',
+    bucket: 'Infra',
+    tag: { en: 'Web3 · Solana', es: 'Web3 · Solana' },
+    description: {
+      en: 'Sealed-bid venture syndicates on Solana: investors bid and vote on startup milestones with zero visibility into each other until a simultaneous reveal, using MagicBlock Ephemeral Rollups for gasless, access-controlled privacy. Built for the Solana Blitz V7 Hackathon.',
+      es: 'Syndicates de inversión con pujas selladas en Solana: los inversores pujan y votan hitos de la startup sin visibilidad entre ellos hasta un reveal simultáneo, usando MagicBlock Ephemeral Rollups para privacidad sin gas. Construido para el Solana Blitz V7 Hackathon.',
+    },
+  },
+  {
     name: 'AVAL',
     alias: 'Mou Casper',
     url: 'https://mou-casper.vercel.app/',
