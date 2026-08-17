@@ -24,22 +24,34 @@ export const strings = {
     meta: {
       title: 'ALFA-EDG — Web3 + AI Builder',
       description:
-        'ALFA-EDG — Web3 + AI infrastructure: Sling Chain (cross-chain atomic swaps via HTLC, no KYC, no custodians) and 15 more live projects.',
+        'ALFA-EDG — Web3 + AI infrastructure: 16 live projects, from cross-chain HTLC swaps to autonomous trading agents.',
     },
     nav: { projects: 'Projects', photos: 'Photos', contact: 'Contact' },
     hero: {
       eyebrow: 'Full-Stack · Web3 + AI · Mobile Apps · Websites with Storage',
       title: 'The full-stack developer who ships what others only pitch.',
-      subtitle: (n) =>
-        `Sling Chain moves money between people with no banks and no middlemen — built, deployed, and running, not a demo. I bring that same bar to everything: AI apps, games, security tools, and business websites. ${n} projects in production, backend to frontend, all built by me. Need the developer who actually delivers? Let's talk.`,
+      intro:
+        'I build things that move real value with no shortcuts: contracts as the only authority, code that decides, never a support ticket.',
+      highlights: (n) => [
+        'Real Web3 — sealed-bid rounds with zero collusion, funds that move on-chain.',
+        'AI with skin in the game — agents that stake capital and get penalized on-chain when wrong.',
+        `${n} projects in production, backend to frontend, all built by me.`,
+      ],
+      closing: 'Need the developer who actually delivers? Let’s talk.',
       cta: 'See my projects',
+      chips: { web3: 'Web3', ai: 'AI', security: 'Security' },
+      stats: {
+        projects: 'Projects shipped',
+        categories: 'Disciplines',
+        prod: 'In production',
+      },
     },
     ethos: {
       kicker: 'How I build',
       items: [
         {
           title: 'No custodians',
-          body: 'Contracts and HTLCs are the only authority. If a swap fails, the timeout returns the funds — not a support ticket.',
+          body: 'Contracts are the only authority. Funds move by code — a timeout, an on-chain penalty, a simultaneous reveal — never a support ticket.',
         },
         {
           title: 'Production, not demos',
@@ -51,11 +63,17 @@ export const strings = {
         },
       ],
     },
-    registry: { heading: 'Project Registry', stamp: (n) => `${n} live` },
+    registry: {
+      heading: 'Project Registry',
+      stamp: (n) => `${n} live`,
+      stampSuffix: 'live',
+      columns: { index: '#', name: 'Project', tag: 'Stack', status: 'Status' },
+    },
     field: {
       heading: 'In the Field',
       subtitle: 'Behind the scenes at hackathons and work sessions.',
       stamp: (n) => `${n} photos`,
+      stampSuffix: 'photos',
     },
     contact: {
       heading: 'Contact',
@@ -71,27 +89,41 @@ export const strings = {
       altPrefix: 'ALFA-EDG — field photo',
     },
     langToggle: { label: 'ES', aria: 'Switch to Spanish' },
+    themeToggle: { toDark: 'Switch to dark theme', toLight: 'Switch to light theme' },
+    backToTop: 'Back to top',
   },
   es: {
     meta: {
       title: 'ALFA-EDG — Builder Web3 + IA',
       description:
-        'ALFA-EDG — Infraestructura Web3 e IA: Sling Chain (swaps cross-chain vía HTLC, sin KYC ni custodios) y 15 proyectos más en producción.',
+        'ALFA-EDG — Infraestructura Web3 e IA: 16 proyectos en producción, de swaps cross-chain vía HTLC a agentes de trading autónomos.',
     },
     nav: { projects: 'Proyectos', photos: 'Fotos', contact: 'Contacto' },
     hero: {
       eyebrow: 'Full-Stack · Web3 + IA · Apps móviles · Páginas web con almacenamiento',
       title: 'El desarrollador full-stack que construye lo que otros solo prometen.',
-      subtitle: (n) =>
-        `Sling Chain mueve dinero entre personas sin bancos ni intermediarios — construido, deployado y funcionando, no una demo. Ese mismo nivel lo aplico a todo: apps de inteligencia artificial, juegos, herramientas de seguridad y páginas web para negocios. ${n} proyectos en producción, de backend a frontend, todos hechos por mí. ¿Buscas al desarrollador que sí entrega? Hablemos.`,
+      intro:
+        'Construyo cosas que mueven valor real sin atajos: contratos como única autoridad, código que decide, nunca un ticket de soporte.',
+      highlights: (n) => [
+        'Web3 real — pujas selladas sin colusión, fondos que se mueven on-chain.',
+        'IA con capital propio — agentes que arriesgan y son penalizados on-chain si fallan.',
+        `${n} proyectos en producción, de backend a frontend, todos hechos por mí.`,
+      ],
+      closing: '¿Buscas al desarrollador que sí entrega? Hablemos.',
       cta: 'Ver mis proyectos',
+      chips: { web3: 'Web3', ai: 'IA', security: 'Seguridad' },
+      stats: {
+        projects: 'Proyectos entregados',
+        categories: 'Disciplinas',
+        prod: 'En producción',
+      },
     },
     ethos: {
       kicker: 'Cómo construyo',
       items: [
         {
           title: 'Sin custodios',
-          body: 'Los contratos y los HTLC son la única autoridad. Si un swap falla, el timeout regresa los fondos — no un ticket de soporte.',
+          body: 'Los contratos son la única autoridad. Los fondos se mueven por código — un timeout, una penalización on-chain, un reveal simultáneo — nunca un ticket de soporte.',
         },
         {
           title: 'Producción, no demos',
@@ -103,11 +135,17 @@ export const strings = {
         },
       ],
     },
-    registry: { heading: 'Registro de proyectos', stamp: (n) => `${n} activos` },
+    registry: {
+      heading: 'Registro de proyectos',
+      stamp: (n) => `${n} activos`,
+      stampSuffix: 'activos',
+      columns: { index: '#', name: 'Proyecto', tag: 'Stack', status: 'Estado' },
+    },
     field: {
       heading: 'En campo',
       subtitle: 'Detrás de cámaras en hackathons y sesiones de trabajo.',
       stamp: (n) => `${n} fotos`,
+      stampSuffix: 'fotos',
     },
     contact: {
       heading: 'Contacto',
@@ -123,5 +161,7 @@ export const strings = {
       altPrefix: 'ALFA-EDG — registro fotográfico',
     },
     langToggle: { label: 'EN', aria: 'Cambiar a inglés' },
+    themeToggle: { toDark: 'Cambiar a tema oscuro', toLight: 'Cambiar a tema claro' },
+    backToTop: 'Volver arriba',
   },
 };

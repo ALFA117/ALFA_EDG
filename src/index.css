@@ -1,17 +1,49 @@
 :root {
-  --color-void: #0a0708;
-  --color-surface: #150f10;
-  --color-surface-2: #1c1415;
-  --color-signal: #ff2a4d;
-  --color-signal-rgb: 255, 42, 77;
-  --color-circuit: #3d3438;
-  --color-ink: #f2eaea;
-  --color-muted: #a89b9d;
-  --color-border: #2a2224;
+  --color-void: #07090a;
+  --color-surface: #0e1210;
+  --color-surface-2: #141917;
+  --color-signal: #3ee878;
+  --color-signal-rgb: 62, 232, 120;
+  --color-circuit: #1c2621;
+  --color-ink: #e8efe9;
+  --color-muted: #7c8b81;
+  --color-border: #1c211e;
 
-  --font-display: 'Syne', 'Segoe UI', sans-serif;
-  --font-body: 'Public Sans', 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
+  /* Per-category accents (ANSI-terminal-coded) — the registry's only real
+     source of color variety; everything else stays signal-green. */
+  --cat-infra: #38bdf8;
+  --cat-infra-rgb: 56, 189, 248;
+  --cat-ia: #a78bfa;
+  --cat-ia-rgb: 167, 139, 250;
+  --cat-seguridad: #fb7185;
+  --cat-seguridad-rgb: 251, 113, 133;
+  --cat-gaming: #f472b6;
+  --cat-gaming-rgb: 244, 114, 182;
+  --cat-freelance: #facc15;
+  --cat-freelance-rgb: 250, 204, 21;
+  --cat-otros: #94a3b8;
+  --cat-otros-rgb: 148, 163, 184;
+
+  --font-display: 'JetBrains Mono', 'Consolas', monospace;
+  --font-body: 'JetBrains Mono', 'Consolas', monospace;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+/* Light theme — same signal green, same category accents; only the
+   void/surface/ink stack inverts. The green itself is darkened a step
+   (same hue, lower lightness) because the original #3ee878 fails text
+   contrast on a white background — everywhere it's used as a solid fill
+   (badges, buttons) it reads identically either way. */
+[data-theme='light'] {
+  --color-void: #f6f8f7;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef2f0;
+  --color-signal: #159957;
+  --color-signal-rgb: 21, 153, 87;
+  --color-circuit: #c7d2ce;
+  --color-ink: #101612;
+  --color-muted: #5b6b62;
+  --color-border: #dbe3df;
 }
 
 * {
@@ -19,16 +51,70 @@
 }
 
 html {
+  /* The photo reel intentionally breaks out to full viewport width via
+     100vw + left:50%/translateX(-50%) — that trick overshoots the right
+     edge by the scrollbar's width, which otherwise leaves the whole page
+     horizontally scrollable by a few pixels. */
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  /* The nav is sticky, not just visually pinned — without this every anchor
+     jump (nav links, "Ver mis proyectos") lands the target heading exactly
+     under it, half-hidden. Matches .nav's real height (~81px) plus breathing
+     room; the mobile nav wraps taller, so it gets its own value below. */
+  scroll-padding-top: 96px;
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 136px;
+  }
 }
 
 body {
   margin: 0;
-  background: var(--color-void) url('./assets/alfa-pattern.svg') repeat;
+  overflow-x: hidden;
+  background: var(--color-void);
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Sutil textura de scanlines — el único "adorno" del fondo, a propósito. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(var(--color-signal-rgb), 0.025) 0px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@keyframes cursor-blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.blink-cursor {
+  display: inline-block;
+  width: 0.5em;
+  margin-left: 0.08em;
+  background: currentColor;
+  animation: cursor-blink 1.1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blink-cursor {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 a {

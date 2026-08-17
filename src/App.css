@@ -1,37 +1,13 @@
-/* ---------- Particle field ---------- */
-
-.particle-field {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  display: block;
-}
-
-.hero3d-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.hero3d-bg canvas {
-  display: block;
-}
-
-.hero3d-scrim {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: rgba(10, 7, 8, 0.6);
-}
-
 /* ---------- Alfa mark ---------- */
 
 .alfa-mark {
-  font-family: var(--font-display);
-  font-weight: 800;
+  /* JetBrains Mono's lowercase alpha reads as a plain "a" at a glance — a
+     serif renders the traditional bowl+tail shape that's unmistakably the
+     Greek letter, which is the whole point of the mark. Body text elsewhere
+     stays monospace; this is scoped to the glyph itself. */
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-style: italic;
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -59,6 +35,31 @@
 
 .alfa-mark--ghost {
   font-size: clamp(220px, 30vw, 460px);
+}
+
+/* ---------- Scroll progress ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 30;
+  background: transparent;
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  background: var(--color-signal);
+  box-shadow: 0 0 8px rgba(var(--color-signal-rgb), 0.6);
+  transition: width 120ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress__bar {
+    transition: none;
+  }
 }
 
 /* ---------- Nav ---------- */
@@ -99,7 +100,7 @@
   align-items: center;
   min-height: 44px;
   padding: 0 14px;
-  border-radius: 999px;
+  border-radius: 4px;
   border: 1px solid transparent;
   font-family: var(--font-mono);
   font-weight: 600;
@@ -142,11 +143,44 @@
   gap: 12px;
 }
 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle:hover {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
+  box-shadow: 0 0 10px rgba(var(--color-signal-rgb), 0.25);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
 .lang-toggle {
   min-width: 44px;
   min-height: 44px;
   padding: 0 12px;
-  border-radius: 999px;
+  border-radius: 4px;
   border: 1px solid var(--color-border);
   background: none;
   color: var(--color-muted);
@@ -174,35 +208,69 @@
 /* ---------- Layout ---------- */
 
 main {
-  max-width: 880px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 section {
-  padding: 56px clamp(20px, 4vw, 32px);
+  padding: 56px clamp(20px, 4vw, 48px);
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (photo floats right, text wraps around it) ---------- */
 
 .hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: clamp(480px, 82vh, 780px);
-  padding-top: clamp(56px, 9vh, 96px);
-  padding-bottom: clamp(48px, 7vh, 80px);
+  padding-top: clamp(48px, 7vh, 84px);
+  padding-bottom: clamp(48px, 7vh, 84px);
   overflow: hidden;
 }
 
-.hero__watermark {
+/* Capping the reading column (instead of leaving it full section width)
+   is what lets the photo float sit close to the text with no dead gutter
+   between them, and keeps line length sane once text clears the float. */
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+}
+
+/* The eyebrow badge is a long single-line pill — floated text can't wrap
+   INSIDE it, so if it were left as the float's first sibling, the browser
+   pushes the whole thing (and everything after it) below the photo to find
+   room, which is what created the big dead gap. Keeping it full-width and
+   outside the float context sidesteps that entirely. */
+.hero__kicker {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.hero__glow {
   position: absolute;
-  top: -30px;
-  right: -20px;
-  color: var(--color-circuit);
-  opacity: 0.3;
+  top: -10%;
+  right: -10%;
+  width: min(700px, 120vw);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(var(--color-signal-rgb), 0.14) 0%, rgba(var(--color-signal-rgb), 0.04) 40%, transparent 68%);
   z-index: 0;
   pointer-events: none;
+}
+
+/* A drifting node network, AVS-style — faded out over the text column so
+   it reads as atmosphere behind the photo, not noise behind the copy. */
+.hero__network {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(100deg, transparent 0%, transparent 12%, black 40%, black 100%);
+  mask-image: linear-gradient(100deg, transparent 0%, transparent 12%, black 40%, black 100%);
 }
 
 @keyframes hero-in {
@@ -210,32 +278,54 @@ section {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.hero__eyebrow {
+.hero__badge {
   position: relative;
   z-index: 1;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
   color: var(--color-signal);
-  margin-bottom: 20px;
   animation: hero-in 700ms ease backwards;
   animation-delay: 0ms;
+}
+
+.hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  box-shadow: 0 0 6px var(--color-signal);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+.hero__accent-bar {
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-signal);
+  box-shadow: 0 0 8px rgba(var(--color-signal-rgb), 0.5);
+  margin: 18px 0 22px;
+  animation: hero-in 700ms ease backwards;
+  animation-delay: 60ms;
 }
 
 .hero__title {
   position: relative;
   z-index: 1;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.1rem, 5.4vw, 4rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin: 0 0 20px;
-  max-width: 20ch;
-  overflow-wrap: break-word;
-  hyphens: auto;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
   color: var(--color-ink);
   animation: hero-in 700ms ease backwards;
   animation-delay: 100ms;
@@ -244,20 +334,195 @@ section {
 .hero__subtitle {
   position: relative;
   z-index: 1;
-  font-size: clamp(1rem, 1.4vw, 1.1rem);
-  line-height: 1.65;
+  font-size: clamp(0.98rem, 1.1vw, 1.05rem);
+  line-height: 1.7;
   color: var(--color-muted);
-  max-width: 58ch;
-  margin: 0 0 32px;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  margin: 0 0 20px;
   animation: hero-in 700ms ease backwards;
-  animation-delay: 250ms;
+  animation-delay: 200ms;
+}
+
+.hero__highlights {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 0;
+  animation: hero-in 700ms ease backwards;
+  animation-delay: 280ms;
+}
+
+.hero__highlights li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--color-ink);
+}
+
+.hero__highlights li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-signal);
+  font-weight: 700;
+}
+
+.hero__closing {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-muted);
+  margin: 0 0 28px;
+  animation: hero-in 700ms ease backwards;
+  animation-delay: 340ms;
 }
 
 .hero__actions {
   position: relative;
   z-index: 1;
   animation: hero-in 700ms ease backwards;
-  animation-delay: 380ms;
+  animation-delay: 400ms;
+}
+
+.hero__stats {
+  position: relative;
+  z-index: 1;
+  clear: both;
+  display: flex;
+  gap: 0;
+  margin: 64px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+  max-width: 480px;
+  animation: hero-in 700ms ease backwards;
+  animation-delay: 480ms;
+}
+
+.hero__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 20px;
+  border-left: 1px solid var(--color-border);
+}
+
+.hero__stat:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.hero__stat-value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: var(--color-signal);
+  line-height: 1;
+}
+
+.hero__stat-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ---------- Hero visual: real photo + floating chips ---------- */
+
+.hero__visual {
+  position: relative;
+  z-index: 1;
+  max-width: 260px;
+  margin: 0 auto 28px;
+}
+
+@media (min-width: 900px) {
+  .hero__visual {
+    float: right;
+    width: 300px;
+    max-width: none;
+    margin: 4px 0 20px 40px;
+  }
+}
+
+.hero__photo {
+  display: block;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  animation: hero-in 700ms ease backwards;
+  animation-delay: 200ms;
+}
+
+/* Crossfading photos stack absolutely on top of one another — the
+   container itself carries the 1/1 aspect-ratio since these no longer
+   contribute intrinsic size (position: absolute). */
+.hero__photo img {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.25) contrast(1.05);
+}
+
+/* Floating chips add real clutter on a narrow column — desktop only. */
+.hero__chip {
+  display: none;
+  position: absolute;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-void);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-ink);
+}
+
+@media (min-width: 900px) {
+  .hero__chip {
+    display: inline-flex;
+  }
+}
+
+.hero__chip svg {
+  width: 15px;
+  height: 15px;
+  color: var(--color-signal);
+}
+
+.hero__chip--1 {
+  top: -18px;
+  left: -28px;
+}
+
+.hero__chip--2 {
+  top: 40%;
+  right: -32px;
+}
+
+.hero__chip--3 {
+  bottom: -16px;
+  left: 20%;
 }
 
 .btn {
@@ -266,7 +531,7 @@ section {
   align-items: center;
   justify-content: center;
   padding: 0 26px;
-  border-radius: 999px;
+  border-radius: 4px;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 0.95rem;
@@ -282,7 +547,6 @@ section {
 
 .btn--primary:hover,
 .btn--primary:focus-visible {
-  transform: translateY(-2px);
   box-shadow: 0 0 22px rgba(var(--color-signal-rgb), 0.45);
 }
 
@@ -296,36 +560,39 @@ section {
   transform: translateX(4px);
 }
 
-/* ---------- Ethos ---------- */
+/* ---------- Ethos (elevated cards overlapping the hero) ---------- */
 
 .ethos {
-  padding-top: 0;
+  position: relative;
+  z-index: 2;
+  padding-top: 48px;
   padding-bottom: 32px;
 }
 
-.ethos__kicker {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: 24px;
+@media (min-width: 900px) {
+  .ethos {
+    padding-top: 24px;
+  }
 }
 
 .ethos__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 24px;
 }
 
 .ethos__item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding: 26px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.4);
   opacity: 0;
   transform: translateY(10px);
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.is-visible .ethos__item {
@@ -339,20 +606,24 @@ section {
 }
 
 .ethos__item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  border-color: var(--color-signal);
 }
 
-.ethos__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-circuit);
-  box-shadow: 0 0 0 transparent;
+.ethos__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(var(--color-signal-rgb), 0.1);
+  color: var(--color-signal);
 }
 
-.ethos__item:hover .ethos__dot {
-  background: var(--color-signal);
-  box-shadow: 0 0 6px var(--color-signal);
+.ethos__icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .ethos__item h3 {
@@ -417,7 +688,7 @@ section {
   letter-spacing: 0.04em;
   color: var(--color-muted);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 5px 12px;
 }
 
@@ -436,7 +707,7 @@ section {
   gap: 6px;
   padding: 5px;
   margin-bottom: 28px;
-  border-radius: 16px;
+  border-radius: 6px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
 }
@@ -449,7 +720,7 @@ section {
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 11px;
+  border-radius: 4px;
   background: none;
   cursor: pointer;
 }
@@ -457,7 +728,7 @@ section {
 .category-tabs__highlight {
   position: absolute;
   inset: 0;
-  border-radius: 11px;
+  border-radius: 4px;
   background: rgba(var(--color-signal-rgb), 0.15);
   border: 1px solid var(--color-signal);
   box-shadow: 0 0 16px rgba(var(--color-signal-rgb), 0.35);
@@ -480,159 +751,211 @@ section {
   color: var(--color-signal);
 }
 
+.category-tabs__count {
+  margin-left: 6px;
+  font-size: 0.72rem;
+  opacity: 0.6;
+}
+
 /* ---------- Registry ---------- */
 
 .registry__list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-.project-row {
-  display: grid;
-  grid-template-columns: 88px 1fr auto;
-  align-items: start;
-  gap: 20px;
-  padding: 24px;
+/* Each category gets its own accent, so the grid reads as more than one
+   long green list — --accent defaults to the brand signal for anything
+   unmapped (or when JS hasn't hydrated a data-cat yet). */
+.project-card {
+  --accent: var(--color-signal);
+  --accent-rgb: var(--color-signal-rgb);
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: 8px;
   background: var(--color-surface);
+  overflow: hidden;
   animation: row-in 400ms ease backwards;
   animation-delay: var(--delay, 0ms);
   transition: border-color 220ms cubic-bezier(0.16, 1, 0.3, 1), transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.project-card[data-cat="Infra"] { --accent: var(--cat-infra); --accent-rgb: var(--cat-infra-rgb); }
+.project-card[data-cat="IA"] { --accent: var(--cat-ia); --accent-rgb: var(--cat-ia-rgb); }
+.project-card[data-cat="Seguridad"] { --accent: var(--cat-seguridad); --accent-rgb: var(--cat-seguridad-rgb); }
+.project-card[data-cat="Gaming"] { --accent: var(--cat-gaming); --accent-rgb: var(--cat-gaming-rgb); }
+.project-card[data-cat="Freelance"] { --accent: var(--cat-freelance); --accent-rgb: var(--cat-freelance-rgb); }
+.project-card[data-cat="Otros"] { --accent: var(--cat-otros); --accent-rgb: var(--cat-otros-rgb); }
 
 @keyframes row-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.project-row:hover,
-.project-row:focus-visible {
-  border-color: var(--color-signal);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(var(--color-signal-rgb), 0.2);
+.project-card:hover,
+.project-card:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--accent-rgb), 0.25);
 }
 
-.project-row__status-col {
+.project-card__preview {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  position: relative;
+  perspective: 600px;
+  transform-style: preserve-3d;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-card__preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  filter: grayscale(0.35) brightness(0.85);
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(1);
+  transition: transform 150ms ease-out, filter 220ms ease-out;
+  will-change: transform;
+}
+
+.project-card:hover .project-card__preview img {
+  filter: grayscale(0) brightness(1);
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__preview img {
+    transform: none !important;
+  }
+}
+
+.project-card__index {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(7, 9, 10, 0.7);
+  backdrop-filter: blur(4px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+}
+
+.project-card__knot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: 0 0 10px rgba(var(--color-signal-rgb), 0.5);
+}
+
+.project-card__body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-top: 2px;
+  padding: 16px;
+  flex: 1;
+  min-width: 0;
 }
 
-.project-row__index {
+.project-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.project-card__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  min-width: 0;
+}
+
+.project-card__alias {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--color-circuit);
-  letter-spacing: 0.02em;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--color-muted);
 }
 
-.project-row__status {
+.project-card__status {
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
 
-.project-row__dot {
+.project-card__dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-signal);
-  box-shadow: 0 0 6px var(--color-signal);
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--color-signal); }
-  50% { opacity: 0.55; box-shadow: 0 0 2px var(--color-signal); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
 }
 
-.project-row__main {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.project-row__name {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.28rem;
-  letter-spacing: -0.01em;
-  color: var(--color-ink);
-}
-
-.project-row__alias {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.85rem;
-  color: var(--color-muted);
-}
-
-.project-row__knot {
-  width: 20px;
-  height: 20px;
-  border-radius: 6px;
-  font-size: 12px;
-  box-shadow: 0 0 0 transparent;
-}
-
-.project-row:hover .project-row__knot {
-  box-shadow: 0 0 10px rgba(var(--color-signal-rgb), 0.55);
-  transform: scale(1.08);
-}
-
-.project-row__description {
-  font-size: 0.92rem;
+.project-card__description {
+  font-size: 0.88rem;
   line-height: 1.55;
   color: var(--color-muted);
-  max-width: 60ch;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  flex: 1;
 }
 
-.project-row__meta {
+.project-card__footer {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 12px;
   padding-top: 4px;
-  justify-self: end;
 }
 
-.project-row__tag {
+.project-card__tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-muted);
+  font-size: 0.72rem;
+  color: var(--accent);
   white-space: nowrap;
-  padding: 5px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  transition: color 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 4px 10px;
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  border-radius: 4px;
+  background: rgba(var(--accent-rgb), 0.08);
 }
 
-.project-row:hover .project-row__tag {
-  color: var(--color-signal);
-  border-color: var(--color-signal);
-}
-
-.project-row__link-icon {
+.project-card__link-icon {
   color: var(--color-circuit);
+  flex-shrink: 0;
   transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-row:hover .project-row__link-icon {
-  color: var(--color-signal);
+.project-card:hover .project-card__link-icon {
+  color: var(--accent);
   transform: translate(2px, -2px);
 }
 
-/* ---------- Photo reel ---------- */
+/* ---------- Photo reel: a continuously scrolling filmstrip ---------- */
 
 .photo-reel {
   width: 100vw;
@@ -641,51 +964,62 @@ section {
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* Sprocket-hole strips above and below the frames — the detail that
+   reads as "film reel" instead of just "row of photos". */
+.photo-reel__sprockets {
+  height: 9px;
+  background-color: var(--color-border);
+  background-image: radial-gradient(circle, var(--color-void) 2.2px, transparent 2.4px);
+  background-size: 18px 9px;
+  background-repeat: repeat-x;
+  opacity: 0.55;
 }
 
 .photo-reel__frame {
   position: relative;
-  max-width: 94vw;
-  height: clamp(280px, 56vh, 620px);
-  aspect-ratio: var(--ratio);
-  transition: aspect-ratio 400ms ease;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* Position driven from JS (a framer-motion motion value) so the strip can
+   both auto-scroll AND be dragged/stepped by the user — a plain CSS
+   @keyframes loop can't be paused mid-flight and resumed from an
+   arbitrary offset, which is what scrubbing needs. */
+.photo-reel__track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding: 10px 0;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.photo-reel__track:active {
+  cursor: grabbing;
 }
 
 .photo-reel__image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.photo-reel__image--in {
-  animation: photo-fade-in 400ms ease forwards;
-}
-
-.photo-reel__image--out {
-  animation: photo-fade-out 400ms ease forwards;
-}
-
-@keyframes photo-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes photo-fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  display: block;
+  height: clamp(160px, 24vw, 260px);
+  width: auto;
+  object-fit: cover;
+  border-radius: 3px;
+  filter: grayscale(0.15) contrast(1.03);
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .photo-reel__controls {
   display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 16px;
+  margin-top: 4px;
 }
 
 .photo-reel__nav {
@@ -695,8 +1029,8 @@ section {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: none;
+  border-radius: 4px;
+  background: var(--color-void);
   color: var(--color-ink);
   font-size: 1.05rem;
   cursor: pointer;
@@ -707,14 +1041,6 @@ section {
   border-color: var(--color-signal);
   color: var(--color-signal);
   box-shadow: 0 0 10px rgba(var(--color-signal-rgb), 0.25);
-}
-
-.photo-reel__counter {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--color-muted);
-  min-width: 64px;
-  text-align: center;
 }
 
 /* ---------- Contact ---------- */
@@ -732,6 +1058,58 @@ section {
   margin: 0 0 28px;
 }
 
+/* ---------- Social rail (fixed left edge, desktop only) ---------- */
+
+.social-rail {
+  position: fixed;
+  left: 20px;
+  bottom: 0;
+  z-index: 15;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 24px;
+}
+
+@media (min-width: 900px) {
+  .social-rail {
+    display: flex;
+  }
+
+  /* Guarantees clearance from the fixed rail even at viewport widths where
+     main's own centering margin (max-width 1200px) hasn't kicked in yet. */
+  .page {
+    padding-left: 76px;
+  }
+}
+
+.social-rail__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-muted);
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-rail__link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.social-rail__link:hover,
+.social-rail__link:focus-visible {
+  color: var(--color-signal);
+}
+
+.social-rail__line {
+  width: 1px;
+  height: 90px;
+  background: var(--color-border);
+}
+
 .social-bar {
   display: flex;
   flex-wrap: wrap;
@@ -745,7 +1123,7 @@ section {
   min-height: 48px;
   padding: 0 22px;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--color-ink);
@@ -757,7 +1135,6 @@ section {
   color: var(--color-signal);
   border-color: var(--color-signal);
   box-shadow: 0 0 12px rgba(var(--color-signal-rgb), 0.22);
-  transform: translateY(-2px);
 }
 
 /* ---------- Footer ---------- */
@@ -769,6 +1146,31 @@ section {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   border-top: 1px solid var(--color-border);
+}
+
+/* ---------- Back to top ---------- */
+
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 1.1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.back-to-top:hover {
+  color: var(--color-signal);
+  border-color: var(--color-signal);
 }
 
 /* ---------- Reveal ---------- */
@@ -801,6 +1203,15 @@ section {
   }
 
   .nav__right {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    justify-content: flex-end;
+  }
+
+  /* Forces its own row so the two toggle buttons land together on the
+     next line instead of each wrapping alone (which read as scattered). */
+  .nav__links {
     flex-basis: 100%;
     justify-content: flex-end;
   }
@@ -835,23 +1246,96 @@ section {
     gap: 24px;
   }
 
-  .project-row {
+  .registry__list {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 18px;
   }
 
-  .project-row__status-col {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
+  /* Everything below reads oversized on an actual phone (checked against real
+     device pixel ratios, not just a scaled-down desktop) — this is a real
+     mobile type scale, not the desktop clamp() minimums stretched thin. */
+  .hero {
+    padding-top: 40px;
+    padding-bottom: 56px;
   }
 
-  .project-row__meta {
-    justify-self: start;
+  .hero__badge {
+    padding: 5px 12px;
+    font-size: 0.68rem;
+    gap: 6px;
   }
 
-  .hero__watermark {
-    display: none;
+  .hero__accent-bar {
+    width: 40px;
+    height: 2px;
+    margin: 14px 0 16px;
+  }
+
+  .hero__title {
+    font-size: 1.55rem;
+    line-height: 1.28;
+    margin-bottom: 14px;
+  }
+
+  .hero__subtitle {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    /* justify reads as awkward rivers of whitespace on a narrow phone
+       column — left-align there, keep justify for the wider desktop wrap */
+    text-align: left;
+    hyphens: none;
+    margin-bottom: 18px;
+  }
+
+  .hero__highlights li {
+    font-size: 0.88rem;
+  }
+
+  .hero__closing {
+    font-size: 0.86rem;
+    margin-bottom: 22px;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 0 20px;
+    font-size: 0.85rem;
+  }
+
+  .hero__stats {
+    margin-top: 28px;
+    padding-top: 18px;
+  }
+
+  .hero__stat {
+    padding: 0 12px;
+  }
+
+  .hero__stat-value {
+    font-size: 1.3rem;
+  }
+
+  .hero__stat-label {
+    font-size: 0.6rem;
+  }
+
+  .ethos__item {
+    padding: 20px 18px;
+  }
+
+  .ethos__item h3 {
+    font-size: 1rem;
+  }
+
+  .ethos__item p {
+    font-size: 0.84rem;
+  }
+
+  .section-heading h2 {
+    font-size: 1.4rem;
+  }
+
+  .section-heading__stamp {
+    font-size: 0.7rem;
+    padding: 4px 10px;
   }
 }

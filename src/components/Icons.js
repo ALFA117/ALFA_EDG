@@ -84,6 +84,73 @@ export function ExternalLinkIcon(props) {
   );
 }
 
+export function ShieldIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M12 3.5 5 6.2v5.3c0 4.4 3 7.9 7 8.9 4-1 7-4.5 7-8.9V6.2Z" />
+      <path d="m9 12 2 2 4-4.2" />
+    </svg>
+  );
+}
+
+export function RocketIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M14.5 9.5c2-2.8 2-6 1.5-7-1 -.5-4.2-.5-7 1.5C6.2 6.3 4.8 9.7 4.3 11.6c-.1.5.3.9.8.8 1.9-.5 5.3-1.9 7.6-4.6.6-.7 1.2-1.5 1.8-2.3Z" />
+      <circle cx="13" cy="7" r="1.4" fill="currentColor" stroke="none" />
+      <path d="M9 15c-1.5 0-3 1.5-3 4.5C9 19.5 10.5 18 10.5 16.5" />
+      <path d="M5 12c-1.6.6-2 3-2 5.5 2.5 0 4.9-.4 5.5-2" />
+    </svg>
+  );
+}
+
+export function LayersIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="m12 3 8 4.5-8 4.5-8-4.5Z" />
+      <path d="m4 12 8 4.5 8-4.5" />
+      <path d="m4 16 8 4.5 8-4.5" />
+    </svg>
+  );
+}
+
+export function ChainIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <rect x="3.5" y="9" width="7" height="7" rx="2" />
+      <rect x="13.5" y="9" width="7" height="7" rx="2" />
+      <path d="M10.5 12.5h3" />
+    </svg>
+  );
+}
+
+export function CpuIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <rect x="7" y="7" width="10" height="10" rx="2" />
+      <rect x="10" y="10" width="4" height="4" />
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l1.5 1.5M16.5 16.5 18 18M18 6l-1.5 1.5M7.5 16.5 6 18" />
+    </svg>
+  );
+}
+
+export function SunIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+    </svg>
+  );
+}
+
+export function MoonIcon(props) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+    </svg>
+  );
+}
+
 export const socialIcons = {
   instagram: InstagramIcon,
   x: XIcon,

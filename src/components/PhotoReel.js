@@ -1,5 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { motion, animate, useMotionValue, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
+
+const AUTO_SPEED_PX_S = 26;
+const STEP_PX = 340;
+const RESUME_DELAY_MS = 2200;
 
 function shuffle(array) {
   const copy = [...array];
@@ -10,115 +15,130 @@ function shuffle(array) {
   return copy;
 }
 
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-const AUTOPLAY_MS = 5000;
-
 function PhotoReel({ photos }) {
   const { t } = useLanguage();
-  const orderRef = useRef(shuffle(photos));
-  const order = orderRef.current;
-  const keyCounter = useRef(1);
+  const reduceMotion = useReducedMotion();
+  // Re-shuffled once per page load (not per render) — otherwise every
+  // photo from the same event lands next to each other in source order,
+  // reading as "all from one place" instead of a real mixed reel.
+  const shuffled = useMemo(() => shuffle(photos), [photos]);
+  // Duplicated once so the loop point (wrapping x by half the track's
+  // width) lands on pixel-identical content — invisible to the eye.
+  const strip = [...shuffled, ...shuffled];
 
-  const [index, setIndex] = useState(0);
-  const [current, setCurrent] = useState({ photo: order[0], key: 0 });
-  const [previous, setPrevious] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const trackRef = useRef(null);
+  const x = useMotionValue(0);
+  const halfWidthRef = useRef(0);
+  const controlsRef = useRef(null);
+  const resumeTimerRef = useRef(null);
 
-  const currentRef = useRef(current);
-  currentRef.current = current;
-  const indexRef = useRef(index);
-  indexRef.current = index;
+  const wrap = () => {
+    const half = halfWidthRef.current;
+    if (!half) return;
+    const v = x.get();
+    if (v <= -half) x.set(v + half);
+    else if (v > 0) x.set(v - half);
+  };
+
+  const startAuto = () => {
+    controlsRef.current?.stop();
+    const half = halfWidthRef.current;
+    if (!half) return;
+    const current = x.get();
+    const distance = -half - current;
+    const duration = Math.abs(distance) / AUTO_SPEED_PX_S;
+    controlsRef.current = animate(x, -half, {
+      duration,
+      ease: 'linear',
+      onUpdate: wrap,
+      onComplete: startAuto,
+    });
+  };
 
   useEffect(() => {
-    if (prefersReducedMotion()) setIsPlaying(false);
-  }, []);
+    const measure = () => {
+      if (trackRef.current) halfWidthRef.current = trackRef.current.scrollWidth / 2;
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    if (!reduceMotion) startAuto();
+    return () => {
+      window.removeEventListener('resize', measure);
+      controlsRef.current?.stop();
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduceMotion]);
 
-  const goTo = useCallback(
-    (nextIndex) => {
-      setPrevious(currentRef.current);
-      const nextEntry = { photo: order[nextIndex], key: keyCounter.current };
-      keyCounter.current += 1;
-      setCurrent(nextEntry);
-      setIndex(nextIndex);
-    },
-    [order]
-  );
-
-  const step = useCallback(
-    (dir) => {
-      goTo((indexRef.current + dir + order.length) % order.length);
-    },
-    [goTo, order.length]
-  );
-
-  useEffect(() => {
-    if (!isPlaying) return undefined;
-    const id = setInterval(() => step(1), AUTOPLAY_MS);
-    return () => clearInterval(id);
-  }, [isPlaying, step]);
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      step(1);
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      step(-1);
+  const pauseForInteraction = () => {
+    controlsRef.current?.stop();
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    if (!reduceMotion) {
+      resumeTimerRef.current = setTimeout(startAuto, RESUME_DELAY_MS);
     }
   };
 
+  const step = (dir) => {
+    pauseForInteraction();
+    controlsRef.current = animate(x, x.get() + dir * STEP_PX, {
+      duration: 0.45,
+      ease: 'easeOut',
+      onUpdate: wrap,
+    });
+  };
+
   return (
-    <div className="photo-reel">
-      <div
-        className="photo-reel__frame"
-        style={{ '--ratio': current.photo.ratio }}
-        role="region"
-        aria-label={t.photoReel.region}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-      >
-        {previous && (
-          <img
-            key={`prev-${previous.key}`}
-            className="photo-reel__image photo-reel__image--out"
-            src={previous.photo.src}
-            alt=""
-            aria-hidden="true"
-            onAnimationEnd={() => setPrevious(null)}
-          />
-        )}
-        <img
-          key={`cur-${current.key}`}
-          className="photo-reel__image photo-reel__image--in"
-          src={current.photo.src}
-          alt={`${t.photoReel.altPrefix} ${index + 1}`}
-          width={current.photo.width}
-          height={current.photo.height}
-        />
+    <div className="photo-reel" role="region" aria-label={t.photoReel.region}>
+      <div className="photo-reel__sprockets" aria-hidden="true" />
+      <div className="photo-reel__frame">
+        <motion.div
+          ref={trackRef}
+          className="photo-reel__track"
+          style={{ x }}
+          drag="x"
+          dragElastic={0.05}
+          dragMomentum={false}
+          onDragStart={pauseForInteraction}
+          onDrag={wrap}
+          onDragEnd={pauseForInteraction}
+        >
+          {strip.map((photo, i) => (
+            <img
+              key={i}
+              className="photo-reel__image"
+              src={photo.src}
+              alt={i < photos.length ? `${t.photoReel.altPrefix} ${i + 1}` : ''}
+              aria-hidden={i >= photos.length}
+              draggable={false}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+              style={{ aspectRatio: photo.ratio }}
+            />
+          ))}
+        </motion.div>
       </div>
+      <div className="photo-reel__sprockets" aria-hidden="true" />
 
       <div className="photo-reel__controls">
-        <button type="button" className="photo-reel__nav" onClick={() => step(-1)} aria-label={t.photoReel.prev}>
-          ←
-        </button>
-        <button
+        <motion.button
           type="button"
           className="photo-reel__nav"
-          onClick={() => setIsPlaying((p) => !p)}
-          aria-label={isPlaying ? t.photoReel.pause : t.photoReel.play}
-          aria-pressed={isPlaying}
+          onClick={() => step(-1)}
+          aria-label={t.photoReel.prev}
+          whileTap={{ scale: 0.9 }}
         >
-          {isPlaying ? '❙❙' : '▶'}
-        </button>
-        <span className="photo-reel__counter">
-          {String(index + 1).padStart(2, '0')} / {String(order.length).padStart(2, '0')}
-        </span>
-        <button type="button" className="photo-reel__nav" onClick={() => step(1)} aria-label={t.photoReel.next}>
+          ←
+        </motion.button>
+        <motion.button
+          type="button"
+          className="photo-reel__nav"
+          onClick={() => step(1)}
+          aria-label={t.photoReel.next}
+          whileTap={{ scale: 0.9 }}
+        >
           →
-        </button>
+        </motion.button>
       </div>
     </div>
   );
