@@ -129,6 +129,9 @@ function App() {
 
   return (
     <div className="page">
+      <a href="#main-content" className="skip-link">
+        {t.skipToContent}
+      </a>
       <ScrollProgress />
       <header className="nav">
         <a href="#top" className="nav__brand">
@@ -172,7 +175,7 @@ function App() {
 
       <SocialRail items={socials} />
 
-      <main>
+      <main id="main-content">
         <section id="top" className="hero">
           <div className="hero__glow" aria-hidden="true" />
           <ParticleNetwork className="hero__network" />

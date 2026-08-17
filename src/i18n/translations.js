@@ -91,6 +91,7 @@ export const strings = {
     langToggle: { label: 'ES', aria: 'Switch to Spanish' },
     themeToggle: { toDark: 'Switch to dark theme', toLight: 'Switch to light theme' },
     backToTop: 'Back to top',
+    skipToContent: 'Skip to main content',
   },
   es: {
     meta: {
@@ -163,5 +164,6 @@ export const strings = {
     langToggle: { label: 'EN', aria: 'Cambiar a inglés' },
     themeToggle: { toDark: 'Cambiar a tema oscuro', toLight: 'Cambiar a tema claro' },
     backToTop: 'Volver arriba',
+    skipToContent: 'Saltar al contenido principal',
   },
 };
