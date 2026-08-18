@@ -132,6 +132,7 @@ function App() {
       <a href="#main-content" className="skip-link">
         {t.skipToContent}
       </a>
+      <ParticleNetwork className="page__network" />
       <ScrollProgress />
       <header className="nav">
         <a href="#top" className="nav__brand">
@@ -178,7 +179,6 @@ function App() {
       <main id="main-content">
         <section id="top" className="hero">
           <div className="hero__glow" aria-hidden="true" />
-          <ParticleNetwork className="hero__network" />
 
           <div className="hero__kicker">
             <div className="hero__badge">

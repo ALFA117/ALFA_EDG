@@ -2,6 +2,26 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
+    <script>
+      // Runs before first paint, ahead of React mounting — without this the
+      // page briefly shows the browser's unstyled-default white until the
+      // app's own theme effect fires, which reads as a "white flash" and is
+      // far more visible on the slower JS startup typical of mobile.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16.png" />

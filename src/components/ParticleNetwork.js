@@ -36,9 +36,12 @@ function ParticleNetwork({ className }) {
       .trim() || '62, 232, 120';
 
     function resize() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
+      // Fixed to the viewport, not the page — sized off window dimensions
+      // rather than the (potentially page-length) parent, so the canvas
+      // stays viewport-sized as the network is now a scroll-independent
+      // full-page backdrop rather than a hero-only decoration.
+      width = window.innerWidth;
+      height = window.innerHeight;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
