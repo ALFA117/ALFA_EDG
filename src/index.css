@@ -51,6 +51,11 @@
 }
 
 html {
+  /* Without this, mobile browsers' overscroll/rubber-band bounce past the
+     top or bottom edge reveals the default white canvas behind <body>
+     instead of the theme's void color — the site "flashes" white on every
+     fast scroll on a phone. */
+  background: var(--color-void);
   /* The photo reel intentionally breaks out to full viewport width via
      100vw + left:50%/translateX(-50%) — that trick overshoots the right
      edge by the scrollbar's width, which otherwise leaves the whole page
