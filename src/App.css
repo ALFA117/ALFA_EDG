@@ -262,6 +262,17 @@ section {
   pointer-events: none;
 }
 
+/* Without a stacking context of its own, .page__network's negative
+   z-index puts it behind <body>'s entire paint layer (body is an
+   unpositioned in-flow element, painted as one unit above any negative
+   z-index sibling of the root) — the canvas would draw real pixels but
+   never actually show through anywhere. isolation:isolate scopes z-index
+   resolution to .page itself, so -1 only has to lose to .page's own
+   children, not to the whole document. */
+.page {
+  isolation: isolate;
+}
+
 /* A drifting node network, AVS-style — fixed to the viewport (not the
    page), so it reads as atmosphere behind every section as you scroll,
    not just the hero. Solid section/card backgrounds naturally occlude it
@@ -274,7 +285,6 @@ section {
      nodes over the content instead of behind it. */
   z-index: -1;
   pointer-events: none;
-  opacity: 0.7;
 }
 
 @keyframes hero-in {

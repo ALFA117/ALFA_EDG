@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
-const NODE_COUNT = 80;
+const NODE_COUNT = 110;
 const LINK_DIST = 180;
 const SPEED = 0.12;
-const NODE_RADIUS = 5.2;
+const NODE_RADIUS = 5.6;
 
 function makeNodes(width, height) {
   return Array.from({ length: NODE_COUNT }, () => ({
@@ -80,7 +80,7 @@ function ParticleNetwork({ className }) {
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.hypot(dx, dy);
           if (dist < LINK_DIST) {
-            ctx.strokeStyle = `rgba(${signal}, ${0.16 * (1 - dist / LINK_DIST)})`;
+            ctx.strokeStyle = `rgba(${signal}, ${0.32 * (1 - dist / LINK_DIST)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -90,7 +90,7 @@ function ParticleNetwork({ className }) {
         }
       }
       for (const n of nodes) {
-        ctx.fillStyle = `rgba(${signal}, 0.5)`;
+        ctx.fillStyle = `rgba(${signal}, 0.85)`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, NODE_RADIUS, 0, Math.PI * 2);
         ctx.fill();
