@@ -35,11 +35,13 @@ function ParticleNetwork({ className }) {
       .getPropertyValue('--color-signal-rgb')
       .trim() || '62, 232, 120';
 
+    // Mobile browsers fire `resize` mid-scroll whenever the address bar
+    // collapses/expands (window.innerHeight changes with no user resize).
+    // Re-rolling node positions on every one of those made the whole
+    // network visibly jump during a fast swipe. Resize now only rescales
+    // the canvas and clamps existing nodes into the new bounds — it never
+    // throws away and re-randomizes positions after the first paint.
     function resize() {
-      // Fixed to the viewport, not the page — sized off window dimensions
-      // rather than the (potentially page-length) parent, so the canvas
-      // stays viewport-sized as the network is now a scroll-independent
-      // full-page backdrop rather than a hero-only decoration.
       width = window.innerWidth;
       height = window.innerHeight;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -48,7 +50,20 @@ function ParticleNetwork({ className }) {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      nodes = makeNodes(width, height);
+      if (nodes.length === 0) {
+        nodes = makeNodes(width, height);
+      } else {
+        for (const n of nodes) {
+          n.x = Math.min(n.x, width);
+          n.y = Math.min(n.y, height);
+        }
+      }
+    }
+
+    let resizeTimer;
+    function onWindowResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 120);
     }
 
     function step() {
@@ -85,9 +100,10 @@ function ParticleNetwork({ className }) {
 
     resize();
     step();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', onWindowResize);
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onWindowResize);
+      clearTimeout(resizeTimer);
       if (raf) cancelAnimationFrame(raf);
     };
   }, [reduceMotion]);
