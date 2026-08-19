@@ -285,6 +285,14 @@ section {
      nodes over the content instead of behind it. */
   z-index: -1;
   pointer-events: none;
+  /* Dark theme only — on the void background at full intensity it read
+     as too busy. Light theme keeps full strength: the network reads much
+     softer there already against the light surface. */
+  opacity: 0.5;
+}
+
+[data-theme='light'] .page__network {
+  opacity: 1;
 }
 
 @keyframes hero-in {
