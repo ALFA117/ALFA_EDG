@@ -14,6 +14,10 @@ import previewImg_kivo from './assets/previews/kivo.webp';
 import previewImg_crystal_vanilla from './assets/previews/crystal-vanilla.webp';
 import previewImg_flor_de_sil from './assets/previews/flor-de-sil.webp';
 import previewImg_refugio from './assets/previews/refugio.webp';
+import previewImg_tianguis_ia from './assets/previews/tianguis-ia.webp';
+import previewImg_moux402 from './assets/previews/moux402.webp';
+import previewImg_monglizone from './assets/previews/monglizone.webp';
+import previewImg_el_velador from './assets/previews/el-velador.webp';
 
 export const projects = [
   {
@@ -197,6 +201,52 @@ export const projects = [
     description: {
       en: 'A flower-arrangement catalog with an admin panel to manage inventory and orders, built for a freelance client — where emotions bloom.',
       es: 'Catálogo de arreglos florales con panel de administración para gestionar inventario y pedidos, construido para un cliente freelance — donde florecen las emociones.',
+    },
+  },
+  {
+    name: 'TIANGUIS_IA',
+    url: 'https://tianguis-ia.vercel.app/',
+    preview: previewImg_tianguis_ia,
+    bucket: 'IA',
+    tag: { en: 'AI · Marketplace', es: 'IA · Marketplace' },
+    description: {
+      en: 'A voice-first marketplace: sellers describe an item out loud and the AI drafts the listing while they speak, ready to publish before their coffee gets cold.',
+      es: 'Marketplace por voz: el vendedor describe el producto hablando y la IA redacta la publicación mientras habla, lista antes de que se enfríe el café.',
+    },
+  },
+  {
+    name: 'Moux402',
+    alias: 'x402 API Monetization',
+    url: 'https://mou-x402.vercel.app/',
+    preview: previewImg_moux402,
+    bucket: 'Infra',
+    tag: { en: 'Infra · x402', es: 'Infra · x402' },
+    description: {
+      en: 'Wraps any API with pay-per-call monetization in one command, settled on Ethereum, Base, Solana, or Stellar — no metering stack, no server-side key, no signup for the buyer.',
+      es: 'Envuelve cualquier API con monetización por llamada en un solo comando, liquidada en Ethereum, Base, Solana o Stellar — sin stack de medición, sin clave en el servidor, sin registro para el comprador.',
+    },
+  },
+  {
+    name: 'MongliZone',
+    url: 'https://monglizone.vercel.app/',
+    preview: previewImg_monglizone,
+    bucket: 'IA',
+    tag: { en: 'AI · Content Agent', es: 'IA · Agente de Contenido' },
+    description: {
+      en: 'A persistent AI content director for independent creators: say an idea out loud and it drafts the carousel, video, or caption — publishing only once you approve it. Built as a Mind on Minds by Animoca Brands for the Creative Minds Jam #1.',
+      es: 'Director de contenido con IA persistente para creadores independientes: dices la idea y arma el carrusel, video o caption — publica solo si lo apruebas. Construido como Mind sobre Minds by Animoca Brands para el Creative Minds Jam #1.',
+    },
+  },
+  {
+    name: 'El Velador',
+    alias: { en: 'The Watchman', es: 'El Vigilante' },
+    url: 'https://el-velador-bot.vercel.app/',
+    preview: previewImg_el_velador,
+    bucket: 'Seguridad',
+    tag: { en: 'Web3 · Security Bot', es: 'Web3 · Bot de Seguridad' },
+    description: {
+      en: 'Scans pump.fun tokens in seconds — deployer history, holder distribution, market signals — and returns a traffic-light risk read. Free with a daily limit, unlimited while holding $VELADOR.',
+      es: 'Analiza tokens de pump.fun en segundos: historial del deployer, distribución de holders y señales de mercado, con un semáforo de riesgo. Gratis con límite diario, ilimitado holdeando $VELADOR.',
     },
   },
 ];
