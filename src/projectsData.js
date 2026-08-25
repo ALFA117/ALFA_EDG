@@ -5,7 +5,6 @@ import previewImg_moufut from './assets/previews/moufut.webp';
 import previewImg_nexus_latam from './assets/previews/nexus-latam.webp';
 import previewImg_monkeyclone from './assets/previews/monkeyclone.webp';
 import previewImg_chainguard from './assets/previews/chainguard.webp';
-import previewImg_mongli_agent from './assets/previews/mongli-agent.webp';
 import previewImg_mongli_agent_ia from './assets/previews/mongli-agent-ia.webp';
 import previewImg_mongli_pool from './assets/previews/mongli-pool.webp';
 import previewImg_mongli_pool_deck from './assets/previews/mongli-pool-deck.webp';
@@ -16,7 +15,6 @@ import previewImg_flor_de_sil from './assets/previews/flor-de-sil.webp';
 import previewImg_refugio from './assets/previews/refugio.webp';
 import previewImg_tianguis_ia from './assets/previews/tianguis-ia.webp';
 import previewImg_moux402 from './assets/previews/moux402.webp';
-import previewImg_monglizone from './assets/previews/monglizone.webp';
 import previewImg_el_velador from './assets/previews/el-velador.webp';
 
 export const projects = [
@@ -98,18 +96,6 @@ export const projects = [
     description: {
       en: 'Scans Solidity contracts for reentrancy, tx.origin, overflow, and selfdestruct vulnerabilities before they turn into an exploit. Built for HackOWASP 8.0.',
       es: 'Escanea contratos Solidity en busca de vulnerabilidades de reentrancy, tx.origin, overflow y selfdestruct antes de que se conviertan en un exploit. Construido para HackOWASP 8.0.',
-    },
-  },
-  {
-    name: 'Mongli Agent',
-    alias: 'x402 Research',
-    url: 'https://mongliagent.vercel.app/',
-    preview: previewImg_mongli_agent,
-    bucket: 'IA',
-    tag: { en: 'AI · x402 · Stellar', es: 'IA · x402 · Stellar' },
-    description: {
-      en: 'Autonomous research agent paid per query via x402 micropayments on Stellar — set a budget, ask a question, the agent researches and pays for its own tools, every call a real on-chain transaction.',
-      es: 'Agente de investigación autónomo pagado por consulta vía micropagos x402 en Stellar — defines un presupuesto, haces una pregunta, y el agente investiga y paga sus propias herramientas, cada llamada es una transacción on-chain real.',
     },
   },
   {
@@ -224,17 +210,6 @@ export const projects = [
     description: {
       en: 'Wraps any API with pay-per-call monetization in one command, settled on Ethereum, Base, Solana, or Stellar — no metering stack, no server-side key, no signup for the buyer.',
       es: 'Envuelve cualquier API con monetización por llamada en un solo comando, liquidada en Ethereum, Base, Solana o Stellar — sin stack de medición, sin clave en el servidor, sin registro para el comprador.',
-    },
-  },
-  {
-    name: 'MongliZone',
-    url: 'https://monglizone.vercel.app/',
-    preview: previewImg_monglizone,
-    bucket: 'IA',
-    tag: { en: 'AI · Content Agent', es: 'IA · Agente de Contenido' },
-    description: {
-      en: 'A persistent AI content director for independent creators: say an idea out loud and it drafts the carousel, video, or caption — publishing only once you approve it. Built as a Mind on Minds by Animoca Brands for the Creative Minds Jam #1.',
-      es: 'Director de contenido con IA persistente para creadores independientes: dices la idea y arma el carrusel, video o caption — publica solo si lo apruebas. Construido como Mind sobre Minds by Animoca Brands para el Creative Minds Jam #1.',
     },
   },
   {
