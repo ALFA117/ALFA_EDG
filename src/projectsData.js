@@ -190,7 +190,16 @@ export const projects = [
     },
   },
   {
-    name: 'TIANGUIS_IA',
+    // Renombrado de TIANGUIS_IA a MercaditoMex (2026-08-25). La URL sigue
+    // siendo tianguis-ia.vercel.app a proposito: es el dominio original del
+    // proyecto Vercel, y por eso el UNICO que carga sin pedir login --
+    // mercadito-mex.vercel.app (el alias nuevo) quedo detras de la
+    // proteccion SSO que el proyecto ya tenia activada, asi que enlazar ahi
+    // le pegaria un muro de login de Vercel a cualquier visitante del
+    // portafolio. Si algun dia se libera esa proteccion o se conecta un
+    // dominio propio, actualizar el link.
+    name: 'MercaditoMex',
+    alias: 'antes TIANGUIS_IA',
     url: 'https://tianguis-ia.vercel.app/',
     preview: previewImg_tianguis_ia,
     bucket: 'IA',
