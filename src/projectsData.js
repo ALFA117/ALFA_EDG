@@ -207,6 +207,32 @@ export const projects = [
     },
   },
   {
+    // Sin preview propio todavia -- no hay screenshot real disponible y
+    // no se va a inventar uno. Agregar previewImg_wip cuando exista.
+    name: 'WIP',
+    alias: 'Wallet Integration Piggy',
+    url: 'https://wip-piggy.vercel.app/',
+    bucket: 'IA',
+    tag: { en: 'AI Agent · WDK · Wallet', es: 'Agente IA · WDK · Wallet' },
+    description: {
+      en: "An AI agent with its own wallet enforces a group's spending rules before it moves real USD₮ on Sepolia: caps, allowlists, monthly budget, multi-person approval. Every payment and every rejection lands in an auditable log. Built for the Aleph Hackathon, WDK Track.",
+      es: 'Un agente de IA con billetera propia hace cumplir el reglamento de gasto del grupo antes de mover USD₮ real en Sepolia: topes, lista blanca, presupuesto mensual, aprobación de varias personas. Cada pago y cada rechazo queda en un registro auditable. Construido para el Aleph Hackathon, WDK Track.',
+    },
+  },
+  {
+    // Sin preview propio todavia -- no hay screenshot real disponible y
+    // no se va a inventar uno. Agregar previewImg_monglizone cuando exista.
+    name: 'MongliZone',
+    alias: 'Creative Minds Jam #1',
+    url: 'https://monglizone.vercel.app/',
+    bucket: 'IA',
+    tag: { en: 'AI · Content Mind', es: 'IA · Mind de Contenido' },
+    description: {
+      en: 'Say an idea out loud and it picks the format (a real multi-image carousel, a 1-3 minute video, or a caption), generates it, sends it for approval, and only publishes once you say yes. Built as a persistent Mind on Minds by Animoca Brands.',
+      es: 'Le dices una idea en voz y decide el formato (un carrusel real de varias fotos, un video de 1-3 min, o un caption), lo genera, lo manda a revisión, y solo publica si dices que sí. Construido como Mind persistente sobre Minds by Animoca Brands.',
+    },
+  },
+  {
     name: 'Moux402',
     alias: 'x402 API Monetization',
     url: 'https://mou-x402.vercel.app/',
