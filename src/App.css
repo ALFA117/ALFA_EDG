@@ -810,6 +810,7 @@ section {
 .project-card[data-cat="Gaming"] { --accent: var(--cat-gaming); --accent-rgb: var(--cat-gaming-rgb); }
 .project-card[data-cat="Freelance"] { --accent: var(--cat-freelance); --accent-rgb: var(--cat-freelance-rgb); }
 .project-card[data-cat="Otros"] { --accent: var(--cat-otros); --accent-rgb: var(--cat-otros-rgb); }
+.project-card[data-cat="Web2"] { --accent: var(--cat-web2); --accent-rgb: var(--cat-web2-rgb); }
 
 @keyframes row-in {
   from { opacity: 0; transform: translateY(8px); }

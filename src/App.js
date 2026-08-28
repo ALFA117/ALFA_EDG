@@ -25,7 +25,7 @@ import { ShieldIcon, RocketIcon, LayersIcon, ChainIcon, CpuIcon, SunIcon, MoonIc
 import { useScrollSpy } from './hooks/useScrollSpy';
 import { useLanguage } from './i18n/LanguageContext';
 
-const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Freelance', 'Otros'];
+const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Web2', 'Freelance', 'Otros'];
 const ETHOS_ICONS = [ShieldIcon, RocketIcon, LayersIcon];
 
 // Object-position tuned per photo — different compositions need different

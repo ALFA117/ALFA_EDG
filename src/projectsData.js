@@ -245,6 +245,136 @@ export const projects = [
     },
   },
   {
+    // Showcase comercial de 12 demos freelance (Next.js, repo separado
+    // showcase-edg). Sin preview propio todavia -- no hay screenshot real
+    // disponible desde esta sesion (sin navegador conectado) y no se va a
+    // inventar uno, mismo criterio que WIP/MongliZone mas abajo.
+    name: 'Barbería Urbana',
+    url: 'https://showcase-edg.vercel.app/barberias/barberia-urbana',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Barbershop', es: 'Web2 · Barbería' },
+    description: {
+      en: 'Editorial barbershop landing with a live booking wizard (service → barber → time slot), receipt-style pricing, and a one-tap WhatsApp CTA. One of 12 commercial demos built to sell website packages to local businesses.',
+      es: 'Landing editorial de barbería con wizard de reserva en vivo (servicio → barbero → horario), precios estilo ticket de recibo y CTA directo a WhatsApp. Una de 12 demos comerciales para vender paquetes de sitio web a negocios locales.',
+    },
+  },
+  {
+    name: 'Barbería Premium',
+    url: 'https://showcase-edg.vercel.app/barberias/barberia-premium',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Barbershop', es: 'Web2 · Barbería' },
+    description: {
+      en: 'A quiet, editorial barbershop site built around negative space and a single elegant reservation modal — no bounce, no clutter.',
+      es: 'Sitio de barbería editorial y pausado, construido sobre espacio en blanco y un único modal de reserva elegante — sin rebote, sin ruido visual.',
+    },
+  },
+  {
+    name: 'Barbería Moderna',
+    url: 'https://showcase-edg.vercel.app/barberias/barberia-moderna',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Barbershop', es: 'Web2 · Barbería' },
+    description: {
+      en: 'A Gen-Z-styled barbershop demo with a pill nav, Instagram-style horizontal service stories, and a booking wizard with animated progress dots.',
+      es: 'Demo de barbería con estética Gen-Z: nav en píldora, stories horizontales de servicios estilo Instagram y wizard de reserva con puntos de progreso animados.',
+    },
+  },
+  {
+    name: 'Auto Confianza CDMX',
+    alias: { en: 'Used-car dealership', es: 'Agencia de seminuevos' },
+    url: 'https://showcase-edg.vercel.app/autos/agencia-seminuevos',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Auto Dealer', es: 'Web2 · Agencia de Autos' },
+    description: {
+      en: 'Used-car dealership demo with filterable/sortable inventory (price, year, mileage) and a live monthly-payment simulator on every vehicle.',
+      es: 'Demo de agencia de seminuevos con inventario filtrable/ordenable (precio, año, kilometraje) y simulador de mensualidad en vivo por vehículo.',
+    },
+  },
+  {
+    name: 'Aurea Motors',
+    alias: { en: 'Luxury car microsite', es: 'Microsite de auto de lujo' },
+    url: 'https://showcase-edg.vercel.app/autos/autos-premium',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Auto Dealer', es: 'Web2 · Agencia de Autos' },
+    description: {
+      en: 'A cinematic single-vehicle microsite for a fictional luxury brand — a color configurator swaps the hero photo live, with animated spec counters.',
+      es: 'Microsite cinematográfico de un solo vehículo para una marca de lujo ficticia — configurador de color que cambia la foto del hero en vivo, con contadores de specs animados.',
+    },
+  },
+  {
+    name: 'Terreno Norte 4x4',
+    alias: { en: 'Pickup/SUV dealership', es: 'Agencia de camionetas/SUVs' },
+    url: 'https://showcase-edg.vercel.app/autos/autos-camionetas',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Auto Dealer', es: 'Web2 · Agencia de Autos' },
+    description: {
+      en: 'Pickup/SUV dealership demo with terrain-based filtering, a pickup-vs-SUV comparison table, and animated capacity stats.',
+      es: 'Demo de agencia de camionetas/SUVs con filtro por terreno, tabla comparativa pickup vs SUV y stats de capacidad animados.',
+    },
+  },
+  {
+    name: 'Casa Aroma',
+    alias: { en: 'Beauty e-commerce', es: 'E-commerce de belleza' },
+    url: 'https://showcase-edg.vercel.app/belleza/tienda-productos',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Beauty E-commerce', es: 'Web2 · E-commerce Belleza' },
+    description: {
+      en: 'Full beauty e-commerce demo: real search/filter/sort catalog, a cart drawer, and a 3-step simulated checkout.',
+      es: 'Demo completa de e-commerce de belleza: catálogo con búsqueda/filtro/orden real, cart drawer y checkout simulado en 3 pasos.',
+    },
+  },
+  {
+    name: 'Maison Ámbar',
+    alias: { en: 'Luxury cosmetics boutique', es: 'Boutique de cosmética de lujo' },
+    url: 'https://showcase-edg.vercel.app/belleza/boutique-cosmeticos',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Beauty E-commerce', es: 'Web2 · E-commerce Belleza' },
+    description: {
+      en: 'Editorial luxury cosmetics site — drag-scroll collection, letter-by-letter hero reveal, and a nav that hides on scroll-down and reappears on scroll-up.',
+      es: 'Sitio editorial de cosmética de lujo — colección con drag-scroll, reveal del hero letra por letra, y nav que se oculta al bajar y reaparece al subir.',
+    },
+  },
+  {
+    name: 'Raíz & Piel',
+    alias: { en: 'Haircare/skincare', es: 'Cabello y skincare' },
+    url: 'https://showcase-edg.vercel.app/belleza/cabello-skincare',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Beauty E-commerce', es: 'Web2 · E-commerce Belleza' },
+    description: {
+      en: 'Haircare/skincare demo built around a 3-question quiz that recommends real products from the catalog.',
+      es: 'Demo de cabello/skincare construida alrededor de un quiz de 3 preguntas que recomienda productos reales del catálogo.',
+    },
+  },
+  {
+    name: 'Consultorio Dental Familiar',
+    url: 'https://showcase-edg.vercel.app/dentistas/consultorio-familiar',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Dental Clinic', es: 'Web2 · Clínica Dental' },
+    description: {
+      en: 'Family dental clinic demo with icon-tile services, a real appointment scheduler, and an FAQ accordion.',
+      es: 'Demo de consultorio dental familiar con servicios en iconos-tile, agendador de citas real y acordeón de preguntas frecuentes.',
+    },
+  },
+  {
+    name: 'Clínica Dental Premium',
+    url: 'https://showcase-edg.vercel.app/dentistas/clinica-premium',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Dental Clinic', es: 'Web2 · Clínica Dental' },
+    description: {
+      en: "Premium dental clinic microsite with credentialed specialists, tabbed treatments priced 'from $X', and a patient-experience timeline.",
+      es: "Microsite de clínica dental premium con especialistas acreditados, tratamientos en tabs con precio 'desde $X' y timeline de experiencia del paciente.",
+    },
+  },
+  {
+    name: 'Clínica de Estética Dental',
+    url: 'https://showcase-edg.vercel.app/dentistas/clinica-estetica',
+    bucket: 'Web2',
+    tag: { en: 'Web2 · Dental Clinic', es: 'Web2 · Clínica Dental' },
+    description: {
+      en: 'Cosmetic dentistry demo built around a keyboard-accessible drag-to-reveal before/after slider.',
+      es: 'Demo de estética dental construida alrededor de un slider antes/después con arrastre y soporte completo de teclado.',
+    },
+  },
+  {
     name: 'El Velador',
     alias: { en: 'The Watchman', es: 'El Vigilante' },
     url: 'https://el-velador-bot.vercel.app/',
