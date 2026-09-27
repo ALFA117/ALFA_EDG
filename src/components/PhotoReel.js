@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { motion, animate, useMotionValue, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
+import { ArrowLeftIcon, ArrowRightIcon } from './Icons';
 
 const AUTO_SPEED_PX_S = 26;
 const STEP_PX = 340;
@@ -59,11 +60,18 @@ function PhotoReel({ photos }) {
     const measure = () => {
       if (trackRef.current) halfWidthRef.current = trackRef.current.scrollWidth / 2;
     };
+    // Pausa el carrete con la pestaña oculta y lo reanuda al volver.
+    const onVisibility = () => {
+      if (document.hidden) controlsRef.current?.stop();
+      else if (!reduceMotion) startAuto();
+    };
     measure();
     window.addEventListener('resize', measure);
+    document.addEventListener('visibilitychange', onVisibility);
     if (!reduceMotion) startAuto();
     return () => {
       window.removeEventListener('resize', measure);
+      document.removeEventListener('visibilitychange', onVisibility);
       controlsRef.current?.stop();
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
     };
@@ -123,21 +131,21 @@ function PhotoReel({ photos }) {
       <div className="photo-reel__controls">
         <motion.button
           type="button"
-          className="photo-reel__nav"
+          className="icon-btn"
           onClick={() => step(-1)}
           aria-label={t.photoReel.prev}
-          whileTap={{ scale: 0.9 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.92 }}
         >
-          ←
+          <ArrowLeftIcon />
         </motion.button>
         <motion.button
           type="button"
-          className="photo-reel__nav"
+          className="icon-btn"
           onClick={() => step(1)}
           aria-label={t.photoReel.next}
-          whileTap={{ scale: 0.9 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.92 }}
         >
-          →
+          <ArrowRightIcon />
         </motion.button>
       </div>
     </div>

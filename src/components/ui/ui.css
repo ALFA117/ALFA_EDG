@@ -216,3 +216,19 @@
   font-size: var(--text-sm);
   color: var(--color-ink);
 }
+
+.state a {
+  color: var(--color-signal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Pantalla completa del ErrorBoundary. dvh: en móvil 100vh incluye la
+   barra del navegador y deja el botón fuera de vista. */
+.error-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6) var(--gutter);
+}

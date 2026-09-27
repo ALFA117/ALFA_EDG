@@ -287,9 +287,15 @@ code {
   100% { opacity: 1; }
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .blink-cursor {
   display: inline-block;
   width: 0.5em;
+  height: 0.9em;
+  vertical-align: -0.08em;
   margin-left: 0.08em;
   background: currentColor;
   animation: cursor-blink 1.1s step-end infinite;

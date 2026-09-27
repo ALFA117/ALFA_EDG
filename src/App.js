@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import './App.css';
-import { projects, socials } from './projectsData';
+import { projects, socials, linkCheck } from './projectsData';
 import { photos } from './photosData';
 import heroPhoto1 from './assets/photos/edg-10.jpg';
 import heroPhoto2 from './assets/photos/edg-09.jpg';
@@ -15,21 +15,32 @@ import CategoryTabs from './components/CategoryTabs';
 import PhotoReel from './components/PhotoReel';
 import SocialBar from './components/SocialBar';
 import SocialRail from './components/SocialRail';
-import Reveal from './components/Reveal';
-import TypedText from './components/TypedText';
-import CountUp from './components/CountUp';
 import ScrollProgress from './components/ScrollProgress';
 import ParticleNetwork from './components/ParticleNetwork';
 import BackToTop from './components/BackToTop';
-import { ShieldIcon, RocketIcon, LayersIcon, ChainIcon, CpuIcon, SunIcon, MoonIcon } from './components/Icons';
+import { Button, EmptyState } from './components/ui';
+import {
+  ShieldIcon,
+  RocketIcon,
+  LayersIcon,
+  ChainIcon,
+  CpuIcon,
+  SunIcon,
+  MoonIcon,
+  ArrowRightIcon,
+  GridIcon,
+  MessageIcon,
+  CameraIcon,
+} from './components/Icons';
 import { useScrollSpy } from './hooks/useScrollSpy';
 import { useLanguage } from './i18n/LanguageContext';
 
 const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Web2', 'Freelance', 'Otros'];
 const ETHOS_ICONS = [ShieldIcon, RocketIcon, LayersIcon];
+const NAV_ICONS = { proyectos: GridIcon, contacto: MessageIcon, fotos: CameraIcon };
 
-// Object-position tuned per photo — different compositions need different
-// focal points to crop well into the hero's square frame.
+// object-position ajustado por foto — cada composición recorta distinto en
+// el marco cuadrado del hero.
 const HERO_PHOTOS = [
   { src: heroPhoto1, position: '78% 30%' },
   { src: heroPhoto2, position: '68% 38%' },
@@ -40,53 +51,68 @@ const HERO_PHOTOS = [
 ];
 const HERO_ROTATE_MS = 6000;
 
+function readTheme() {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+  } catch {
+    // almacenamiento bloqueado: cae al tema del sistema
+  }
+  return window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
+function formatDate(iso, language) {
+  return new Intl.DateTimeFormat(language === 'en' ? 'en-US' : 'es-MX', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${iso}T00:00:00Z`));
+}
+
+// Guion de no-corte: "full-stack" no debe partirse en dos renglones.
+const keepHyphens = (text) => text.replace(/(\w)-(\w)/g, '$1‑$2');
+
 function App() {
   const { language, setLanguage, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
   const activeSection = useScrollSpy(['fotos', 'contacto', 'proyectos']);
   const reduceMotion = useReducedMotion();
   const [heroIndex, setHeroIndex] = useState(0);
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light' || saved === 'dark') return saved;
-    return window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  });
+  const [theme, setTheme] = useState(readTheme);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    // The static <meta name="theme-color"> tags only cover the OS default —
-    // once the user picks a theme explicitly, the browser chrome (mobile
-    // Safari/Chrome address bar) should follow that choice, not just the
-    // system preference.
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      // sin almacenamiento: el tema sigue funcionando en esta visita
+    }
+    // Las <meta name="theme-color"> estáticas solo cubren el tema del
+    // sistema; al elegir uno, la barra del navegador móvil lo sigue.
     const color = theme === 'light' ? '#f6f8f7' : '#07090a';
     document.querySelectorAll('meta[name="theme-color"]').forEach((el) => {
       el.setAttribute('content', color);
     });
   }, [theme]);
 
+  // La rotación de fotos se detiene con movimiento reducido y cuando la
+  // pestaña está oculta.
   useEffect(() => {
     if (reduceMotion) return undefined;
-    const id = setInterval(() => {
-      setHeroIndex((i) => (i + 1) % HERO_PHOTOS.length);
-    }, HERO_ROTATE_MS);
-    return () => clearInterval(id);
+    let id;
+    const start = () => {
+      clearInterval(id);
+      id = setInterval(() => setHeroIndex((i) => (i + 1) % HERO_PHOTOS.length), HERO_ROTATE_MS);
+    };
+    const onVisibility = () => (document.hidden ? clearInterval(id) : start());
+    start();
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
   }, [reduceMotion]);
-  const chipEntrance = (delay) => ({
-    initial: reduceMotion ? false : { opacity: 0, y: 8 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: 'easeOut', delay },
-  });
-
-  // The <html lang> and tab title were static (always Spanish) regardless of
-  // the toggle — a real gap for screen readers and search engines, and the
-  // localized copy for this was already sitting unused in t.meta.
-  useEffect(() => {
-    document.documentElement.lang = language;
-    document.title = t.meta.title;
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) metaDescription.setAttribute('content', t.meta.description);
-  }, [language, t]);
 
   const navLinks = useMemo(
     () => [
@@ -114,6 +140,7 @@ function App() {
         ...project,
         alias: typeof project.alias === 'object' ? project.alias[language] : project.alias,
         tag: project.tag[language],
+        env: project.env ? project.env[language] : null,
         description: project.description[language],
       })),
     [language]
@@ -126,6 +153,8 @@ function App() {
         : localizedProjects,
     [localizedProjects, activeCategory]
   );
+
+  const themeLabel = theme === 'light' ? t.themeToggle.toDark : t.themeToggle.toLight;
 
   return (
     <div className="page">
@@ -141,31 +170,54 @@ function App() {
         </a>
         <div className="nav__right">
           <nav className="nav__links" aria-label={language === 'en' ? 'Sections' : 'Secciones'}>
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.id}
-                href={`#${link.id}`}
-                className={
-                  'nav__link' + (activeSection === link.id ? ' is-active' : '')
-                }
-                whileTap={{ scale: 0.94 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
+            {navLinks.map((link) => {
+              const Icon = NAV_ICONS[link.id];
+              const isActive = activeSection === link.id;
+              return (
+                <motion.a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className={'nav__link' + (isActive ? ' is-active' : '')}
+                  aria-current={isActive ? 'location' : undefined}
+                  whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="nav__link-indicator"
+                      transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <Icon />
+                  <span>{link.label}</span>
+                </motion.a>
+              );
+            })}
           </nav>
           <button
             type="button"
-            className="theme-toggle"
+            className="icon-btn"
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            aria-label={theme === 'light' ? t.themeToggle.toDark : t.themeToggle.toLight}
+            aria-label={themeLabel}
+            title={themeLabel}
           >
-            {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={theme}
+                className="icon-btn__swap"
+                initial={reduceMotion ? false : { opacity: 0, rotate: -90, scale: 0.6 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 90, scale: 0.6 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+              </motion.span>
+            </AnimatePresence>
           </button>
           <button
             type="button"
-            className="lang-toggle"
+            className="icon-btn"
             onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
             aria-label={t.langToggle.aria}
           >
@@ -177,153 +229,168 @@ function App() {
       <SocialRail items={socials} />
 
       <main id="main-content">
-        <section id="top" className="hero">
+        <section id="top" className="hero" aria-labelledby="hero-title">
           <div className="hero__glow" aria-hidden="true" />
 
           <div className="hero__kicker">
-            <div className="hero__badge">
-              <span className="hero__badge-dot" aria-hidden="true" />
-              <TypedText text={t.hero.eyebrow} />
-            </div>
-            <span className="hero__accent-bar" aria-hidden="true" />
+            <p className="hero__badge">
+              <span className="hero__badge-prompt" aria-hidden="true">~$</span>
+              <span>{t.hero.eyebrow}</span>
+            </p>
           </div>
 
           <div className="hero__inner">
-          <div className="hero__visual">
-            <span className="hero__photo">
-              <AnimatePresence>
-                <motion.img
-                  key={heroIndex}
-                  src={HERO_PHOTOS[heroIndex].src}
-                  alt=""
-                  loading="eager"
-                  style={{ objectPosition: HERO_PHOTOS[heroIndex].position }}
-                  initial={reduceMotion ? false : { opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.8, ease: 'easeInOut' }}
-                />
-              </AnimatePresence>
-            </span>
-            <motion.div className="hero__chip hero__chip--1" {...chipEntrance(0.5)} aria-hidden="true">
-              <ChainIcon /> {t.hero.chips.web3}
-            </motion.div>
-            <motion.div className="hero__chip hero__chip--2" {...chipEntrance(0.65)} aria-hidden="true">
-              <CpuIcon /> {t.hero.chips.ai}
-            </motion.div>
-            <motion.div className="hero__chip hero__chip--3" {...chipEntrance(0.8)} aria-hidden="true">
-              <ShieldIcon /> {t.hero.chips.security}
-            </motion.div>
-          </div>
+            <div className="hero__visual">
+              <span className="hero__photo">
+                <AnimatePresence initial={false}>
+                  <motion.img
+                    key={heroIndex}
+                    src={HERO_PHOTOS[heroIndex].src}
+                    alt=""
+                    width="600"
+                    height="600"
+                    style={{ objectPosition: HERO_PHOTOS[heroIndex].position }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeInOut' }}
+                  />
+                </AnimatePresence>
+              </span>
+              <div className="hero__chip hero__chip--1" aria-hidden="true">
+                <ChainIcon /> {t.hero.chips.web3}
+              </div>
+              <div className="hero__chip hero__chip--2" aria-hidden="true">
+                <CpuIcon /> {t.hero.chips.ai}
+              </div>
+              <div className="hero__chip hero__chip--3" aria-hidden="true">
+                <ShieldIcon /> {t.hero.chips.security}
+              </div>
+            </div>
 
-          <div className="hero__content">
-            <h1 className="hero__title">
-              {t.hero.title}
-              <span className="blink-cursor" aria-hidden="true" />
-            </h1>
-            <p className="hero__subtitle">{t.hero.intro}</p>
-            <ul className="hero__highlights">
-              {t.hero.highlights(projects.length).map((line) => (
-                <li key={line}>{line}</li>
-              ))}
-            </ul>
-            <p className="hero__closing">{t.hero.closing}</p>
-            <div className="hero__actions">
-              <motion.a
-                className="btn btn--primary"
-                href="#proyectos"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.96 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              >
-                {t.hero.cta} <span className="btn__arrow">→</span>
-              </motion.a>
+            <div className="hero__content">
+              <h1 id="hero-title" className="hero__title t-display">
+                {keepHyphens(t.hero.title).split(' ').slice(0, -1).join(' ')}{' '}
+                <span className="nowrap">
+                  {keepHyphens(t.hero.title).split(' ').slice(-1)}
+                  <span className="blink-cursor" aria-hidden="true" />
+                </span>
+              </h1>
+              <p className="hero__subtitle">{t.hero.intro}</p>
+              <ul className="hero__highlights">
+                {t.hero.highlights(projects.length).map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+              <p className="hero__closing">{t.hero.closing}</p>
+              <Button href="#proyectos" iconEnd={<ArrowRightIcon />}>
+                {t.hero.cta}
+              </Button>
             </div>
-          </div>
 
-          <dl className="hero__stats">
-            <div className="hero__stat">
-              <dt className="hero__stat-value">
-                <CountUp value={projects.length} />
-              </dt>
-              <dd className="hero__stat-label">{t.hero.stats.projects}</dd>
+            <div className="hero__stats-wrap">
+              <dl className="hero__stats">
+                <div className="hero__stat">
+                  <dt className="hero__stat-label">{t.hero.stats.projects}</dt>
+                  <dd className="hero__stat-value">{projects.length}</dd>
+                </div>
+                <div className="hero__stat">
+                  <dt className="hero__stat-label">{t.hero.stats.categories}</dt>
+                  <dd className="hero__stat-value">{categories.length}</dd>
+                </div>
+                <div className="hero__stat">
+                  <dt className="hero__stat-label">{t.hero.stats.links}</dt>
+                  <dd className="hero__stat-value">
+                    {linkCheck.ok}/{linkCheck.total}
+                  </dd>
+                </div>
+              </dl>
+              <p className="hero__stat-note">
+                {t.hero.linkNote(linkCheck.ok, linkCheck.total, formatDate(linkCheck.date, language))}
+              </p>
             </div>
-            <div className="hero__stat">
-              <dt className="hero__stat-value">
-                <CountUp value={categories.length} />
-              </dt>
-              <dd className="hero__stat-label">{t.hero.stats.categories}</dd>
-            </div>
-            <div className="hero__stat">
-              <dt className="hero__stat-value">100%</dt>
-              <dd className="hero__stat-label">{t.hero.stats.prod}</dd>
-            </div>
-          </dl>
           </div>
         </section>
 
-        <Reveal as="section" className="ethos">
+        <section className="ethos" aria-labelledby="ethos-title">
+          <h2 id="ethos-title" className="ethos__kicker t-eyebrow">
+            {t.ethos.kicker}
+          </h2>
           <div className="ethos__grid">
             {t.ethos.items.map((item, index) => {
               const Icon = ETHOS_ICONS[index];
               return (
-                <div
-                  className="ethos__item"
-                  key={item.title}
-                  style={{ '--delay': `${index * 120}ms` }}
-                >
-                  <span className="ethos__icon" aria-hidden="true">
-                    <Icon />
-                  </span>
+                <div className="ethos__item" key={item.title}>
+                  <div className="ethos__head">
+                    <span className="ethos__icon" aria-hidden="true">
+                      <Icon />
+                    </span>
+                    <span className="ethos__index" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}/03
+                    </span>
+                  </div>
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
                 </div>
               );
             })}
           </div>
-        </Reveal>
+        </section>
 
-        <Reveal as="section" id="fotos" className="field">
+        <section id="fotos" className="field" aria-labelledby="fotos-title">
           <div className="section-heading">
-            <h2>{t.field.heading}</h2>
+            <h2 id="fotos-title" className="t-title">{t.field.heading}</h2>
             <span className="section-heading__stamp">
-              <CountUp value={photos.length} /> {t.field.stampSuffix}
+              {photos.length} {t.field.stampSuffix}
             </span>
           </div>
-          <p className="field__subtitle">{t.field.subtitle}</p>
+          <p className="section-lead">{t.field.subtitle}</p>
           <PhotoReel photos={photos} />
-        </Reveal>
+        </section>
 
-        <Reveal as="section" id="contacto" className="contact">
-          <h2>{t.contact.heading}</h2>
+        <section id="contacto" className="contact" aria-labelledby="contacto-title">
+          <h2 id="contacto-title" className="t-title">{t.contact.heading}</h2>
           <p>{t.contact.body}</p>
           <SocialBar items={socials} />
-        </Reveal>
+        </section>
 
-        <Reveal as="section" id="proyectos" className="registry">
+        <section id="proyectos" className="registry" aria-labelledby="proyectos-title">
           <div className="section-heading">
-            <h2>{t.registry.heading}</h2>
+            <h2 id="proyectos-title" className="t-title">{t.registry.heading}</h2>
             <span className="section-heading__stamp">
-              <CountUp value={projects.length} /> {t.registry.stampSuffix}
+              {projects.length} {t.registry.stampSuffix}
             </span>
           </div>
+          <p className="section-lead">{t.registry.lead}</p>
           <CategoryTabs
             categories={categories}
             counts={categoryCounts}
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
           />
-          <div className="registry__list">
-            {filteredProjects.map((project, index) => (
-              <ProjectRow
-                key={`${project.url}-${index}`}
-                index={index}
-                showKnot={project.name === 'AVAL'}
-                {...project}
-              />
-            ))}
-          </div>
-        </Reveal>
+          {filteredProjects.length === 0 ? (
+            <EmptyState
+              title={t.registry.empty.title}
+              body={t.registry.empty.body}
+              action={
+                <Button variant="secondary" onClick={() => setActiveCategory(null)}>
+                  {t.registry.empty.action}
+                </Button>
+              }
+            />
+          ) : (
+            <div className="registry__list">
+              {filteredProjects.map((project, index) => (
+                <ProjectRow
+                  key={project.url + project.name}
+                  index={index}
+                  showKnot={project.name === 'AVAL'}
+                  {...project}
+                />
+              ))}
+            </div>
+          )}
+        </section>
       </main>
 
       <footer className="footer">

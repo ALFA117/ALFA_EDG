@@ -5,7 +5,7 @@ import { socialIcons } from './Icons';
 /** Fixed vertical strip of icon-only social links along the left edge — desktop only (see CSS). */
 function SocialRail({ items }) {
   return (
-    <div className="social-rail" aria-label="Social">
+    <nav className="social-rail" aria-label="Social">
       {items.map((item) => {
         const Icon = socialIcons[item.icon];
         return (
@@ -16,8 +16,8 @@ function SocialRail({ items }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={item.name}
-            whileHover={{ x: 3 }}
-            whileTap={{ scale: 0.9 }}
+            title={item.name}
+            whileTap={{ scale: 0.92 }}
             transition={{ type: 'spring', stiffness: 400, damping: 22 }}
           >
             <Icon />
@@ -25,7 +25,7 @@ function SocialRail({ items }) {
         );
       })}
       <span className="social-rail__line" aria-hidden="true" />
-    </div>
+    </nav>
   );
 }
 

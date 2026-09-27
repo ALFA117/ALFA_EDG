@@ -538,3 +538,8 @@ export const socials = [
     icon: 'linkedin',
   },
 ];
+
+// Última revisión manual de que cada link del registro responde (HTTP 200).
+// Se muestra tal cual en el hero junto con su fecha; actualízala al volver
+// a revisar, no la cambies sin revisar.
+export const linkCheck = { date: '2026-09-27', ok: 37, total: 37 };

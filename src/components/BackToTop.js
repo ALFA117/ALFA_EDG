@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ArrowUpIcon } from './Icons';
 import { useLanguage } from '../i18n/LanguageContext';
 
 function BackToTop() {
@@ -8,12 +9,20 @@ function BackToTop() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    let ticking = false;
     function update() {
+      ticking = false;
       setVisible(window.scrollY > window.innerHeight);
     }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
     update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
@@ -23,14 +32,14 @@ function BackToTop() {
           href="#top"
           className="back-to-top"
           aria-label={t.backToTop}
-          initial={{ opacity: 0, y: 12 }}
+          title={t.backToTop}
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 12 }}
-          transition={{ duration: reduceMotion ? 0 : 0.25 }}
-          whileHover={{ y: -3 }}
-          whileTap={{ scale: 0.92 }}
+          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, transition: { duration: 0.15 } }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          whileTap={reduceMotion ? undefined : { scale: 0.92 }}
         >
-          ↑
+          <ArrowUpIcon />
         </motion.a>
       )}
     </AnimatePresence>

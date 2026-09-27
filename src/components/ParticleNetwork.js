@@ -1,13 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
-const NODE_COUNT = 110;
-const LINK_DIST = 180;
 const SPEED = 0.12;
-const NODE_RADIUS = 5.6;
 
-function makeNodes(width, height) {
-  return Array.from({ length: NODE_COUNT }, () => ({
+// Densidad según pantalla: el costo es O(n²) por cuadro, y en un celular
+// 110 nodos se veían como ruido encima del texto además de gastar batería.
+function densityFor(width) {
+  if (width < 640) return { count: 36, linkDist: 120, radius: 2 };
+  if (width < 1100) return { count: 64, linkDist: 150, radius: 2.5 };
+  return { count: 90, linkDist: 170, radius: 3 };
+}
+
+function makeNodes(n, width, height) {
+  return Array.from({ length: n }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
     vx: (Math.random() - 0.5) * SPEED,
@@ -15,9 +20,9 @@ function makeNodes(width, height) {
   }));
 }
 
-// A constellation of drifting nodes connected by fading lines — the same
-// "3D-ish" tech-web motif as the AVS reference, redrawn in our signal
-// green instead of introducing new colors.
+// Constelación de nodos a la deriva en el verde de señal. Capa fija detrás
+// de todo (ver .page__network); se pausa con la pestaña oculta y queda
+// como un cuadro estático con movimiento reducido.
 function ParticleNetwork({ className }) {
   const canvasRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -29,18 +34,18 @@ function ParticleNetwork({ className }) {
     let width = 0;
     let height = 0;
     let nodes = [];
-    let raf;
+    let density = densityFor(window.innerWidth);
+    let raf = 0;
+    let running = false;
 
-    const signal = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-signal-rgb')
-      .trim() || '62, 232, 120';
+    const readSignal = () =>
+      getComputedStyle(document.documentElement).getPropertyValue('--color-signal-rgb').trim() ||
+      '62, 232, 120';
+    let signal = readSignal();
 
-    // Mobile browsers fire `resize` mid-scroll whenever the address bar
-    // collapses/expands (window.innerHeight changes with no user resize).
-    // Re-rolling node positions on every one of those made the whole
-    // network visibly jump during a fast swipe. Resize now only rescales
-    // the canvas and clamps existing nodes into the new bounds — it never
-    // throws away and re-randomizes positions after the first paint.
+    // En móvil `resize` se dispara a media deslizada cuando la barra de
+    // direcciones se colapsa; solo se reescala y se acomodan los nodos
+    // existentes, nunca se re-generan (se vería un salto).
     function resize() {
       width = window.innerWidth;
       height = window.innerHeight;
@@ -50,37 +55,29 @@ function ParticleNetwork({ className }) {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (nodes.length === 0) {
-        nodes = makeNodes(width, height);
+      const next = densityFor(width);
+      if (nodes.length === 0 || next.count !== density.count) {
+        density = next;
+        nodes = makeNodes(density.count, width, height);
       } else {
         for (const n of nodes) {
           n.x = Math.min(n.x, width);
           n.y = Math.min(n.y, height);
         }
       }
+      if (!running) draw();
     }
 
-    let resizeTimer;
-    function onWindowResize() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resize, 120);
-    }
-
-    function step() {
+    function draw() {
+      const { linkDist, radius } = density;
       ctx.clearRect(0, 0, width, height);
-      for (const n of nodes) {
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > width) n.vx *= -1;
-        if (n.y < 0 || n.y > height) n.vy *= -1;
-      }
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.hypot(dx, dy);
-          if (dist < LINK_DIST) {
-            ctx.strokeStyle = `rgba(${signal}, ${0.32 * (1 - dist / LINK_DIST)})`;
+          if (dist < linkDist) {
+            ctx.strokeStyle = `rgba(${signal}, ${0.3 * (1 - dist / linkDist)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -89,22 +86,59 @@ function ParticleNetwork({ className }) {
           }
         }
       }
+      ctx.fillStyle = `rgba(${signal}, 0.7)`;
       for (const n of nodes) {
-        ctx.fillStyle = `rgba(${signal}, 0.85)`;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, NODE_RADIUS, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
         ctx.fill();
       }
-      if (!reduceMotion) raf = requestAnimationFrame(step);
     }
 
-    resize();
-    step();
-    window.addEventListener('resize', onWindowResize);
-    return () => {
-      window.removeEventListener('resize', onWindowResize);
+    function step() {
+      for (const n of nodes) {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+      }
+      draw();
+      raf = requestAnimationFrame(step);
+    }
+
+    function start() {
+      if (running || reduceMotion || document.hidden) return;
+      running = true;
+      raf = requestAnimationFrame(step);
+    }
+
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+
+    let resizeTimer;
+    const onWindowResize = () => {
       clearTimeout(resizeTimer);
-      if (raf) cancelAnimationFrame(raf);
+      resizeTimer = setTimeout(resize, 120);
+    };
+    const onVisibility = () => (document.hidden ? stop() : start());
+    // El color de señal cambia con el tema: se relee al cambiar data-theme.
+    const themeObserver = new MutationObserver(() => {
+      signal = readSignal();
+      if (!running) draw();
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    resize();
+    start();
+    window.addEventListener('resize', onWindowResize);
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      stop();
+      clearTimeout(resizeTimer);
+      themeObserver.disconnect();
+      window.removeEventListener('resize', onWindowResize);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, [reduceMotion]);
 

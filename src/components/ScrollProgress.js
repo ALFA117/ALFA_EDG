@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { motion, useScroll, useSpring, useReducedMotion } from 'framer-motion';
 
-/** Thin scroll-progress bar under the sticky nav — terminal-style, reads how far into the page you are. */
+/** Barra de progreso de lectura bajo la nav — anima solo transform (scaleX). */
 function ScrollProgress() {
-  const [pct, setPct] = useState(0);
-
-  useEffect(() => {
-    function update() {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setPct(max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0);
-    }
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    return () => {
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
-    };
-  }, []);
-
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const smooth = useSpring(scrollYProgress, { stiffness: 300, damping: 40, restDelta: 0.001 });
   return (
     <div className="scroll-progress" aria-hidden="true">
-      <div className="scroll-progress__bar" style={{ width: `${pct}%` }} />
+      <motion.div
+        className="scroll-progress__bar"
+        style={{ scaleX: reduceMotion ? scrollYProgress : smooth }}
+      />
     </div>
   );
 }

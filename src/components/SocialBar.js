@@ -10,13 +10,11 @@ function SocialBar({ items }) {
         return (
           <motion.a
             key={item.name}
-            className="social-bar__link"
+            className={'social-bar__link' + (item.icon === 'whatsapp' ? ' social-bar__link--primary' : '')}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={item.name}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 22 }}
           >
             <Icon />

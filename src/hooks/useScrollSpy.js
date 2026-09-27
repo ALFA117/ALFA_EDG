@@ -31,7 +31,7 @@ export function useScrollSpy(ids) {
           }
         }
       }
-      if (closestId) setActiveId(closestId);
+      setActiveId(closestId);
     }
 
     update();
