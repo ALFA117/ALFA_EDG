@@ -22,11 +22,27 @@ import previewImg_squash from './assets/previews/squash.webp';
 import previewImg_ronda_ciega from './assets/previews/ronda-ciega.webp';
 import previewImg_palpito from './assets/previews/palpito.webp';
 
+import previewImg_wip from './assets/previews/wip.webp';
+import previewImg_monglizone from './assets/previews/monglizone.webp';
+import previewImg_barberia_urbana from './assets/previews/barberia-urbana.webp';
+import previewImg_barberia_premium from './assets/previews/barberia-premium.webp';
+import previewImg_barberia_moderna from './assets/previews/barberia-moderna.webp';
+import previewImg_autos_seminuevos from './assets/previews/autos-seminuevos.webp';
+import previewImg_autos_premium from './assets/previews/autos-premium.webp';
+import previewImg_autos_camionetas from './assets/previews/autos-camionetas.webp';
+import previewImg_belleza_tienda from './assets/previews/belleza-tienda.webp';
+import previewImg_belleza_boutique from './assets/previews/belleza-boutique.webp';
+import previewImg_belleza_cabello from './assets/previews/belleza-cabello.webp';
+import previewImg_dental_familiar from './assets/previews/dental-familiar.webp';
+import previewImg_dental_premium from './assets/previews/dental-premium.webp';
+import previewImg_dental_estetica from './assets/previews/dental-estetica.webp';
+
 // Orden: lo mas reciente primero.
 export const projects = [
   {
     name: 'FYV Box',
     url: 'https://fyv-box.vercel.app/',
+    env: { en: 'Stellar testnet', es: 'Stellar testnet' },
     preview: previewImg_fyv_box,
     bucket: 'Seguridad',
     tag: { en: 'Web3 · Security Education', es: 'Web3 · Educación en Seguridad' },
@@ -38,6 +54,7 @@ export const projects = [
   {
     name: 'SEPuente',
     url: 'https://sepuente.vercel.app/',
+    env: { en: 'Stellar testnet', es: 'Stellar testnet' },
     preview: previewImg_sepuente,
     bucket: 'Infra',
     tag: { en: 'Web3 · Stellar · SPEI', es: 'Web3 · Stellar · SPEI' },
@@ -50,6 +67,7 @@ export const projects = [
     name: 'El Velador',
     alias: { en: 'The Watchman', es: 'El Vigilante' },
     url: 'https://el-velador-bot.vercel.app/',
+    env: { en: 'Solana mainnet · read-only', es: 'Solana mainnet · solo lectura' },
     preview: previewImg_el_velador,
     bucket: 'Seguridad',
     tag: { en: 'Web3 · Security Bot', es: 'Web3 · Bot de Seguridad' },
@@ -62,6 +80,7 @@ export const projects = [
     name: 'Squash',
     alias: { en: 'git squash, but for money', es: 'git squash, pero para dinero' },
     url: 'https://squash-pay.vercel.app/',
+    env: { en: 'Hedera testnet', es: 'Hedera testnet' },
     preview: previewImg_squash,
     bucket: 'Infra',
     tag: { en: 'Web3 · Hedera · x402', es: 'Web3 · Hedera · x402' },
@@ -74,6 +93,7 @@ export const projects = [
     name: 'Ronda Ciega',
     alias: { en: 'Blind Matching', es: 'Matching a ciegas' },
     url: 'https://ronda-ciega.vercel.app/',
+    env: { en: 'Solana devnet', es: 'Solana devnet' },
     preview: previewImg_ronda_ciega,
     bucket: 'Infra',
     tag: { en: 'Web3 · Solana · Privacy', es: 'Web3 · Solana · Privacidad' },
@@ -85,6 +105,7 @@ export const projects = [
   {
     name: 'Palpito',
     url: 'https://palpito-somnia.vercel.app/',
+    env: { en: 'Somnia testnet', es: 'Somnia testnet' },
     preview: previewImg_palpito,
     bucket: 'Infra',
     tag: { en: 'Web3 · Somnia · Social', es: 'Web3 · Somnia · Social' },
@@ -109,6 +130,7 @@ export const projects = [
     name: 'AVS',
     alias: 'Anonymous Venture Syndicate',
     url: 'https://avs-mou.vercel.app/',
+    env: { en: 'Solana devnet', es: 'Solana devnet' },
     preview: previewImg_avs,
     bucket: 'Infra',
     tag: { en: 'Web3 · Solana', es: 'Web3 · Solana' },
@@ -121,6 +143,7 @@ export const projects = [
     name: 'AVAL',
     alias: 'Mou Casper',
     url: 'https://mou-casper.vercel.app/',
+    env: { en: 'Casper testnet', es: 'Casper testnet' },
     preview: previewImg_aval,
     bucket: 'Infra',
     tag: { en: 'DeFi · AI Agents', es: 'DeFi · Agentes IA' },
@@ -132,6 +155,7 @@ export const projects = [
   {
     name: 'Mou Fut',
     url: 'https://moufut.vercel.app/',
+    env: { en: 'Sepolia testnet · demo mode', es: 'Sepolia testnet · modo demo' },
     preview: previewImg_moufut,
     bucket: 'Infra',
     tag: { en: 'P2P · On-device AI', es: 'P2P · IA on-device' },
@@ -143,6 +167,7 @@ export const projects = [
   {
     name: 'Nexus LATAM',
     url: 'https://nexus-latam-kappa.vercel.app/',
+    env: { en: 'Arbitrum Sepolia', es: 'Arbitrum Sepolia' },
     preview: previewImg_nexus_latam,
     bucket: 'Infra',
     tag: { en: 'B2B · Arbitrum', es: 'B2B · Arbitrum' },
@@ -154,6 +179,7 @@ export const projects = [
   {
     name: 'MonkeyClone',
     url: 'https://monkeyclone.vercel.app/',
+    env: { en: 'Solana devnet', es: 'Solana devnet' },
     preview: previewImg_monkeyclone,
     bucket: 'Infra',
     tag: { en: 'Web3 · Solana', es: 'Web3 · Solana' },
@@ -188,6 +214,7 @@ export const projects = [
   {
     name: 'Mongli Pool',
     url: 'https://mongli-pool.vercel.app/',
+    env: { en: 'Stellar testnet', es: 'Stellar testnet' },
     preview: previewImg_mongli_pool,
     bucket: 'Infra',
     tag: { en: 'Web3 · Pool', es: 'Web3 · Pool' },
@@ -211,6 +238,7 @@ export const projects = [
   {
     name: 'Mongli Game',
     url: 'https://mongli-game.vercel.app/',
+    env: { en: '0G Galileo testnet', es: '0G Galileo testnet' },
     preview: previewImg_mongli_game,
     bucket: 'Gaming',
     tag: { en: 'Gaming', es: 'Gaming' },
@@ -222,6 +250,7 @@ export const projects = [
   {
     name: 'Kivo App',
     url: 'https://kivo-app-five.vercel.app/',
+    env: { en: 'Stellar testnet', es: 'Stellar testnet' },
     preview: previewImg_kivo,
     bucket: 'Infra',
     tag: { en: 'Web3 · Stellar', es: 'Web3 · Stellar' },
@@ -282,11 +311,11 @@ export const projects = [
     },
   },
   {
-    // Sin preview propio todavia -- no hay screenshot real disponible y
-    // no se va a inventar uno. Agregar previewImg_wip cuando exista.
     name: 'WIP',
     alias: 'Wallet Integration Piggy',
     url: 'https://wip-piggy.vercel.app/',
+    preview: previewImg_wip,
+    env: { en: 'Sepolia testnet', es: 'Sepolia testnet' },
     bucket: 'IA',
     tag: { en: 'AI Agent · WDK · Wallet', es: 'Agente IA · WDK · Wallet' },
     description: {
@@ -295,11 +324,10 @@ export const projects = [
     },
   },
   {
-    // Sin preview propio todavia -- no hay screenshot real disponible y
-    // no se va a inventar uno. Agregar previewImg_monglizone cuando exista.
     name: 'MongliZone',
     alias: 'Creative Minds Jam #1',
     url: 'https://monglizone.vercel.app/',
+    preview: previewImg_monglizone,
     bucket: 'IA',
     tag: { en: 'AI · Content Mind', es: 'IA · Mind de Contenido' },
     description: {
@@ -321,11 +349,11 @@ export const projects = [
   },
   {
     // Showcase comercial de 12 demos freelance (Next.js, repo separado
-    // showcase-edg). Sin preview propio todavia -- no hay screenshot real
-    // disponible desde esta sesion (sin navegador conectado) y no se va a
-    // inventar uno, mismo criterio que WIP/MongliZone mas abajo.
+    // showcase-edg). Negocios ficticios: se etiquetan como demo en la tarjeta.
     name: 'Barbería Urbana',
     url: 'https://showcase-edg.vercel.app/barberias/barberia-urbana',
+    preview: previewImg_barberia_urbana,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Barbershop', es: 'Web2 · Barbería' },
     description: {
@@ -336,6 +364,8 @@ export const projects = [
   {
     name: 'Barbería Premium',
     url: 'https://showcase-edg.vercel.app/barberias/barberia-premium',
+    preview: previewImg_barberia_premium,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Barbershop', es: 'Web2 · Barbería' },
     description: {
@@ -346,6 +376,8 @@ export const projects = [
   {
     name: 'Barbería Moderna',
     url: 'https://showcase-edg.vercel.app/barberias/barberia-moderna',
+    preview: previewImg_barberia_moderna,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Barbershop', es: 'Web2 · Barbería' },
     description: {
@@ -357,6 +389,8 @@ export const projects = [
     name: 'Auto Confianza CDMX',
     alias: { en: 'Used-car dealership', es: 'Agencia de seminuevos' },
     url: 'https://showcase-edg.vercel.app/autos/agencia-seminuevos',
+    preview: previewImg_autos_seminuevos,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Auto Dealer', es: 'Web2 · Agencia de Autos' },
     description: {
@@ -368,6 +402,8 @@ export const projects = [
     name: 'Aurea Motors',
     alias: { en: 'Luxury car microsite', es: 'Microsite de auto de lujo' },
     url: 'https://showcase-edg.vercel.app/autos/autos-premium',
+    preview: previewImg_autos_premium,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Auto Dealer', es: 'Web2 · Agencia de Autos' },
     description: {
@@ -379,6 +415,8 @@ export const projects = [
     name: 'Terreno Norte 4x4',
     alias: { en: 'Pickup/SUV dealership', es: 'Agencia de camionetas/SUVs' },
     url: 'https://showcase-edg.vercel.app/autos/autos-camionetas',
+    preview: previewImg_autos_camionetas,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Auto Dealer', es: 'Web2 · Agencia de Autos' },
     description: {
@@ -390,6 +428,8 @@ export const projects = [
     name: 'Casa Aroma',
     alias: { en: 'Beauty e-commerce', es: 'E-commerce de belleza' },
     url: 'https://showcase-edg.vercel.app/belleza/tienda-productos',
+    preview: previewImg_belleza_tienda,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Beauty E-commerce', es: 'Web2 · E-commerce Belleza' },
     description: {
@@ -401,6 +441,8 @@ export const projects = [
     name: 'Maison Ámbar',
     alias: { en: 'Luxury cosmetics boutique', es: 'Boutique de cosmética de lujo' },
     url: 'https://showcase-edg.vercel.app/belleza/boutique-cosmeticos',
+    preview: previewImg_belleza_boutique,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Beauty E-commerce', es: 'Web2 · E-commerce Belleza' },
     description: {
@@ -412,6 +454,8 @@ export const projects = [
     name: 'Raíz & Piel',
     alias: { en: 'Haircare/skincare', es: 'Cabello y skincare' },
     url: 'https://showcase-edg.vercel.app/belleza/cabello-skincare',
+    preview: previewImg_belleza_cabello,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Beauty E-commerce', es: 'Web2 · E-commerce Belleza' },
     description: {
@@ -422,6 +466,8 @@ export const projects = [
   {
     name: 'Consultorio Dental Familiar',
     url: 'https://showcase-edg.vercel.app/dentistas/consultorio-familiar',
+    preview: previewImg_dental_familiar,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Dental Clinic', es: 'Web2 · Clínica Dental' },
     description: {
@@ -432,6 +478,8 @@ export const projects = [
   {
     name: 'Clínica Dental Premium',
     url: 'https://showcase-edg.vercel.app/dentistas/clinica-premium',
+    preview: previewImg_dental_premium,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Dental Clinic', es: 'Web2 · Clínica Dental' },
     description: {
@@ -442,6 +490,8 @@ export const projects = [
   {
     name: 'Clínica de Estética Dental',
     url: 'https://showcase-edg.vercel.app/dentistas/clinica-estetica',
+    preview: previewImg_dental_estetica,
+    env: { en: 'Demo · fictional business', es: 'Demo · negocio ficticio' },
     bucket: 'Web2',
     tag: { en: 'Web2 · Dental Clinic', es: 'Web2 · Clínica Dental' },
     description: {

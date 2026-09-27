@@ -1,25 +1,15 @@
 {
   "short_name": "ALFA-EDG",
   "name": "ALFA-EDG — Builder Web3 + IA",
+  "description": "Portafolio de proyectos Web3 + IA con demo en vivo.",
+  "lang": "es",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+    { "src": "favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon" },
+    { "src": "logo192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "logo512.png", "type": "image/png", "sizes": "512x512" }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#07070C",
-  "background_color": "#07070C"
+  "theme_color": "#07090a",
+  "background_color": "#07090a"
 }

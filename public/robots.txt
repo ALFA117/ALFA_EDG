@@ -1,5 +1,4 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
 
-Sitemap: https://alfa-edg.vercel.app/sitemap.xml
+Sitemap: https://alfaedg.vercel.app/sitemap.xml

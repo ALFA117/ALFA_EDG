@@ -1,0 +1,218 @@
+/* ---------- Botón ---------- */
+
+.btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-6);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--text-base);
+  line-height: 1;
+  cursor: pointer;
+  transition: box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn--primary {
+  background: var(--color-signal);
+  color: var(--color-on-signal);
+}
+
+.btn--primary:hover {
+  box-shadow: var(--glow-signal);
+}
+
+.btn--primary:hover svg:last-child {
+  transform: translateX(3px);
+}
+
+.btn--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-signal);
+  color: var(--color-signal);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.btn--ghost:hover {
+  color: var(--color-signal);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn.is-loading {
+  cursor: progress;
+}
+
+.btn__spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: btn-spin 700ms linear infinite;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Campo de texto ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.field__input {
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-base);
+}
+
+.field__input:focus-visible {
+  border-color: var(--color-signal);
+}
+
+.field.has-error .field__input {
+  border-color: var(--color-danger);
+}
+
+.field__hint {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.field__error {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+.field__error::before {
+  content: '✕ ';
+  font-family: var(--font-mono);
+}
+
+/* ---------- Tarjeta ---------- */
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+/* ---------- Skeleton ---------- */
+
+.skeleton {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(var(--color-signal-rgb), 0.06), transparent);
+  animation: skeleton-sweep 1.4s var(--ease-out) infinite;
+}
+
+@keyframes skeleton-sweep {
+  to { transform: translateX(100%); }
+}
+
+/* ---------- Estados vacío / error ---------- */
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-6);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
+
+.state__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+}
+
+.state--error .state__title {
+  color: var(--color-danger);
+}
+
+.state__body {
+  margin: 0;
+  color: var(--color-muted);
+  max-width: 60ch;
+}
+
+/* ---------- Toast ---------- */
+
+.toast-region {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--tabbar-h) + var(--space-4) + env(safe-area-inset-bottom));
+  z-index: var(--z-toast);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.toast {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}

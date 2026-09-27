@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <script>
-      // Runs before first paint, ahead of React mounting — without this the
-      // page briefly shows the browser's unstyled-default white until the
-      // app's own theme effect fires, which reads as a "white flash" and is
-      // far more visible on the slower JS startup typical of mobile.
+      // Corre antes del primer pintado: sin esto la página muestra un flash
+      // blanco hasta que React aplica el tema.
       (function () {
         try {
           var saved = localStorage.getItem('theme');
@@ -22,44 +20,93 @@
         }
       })();
     </script>
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>ALFA-EDG — Builder Web3 + IA</title>
+    <meta name="description" content="ALFA-EDG — desarrollador full-stack Web3 + IA en México: 37 proyectos con demo en vivo, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain." />
+    <link rel="canonical" href="https://alfaedg.vercel.app/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="ALFA-EDG" />
+
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <meta name="theme-color" content="#f6f8f7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#07090a" media="(prefers-color-scheme: dark)" />
-    <meta
-      name="description"
-      content="ALFA-EDG — Infraestructura Web3 e IA: 16 proyectos en producción, de swaps cross-chain vía HTLC a agentes de trading autónomos."
-    />
-    <meta property="og:title" content="ALFA-EDG — Builder Web3 + IA" />
-    <meta property="og:description" content="Infraestructura Web3 + IA en producción: atomic swaps, DeFi, seguridad on-chain, agentes y gaming." />
+
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://alfa-edg.vercel.app/og.png" />
-    <meta property="og:url" content="https://alfa-edg.vercel.app/" />
+    <meta property="og:site_name" content="ALFA-EDG" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:url" content="https://alfaedg.vercel.app/" />
+    <meta property="og:title" content="ALFA-EDG — Builder Web3 + IA" />
+    <meta property="og:description" content="ALFA-EDG — desarrollador full-stack Web3 + IA en México: 37 proyectos con demo en vivo, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain." />
+    <meta property="og:image" content="https://alfaedg.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ALFA-EDG — portafolio de proyectos Web3 + IA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ALFA-EDG — Builder Web3 + IA" />
-    <meta name="twitter:description" content="Infraestructura Web3 + IA en producción: atomic swaps, DeFi, seguridad on-chain, agentes y gaming." />
-    <meta name="twitter:image" content="https://alfa-edg.vercel.app/og.png" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta name="twitter:description" content="ALFA-EDG — desarrollador full-stack Web3 + IA en México: 37 proyectos con demo en vivo, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain." />
+    <meta name="twitter:image" content="https://alfaedg.vercel.app/og.png" />
+    <meta name="twitter:image:alt" content="ALFA-EDG — portafolio de proyectos Web3 + IA" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <title>ALFA-EDG — Builder Web3 + IA</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <main style="max-width:720px;margin:0 auto;padding:24px 16px;font-family:system-ui,sans-serif;line-height:1.6;color:#e8efe9;background:#07090a">
+        <h1 style="font-family:monospace">ALFA-EDG — Builder Web3 + IA</h1>
+        <p>Desarrollador full-stack en México. 37 proyectos con demo en vivo: Web3, agentes de IA, seguridad on-chain y sitios para negocios. Esta es la versión sin JavaScript; actívalo para ver el sitio completo.</p>
+        <p>Contacto: <a href="https://www.instagram.com/alfa_edg.mou/">Instagram</a> · <a href="https://x.com/ALFA_EDG">X</a> · <a href="https://wa.me/525655102956?text=Hola%20Edgar%2C%20vi%20tu%20portafolio%20y%20quiero%20platicar%20de%20un%20proyecto">WhatsApp</a> · <a href="https://t.me/ALFA_EDG">Telegram</a> · <a href="mailto:edgarlopezbaeza.ing@gmail.com">Email</a> · <a href="https://www.facebook.com/edgar.lopez.58747?locale=es_LA">Facebook</a> · <a href="https://www.linkedin.com/in/edgar-lopez-baeza-6b5a22353">LinkedIn</a></p>
+        <h2 style="font-family:monospace">Proyectos (37)</h2>
+        <ul>
+          <li><a href="https://fyv-box.vercel.app/">FYV Box</a> — Web3 · Educación en Seguridad · Stellar testnet. Simulador gratuito de estafas crypto en español: 22 simulacros realistas (phishing, airdrops falsos, ingeniería social, firmas peligrosas, preventas falsas, manejo de llaves) en 6 módulos. Al completar un track obtienes una credencial verificable ligada a tu dirección de Stellar testnet.</li>
+          <li><a href="https://sepuente.vercel.app/">SEPuente</a> — Web3 · Stellar · SPEI · Stellar testnet. Gateway open source y no custodial que presenta las rampas de pesos mexicanos como un anchor estándar de Stellar: mandas pesos por SPEI y los recibes en cualquier wallet SEP-24, y de regreso. Pasa 75 de 76 pruebas oficiales de anchor de SDF. Construido para GOYA HACK · CriptoUNAM 2026.</li>
+          <li><a href="https://el-velador-bot.vercel.app/">El Velador</a> — Web3 · Bot de Seguridad · Solana mainnet · solo lectura. Analiza tokens de pump.fun en segundos: historial del deployer, distribución de holders y señales de mercado, con un semáforo de riesgo. Gratis con límite diario, ilimitado holdeando $VELADOR.</li>
+          <li><a href="https://squash-pay.vercel.app/">Squash</a> — Web3 · Hedera · x402 · Hedera testnet. Motor de compensación multilateral: le das N deudas entre N personas y devuelve el mínimo demostrable de transferencias, y las liquida de forma atómica en Hedera — nadie paga hasta que todos firman. Divide la cuenta en la mesa con un QR; cualquier app o agente puede llamar al motor y pagar por obligación vía x402.</li>
+          <li><a href="https://ronda-ciega.vercel.app/">Ronda Ciega</a> — Web3 · Solana · Privacidad · Solana devnet. Matching estable a ciegas en Solana: founders y builders se rankean entre sí, el algoritmo Gale–Shapley corre dentro de un Private Ephemeral Rollup de MagicBlock y solo salen las parejas — las listas de preferencias nunca se publican. Construido para MagicBlock Solana Blitz v8.</li>
+          <li><a href="https://palpito-somnia.vercel.app/">Palpito</a> — Web3 · Somnia · Social · Somnia testnet. Un feed social de predicciones de BTC/ETH donde cada palpito es una posición real on-chain en event contracts de DreamDEX, liquidada públicamente por un oráculo minutos después — con recibo auditable y ranking de quién realmente acierta. Construido para el Somnia × DreamDEX Hackathon.</li>
+          <li><a href="https://mad-mongli-agent.vercel.app/">MAD</a> — IA · Agente de Trading. Agente de trading autónomo que solo apuesta en un mercado de predicción cuando un dato público con nombre respalda el número, y se abstiene si no lo hay. Construido para el Delphi Agent Arena Competition de Gensyn.</li>
+          <li><a href="https://avs-mou.vercel.app/">AVS</a> — Web3 · Solana · Solana devnet. Sindicatos de inversión con pujas selladas en Solana: los inversores pujan y votan hitos de la startup sin visibilidad entre ellos hasta un reveal simultáneo, usando MagicBlock Ephemeral Rollups para privacidad sin gas. Construido para el Solana Blitz V7 Hackathon.</li>
+          <li><a href="https://mou-casper.vercel.app/">AVAL</a> — DeFi · Agentes IA · Casper testnet. Mesa de securitización autónoma: agentes de IA arriesgan su propio capital calificando riesgo de facturas reales (real-world receivables) y son penalizados on-chain si fallan. Casper Agentic Buildathon 2026.</li>
+          <li><a href="https://moufut.vercel.app/">Mou Fut</a> — P2P · IA on-device · Sepolia testnet · modo demo. Fútbol P2P sin servidor: chat en malla, comentarista IA on-device y quiniela en USDt liquidada entre pares, sin backend propio. Construido para el Tether Developers Cup 2026.</li>
+          <li><a href="https://nexus-latam-kappa.vercel.app/">Nexus LATAM</a> — B2B · Arbitrum · Arbitrum Sepolia. Liquida, financia y audita comercio B2B en LATAM en menos de 60 segundos, con una flota de agentes de IA que calculan el riesgo en tiempo real. Construido sobre Arbitrum + Bitso para ETH México 2026.</li>
+          <li><a href="https://monkeyclone.vercel.app/">MonkeyClone</a> — Web3 · Solana · Solana devnet. Copy-trading en Solana con mecánica de fantasy draft: elige tres wallets con buen desempeño, deposita una vez, y el protocolo copia sus operaciones por ti. Rankeadas cada semana por ROI, win rate y consistencia.</li>
+          <li><a href="https://chainguard-pi.vercel.app/">ChainGuard</a> — Web3 · Seguridad. Escanea contratos Solidity en busca de vulnerabilidades de reentrancy, tx.origin, overflow y selfdestruct antes de que se conviertan en un exploit. Construido para HackOWASP 8.0.</li>
+          <li><a href="https://mongli-agent-ia.vercel.app/">Mou IA</a> — IA · Mantle · On-chain. Inteligencia de señales on-chain para rastrear &quot;smart money&quot; en Mantle Network — feed en vivo, explorador de wallets y analítica que detecta movimientos de ballenas y anomalías en tiempo real.</li>
+          <li><a href="https://mongli-pool.vercel.app/">Mongli Pool</a> — Web3 · Pool · Stellar testnet. Pool de privacidad en Stellar con cumplimiento regulatorio integrado: deposita y retira sin que nadie pueda vincular ambas operaciones, verificado con pruebas ZK reales on-chain. Construido para Stellar Hacks: ZK 2025.</li>
+          <li><a href="https://presentacionde-monglipool.vercel.app/">Mongli Pool</a> — Diseño Web · Presentación. Un framework de presentación construido desde cero en HTML/CSS/JS puro: navegación por teclado y swipe, transiciones animadas y toggle de tema claro/oscuro. Aquí lleva un pitch como contenido, pero el framework es lo que se entrega.</li>
+          <li><a href="https://mongli-game.vercel.app/">Mongli Game</a> — Gaming · 0G Galileo testnet. Un thriller narrativo noir guardado on-chain: reconstruye una identidad fragmentada mientras un narrador con IA lleva cada decisión, todo persistido en 0G Storage. Construido para el Zero Cup 2026.</li>
+          <li><a href="https://kivo-app-five.vercel.app/">Kivo App</a> — Web3 · Stellar · Stellar testnet. Custodia programática sobre Stellar para el comercio mexicano: el dinero queda retenido on-chain y solo se libera cuando ambas partes confirman la entrega. Construido para el Stellar Hackathon 2026.</li>
+          <li><a href="https://crystal-vanilla.vercel.app/">Crystal Vanilla</a> — Web App. Calculadora de producción para un negocio de extracto de vainilla: convierte litros disponibles en unidades de venta y proyecta costos de manufactura al instante. Construido para un cliente freelance.</li>
+          <li><a href="https://wall-of-guardians.vercel.app/">Refugio</a> — Decentraland · Social. Una fogata en Decentraland (SDK7) que solo arde cuando la gente llega — sin host, sin evento programado. Un mini-juego cooperativo hace crecer el fuego en tiempo real; aquí se muestra el leaderboard público y una demo jugable en el navegador, sin instalar nada. Friendzone Hackathon.</li>
+          <li><a href="https://flor-de-sil.vercel.app/">Flor de Sil</a> — Freelance / Cliente. Catálogo de arreglos florales con panel de administración para gestionar inventario y pedidos, construido para un cliente freelance — donde florecen las emociones.</li>
+          <li><a href="https://mercadito-mex.vercel.app/">MercaditoMex</a> — IA · Marketplace. Marketplace por voz: el vendedor describe el producto hablando y la IA redacta la publicación mientras habla, lista antes de que se enfríe el café.</li>
+          <li><a href="https://wip-piggy.vercel.app/">WIP</a> — Agente IA · WDK · Wallet · Sepolia testnet. Un agente de IA con billetera propia hace cumplir el reglamento de gasto del grupo antes de mover USD₮ real en Sepolia: topes, lista blanca, presupuesto mensual, aprobación de varias personas. Cada pago y cada rechazo queda en un registro auditable. Construido para el Aleph Hackathon, WDK Track.</li>
+          <li><a href="https://monglizone.vercel.app/">MongliZone</a> — IA · Mind de Contenido. Le dices una idea en voz y decide el formato (un carrusel real de varias fotos, un video de 1-3 min, o un caption), lo genera, lo manda a revisión, y solo publica si dices que sí. Construido como Mind persistente sobre Minds by Animoca Brands.</li>
+          <li><a href="https://mou-x402.vercel.app/">Moux402</a> — Infra · x402. Envuelve cualquier API con monetización por llamada en un solo comando, liquidada en Ethereum, Base, Solana o Stellar — sin stack de medición, sin clave en el servidor, sin registro para el comprador.</li>
+          <li><a href="https://showcase-edg.vercel.app/barberias/barberia-urbana">Barbería Urbana</a> — Web2 · Barbería · Demo · negocio ficticio. Landing editorial de barbería con wizard de reserva en vivo (servicio → barbero → horario), precios estilo ticket de recibo y CTA directo a WhatsApp. Una de 12 demos comerciales para vender paquetes de sitio web a negocios locales.</li>
+          <li><a href="https://showcase-edg.vercel.app/barberias/barberia-premium">Barbería Premium</a> — Web2 · Barbería · Demo · negocio ficticio. Sitio de barbería editorial y pausado, construido sobre espacio en blanco y un único modal de reserva elegante — sin rebote, sin ruido visual.</li>
+          <li><a href="https://showcase-edg.vercel.app/barberias/barberia-moderna">Barbería Moderna</a> — Web2 · Barbería · Demo · negocio ficticio. Demo de barbería con estética Gen-Z: nav en píldora, stories horizontales de servicios estilo Instagram y wizard de reserva con puntos de progreso animados.</li>
+          <li><a href="https://showcase-edg.vercel.app/autos/agencia-seminuevos">Auto Confianza CDMX</a> — Web2 · Agencia de Autos · Demo · negocio ficticio. Demo de agencia de seminuevos con inventario filtrable/ordenable (precio, año, kilometraje) y simulador de mensualidad en vivo por vehículo.</li>
+          <li><a href="https://showcase-edg.vercel.app/autos/autos-premium">Aurea Motors</a> — Web2 · Agencia de Autos · Demo · negocio ficticio. Microsite cinematográfico de un solo vehículo para una marca de lujo ficticia — configurador de color que cambia la foto del hero en vivo, con contadores de specs animados.</li>
+          <li><a href="https://showcase-edg.vercel.app/autos/autos-camionetas">Terreno Norte 4x4</a> — Web2 · Agencia de Autos · Demo · negocio ficticio. Demo de agencia de camionetas/SUVs con filtro por terreno, tabla comparativa pickup vs SUV y stats de capacidad animados.</li>
+          <li><a href="https://showcase-edg.vercel.app/belleza/tienda-productos">Casa Aroma</a> — Web2 · E-commerce Belleza · Demo · negocio ficticio. Demo completa de e-commerce de belleza: catálogo con búsqueda/filtro/orden real, cart drawer y checkout simulado en 3 pasos.</li>
+          <li><a href="https://showcase-edg.vercel.app/belleza/boutique-cosmeticos">Maison Ámbar</a> — Web2 · E-commerce Belleza · Demo · negocio ficticio. Sitio editorial de cosmética de lujo — colección con drag-scroll, reveal del hero letra por letra, y nav que se oculta al bajar y reaparece al subir.</li>
+          <li><a href="https://showcase-edg.vercel.app/belleza/cabello-skincare">Raíz &amp; Piel</a> — Web2 · E-commerce Belleza · Demo · negocio ficticio. Demo de cabello/skincare construida alrededor de un quiz de 3 preguntas que recomienda productos reales del catálogo.</li>
+          <li><a href="https://showcase-edg.vercel.app/dentistas/consultorio-familiar">Consultorio Dental Familiar</a> — Web2 · Clínica Dental · Demo · negocio ficticio. Demo de consultorio dental familiar con servicios en iconos-tile, agendador de citas real y acordeón de preguntas frecuentes.</li>
+          <li><a href="https://showcase-edg.vercel.app/dentistas/clinica-premium">Clínica Dental Premium</a> — Web2 · Clínica Dental · Demo · negocio ficticio. Microsite de clínica dental premium con especialistas acreditados, tratamientos en tabs con precio 'desde $X' y timeline de experiencia del paciente.</li>
+          <li><a href="https://showcase-edg.vercel.app/dentistas/clinica-estetica">Clínica de Estética Dental</a> — Web2 · Clínica Dental · Demo · negocio ficticio. Demo de estética dental construida alrededor de un slider antes/después con arrastre y soporte completo de teclado.</li>
+        </ul>
+      </main>
+    </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
