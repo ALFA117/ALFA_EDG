@@ -16,8 +16,83 @@ import previewImg_refugio from './assets/previews/refugio.webp';
 import previewImg_tianguis_ia from './assets/previews/tianguis-ia.webp';
 import previewImg_moux402 from './assets/previews/moux402.webp';
 import previewImg_el_velador from './assets/previews/el-velador.webp';
+import previewImg_fyv_box from './assets/previews/fyv-box.webp';
+import previewImg_sepuente from './assets/previews/sepuente.webp';
+import previewImg_squash from './assets/previews/squash.webp';
+import previewImg_ronda_ciega from './assets/previews/ronda-ciega.webp';
+import previewImg_palpito from './assets/previews/palpito.webp';
 
+// Orden: lo mas reciente primero.
 export const projects = [
+  {
+    name: 'FYV Box',
+    url: 'https://fyv-box.vercel.app/',
+    preview: previewImg_fyv_box,
+    bucket: 'Seguridad',
+    tag: { en: 'Web3 · Security Education', es: 'Web3 · Educación en Seguridad' },
+    description: {
+      en: 'A free crypto-scam simulator in Spanish: 22 realistic drills (phishing, fake airdrops, social engineering, dangerous signatures, fake presales, key handling) across 6 modules. Finish a track and earn a verifiable credential tied to your Stellar testnet address.',
+      es: 'Simulador gratuito de estafas crypto en español: 22 simulacros realistas (phishing, airdrops falsos, ingeniería social, firmas peligrosas, preventas falsas, manejo de llaves) en 6 módulos. Al completar un track obtienes una credencial verificable ligada a tu dirección de Stellar testnet.',
+    },
+  },
+  {
+    name: 'SEPuente',
+    url: 'https://sepuente.vercel.app/',
+    preview: previewImg_sepuente,
+    bucket: 'Infra',
+    tag: { en: 'Web3 · Stellar · SPEI', es: 'Web3 · Stellar · SPEI' },
+    description: {
+      en: 'An open-source, non-custodial gateway that exposes Mexican peso on/off-ramps as a standard Stellar anchor: send pesos by SPEI and receive them in any SEP-24 wallet, and back. Passes 75 of 76 official SDF anchor tests. Built for GOYA HACK · CriptoUNAM 2026.',
+      es: 'Gateway open source y no custodial que presenta las rampas de pesos mexicanos como un anchor estándar de Stellar: mandas pesos por SPEI y los recibes en cualquier wallet SEP-24, y de regreso. Pasa 75 de 76 pruebas oficiales de anchor de SDF. Construido para GOYA HACK · CriptoUNAM 2026.',
+    },
+  },
+  {
+    name: 'El Velador',
+    alias: { en: 'The Watchman', es: 'El Vigilante' },
+    url: 'https://el-velador-bot.vercel.app/',
+    preview: previewImg_el_velador,
+    bucket: 'Seguridad',
+    tag: { en: 'Web3 · Security Bot', es: 'Web3 · Bot de Seguridad' },
+    description: {
+      en: 'Scans pump.fun tokens in seconds — deployer history, holder distribution, market signals — and returns a traffic-light risk read. Free with a daily limit, unlimited while holding $VELADOR.',
+      es: 'Analiza tokens de pump.fun en segundos: historial del deployer, distribución de holders y señales de mercado, con un semáforo de riesgo. Gratis con límite diario, ilimitado holdeando $VELADOR.',
+    },
+  },
+  {
+    name: 'Squash',
+    alias: { en: 'git squash, but for money', es: 'git squash, pero para dinero' },
+    url: 'https://squash-pay.vercel.app/',
+    preview: previewImg_squash,
+    bucket: 'Infra',
+    tag: { en: 'Web3 · Hedera · x402', es: 'Web3 · Hedera · x402' },
+    description: {
+      en: 'A multilateral netting engine: give it N debts between N people and it returns the provably minimum number of transfers, then settles them atomically on Hedera — nobody pays until everybody signs. Split a bill at the table with a QR; any app or agent can call the engine and pay per obligation over x402.',
+      es: 'Motor de compensación multilateral: le das N deudas entre N personas y devuelve el mínimo demostrable de transferencias, y las liquida de forma atómica en Hedera — nadie paga hasta que todos firman. Divide la cuenta en la mesa con un QR; cualquier app o agente puede llamar al motor y pagar por obligación vía x402.',
+    },
+  },
+  {
+    name: 'Ronda Ciega',
+    alias: { en: 'Blind Matching', es: 'Matching a ciegas' },
+    url: 'https://ronda-ciega.vercel.app/',
+    preview: previewImg_ronda_ciega,
+    bucket: 'Infra',
+    tag: { en: 'Web3 · Solana · Privacy', es: 'Web3 · Solana · Privacidad' },
+    description: {
+      en: 'Blind stable matching on Solana: founders and builders rank each other, the Gale–Shapley algorithm runs inside a MagicBlock Private Ephemeral Rollup, and only the pairings come out — the preference lists are never published. Built for MagicBlock Solana Blitz v8.',
+      es: 'Matching estable a ciegas en Solana: founders y builders se rankean entre sí, el algoritmo Gale–Shapley corre dentro de un Private Ephemeral Rollup de MagicBlock y solo salen las parejas — las listas de preferencias nunca se publican. Construido para MagicBlock Solana Blitz v8.',
+    },
+  },
+  {
+    name: 'Palpito',
+    url: 'https://palpito-somnia.vercel.app/',
+    preview: previewImg_palpito,
+    bucket: 'Infra',
+    tag: { en: 'Web3 · Somnia · Social', es: 'Web3 · Somnia · Social' },
+    description: {
+      en: 'A social feed of BTC/ETH price calls where every call is a real on-chain position on DreamDEX event contracts, settled publicly by an oracle minutes later — with a receipt anyone can audit and a leaderboard of who is actually right. Built for the Somnia × DreamDEX Hackathon.',
+      es: 'Un feed social de predicciones de BTC/ETH donde cada palpito es una posición real on-chain en event contracts de DreamDEX, liquidada públicamente por un oráculo minutos después — con recibo auditable y ranking de quién realmente acierta. Construido para el Somnia × DreamDEX Hackathon.',
+    },
+  },
   {
     name: 'MAD',
     alias: 'Mongli Agent Delphi',
@@ -372,18 +447,6 @@ export const projects = [
     description: {
       en: 'Cosmetic dentistry demo built around a keyboard-accessible drag-to-reveal before/after slider.',
       es: 'Demo de estética dental construida alrededor de un slider antes/después con arrastre y soporte completo de teclado.',
-    },
-  },
-  {
-    name: 'El Velador',
-    alias: { en: 'The Watchman', es: 'El Vigilante' },
-    url: 'https://el-velador-bot.vercel.app/',
-    preview: previewImg_el_velador,
-    bucket: 'Seguridad',
-    tag: { en: 'Web3 · Security Bot', es: 'Web3 · Bot de Seguridad' },
-    description: {
-      en: 'Scans pump.fun tokens in seconds — deployer history, holder distribution, market signals — and returns a traffic-light risk read. Free with a daily limit, unlimited while holding $VELADOR.',
-      es: 'Analiza tokens de pump.fun en segundos: historial del deployer, distribución de holders y señales de mercado, con un semáforo de riesgo. Gratis con límite diario, ilimitado holdeando $VELADOR.',
     },
   },
 ];
