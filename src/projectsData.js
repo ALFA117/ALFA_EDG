@@ -391,7 +391,7 @@ export const projects = [
 export const socials = [
   {
     name: 'Instagram',
-    url: 'https://www.instagram.com/alfa_edg_/',
+    url: 'https://www.instagram.com/alfa_edg.mou/',
     icon: 'instagram',
   },
   {
