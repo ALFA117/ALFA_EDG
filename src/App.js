@@ -16,7 +16,7 @@ import PhotoReel from './components/PhotoReel';
 import SocialBar from './components/SocialBar';
 import SocialRail from './components/SocialRail';
 import ScrollProgress from './components/ScrollProgress';
-import ParticleNetwork from './components/ParticleNetwork';
+import AmbientBackground from './components/AmbientBackground';
 import BackToTop from './components/BackToTop';
 import { Button, EmptyState } from './components/ui';
 import {
@@ -31,6 +31,7 @@ import {
   GridIcon,
   MessageIcon,
   CameraIcon,
+  GitHubIcon,
 } from './components/Icons';
 import { useScrollSpy } from './hooks/useScrollSpy';
 import { useLanguage } from './i18n/LanguageContext';
@@ -50,6 +51,7 @@ const HERO_PHOTOS = [
   { src: heroPhoto6, position: '62% 30%' },
 ];
 const HERO_ROTATE_MS = 6000;
+const github = socials.find((s) => s.icon === 'github');
 
 function readTheme() {
   try {
@@ -90,7 +92,7 @@ function App() {
     }
     // Las <meta name="theme-color"> estáticas solo cubren el tema del
     // sistema; al elegir uno, la barra del navegador móvil lo sigue.
-    const color = theme === 'light' ? '#f6f8f7' : '#07090a';
+    const color = theme === 'light' ? '#e3e7e0' : '#07090a';
     document.querySelectorAll('meta[name="theme-color"]').forEach((el) => {
       el.setAttribute('content', color);
     });
@@ -161,7 +163,7 @@ function App() {
       <a href="#main-content" className="skip-link">
         {t.skipToContent}
       </a>
-      <ParticleNetwork className="page__network" />
+      <AmbientBackground />
       <ScrollProgress />
       <header className="nav">
         <a href="#top" className="nav__brand">
@@ -283,9 +285,20 @@ function App() {
                 ))}
               </ul>
               <p className="hero__closing">{t.hero.closing}</p>
-              <Button href="#proyectos" iconEnd={<ArrowRightIcon />}>
-                {t.hero.cta}
-              </Button>
+              <div className="hero__actions">
+                <Button href="#proyectos" iconEnd={<ArrowRightIcon />}>
+                  {t.hero.cta}
+                </Button>
+                <Button
+                  variant="secondary"
+                  href={github.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  icon={<GitHubIcon />}
+                >
+                  {t.hero.github}
+                </Button>
+              </div>
             </div>
 
             <div className="hero__stats-wrap">

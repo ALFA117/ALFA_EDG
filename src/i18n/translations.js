@@ -41,6 +41,7 @@ export const strings = {
       ],
       closing: 'Need the developer who actually delivers? Let’s talk.',
       cta: 'See my projects',
+      github: 'My GitHub',
       chips: { web3: 'Web3', ai: 'AI', security: 'Security' },
       stats: {
         projects: 'Projects shipped',
@@ -117,6 +118,7 @@ export const strings = {
       ],
       closing: '¿Buscas al desarrollador que sí entrega? Hablemos.',
       cta: 'Ver mis proyectos',
+      github: 'Mi GitHub',
       chips: { web3: 'Web3', ai: 'IA', security: 'Seguridad' },
       stats: {
         projects: 'Proyectos entregados',
