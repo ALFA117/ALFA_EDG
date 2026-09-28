@@ -10,6 +10,7 @@ import heroPhoto4 from './assets/photos/edg-02.jpg';
 import heroPhoto5 from './assets/photos/edg-01.jpg';
 import heroPhoto6 from './assets/photos/edg-03.jpg';
 import AlfaMark from './components/AlfaMark';
+import ScrambleTitle from './components/ScrambleTitle';
 import ProjectRow from './components/ProjectRow';
 import CategoryTabs from './components/CategoryTabs';
 import PhotoReel from './components/PhotoReel';
@@ -92,7 +93,7 @@ function App() {
     }
     // Las <meta name="theme-color"> estáticas solo cubren el tema del
     // sistema; al elegir uno, la barra del navegador móvil lo sigue.
-    const color = theme === 'light' ? '#e3e7e0' : '#07090a';
+    const color = theme === 'light' ? '#cdd3cb' : '#07090a';
     document.querySelectorAll('meta[name="theme-color"]').forEach((el) => {
       el.setAttribute('content', color);
     });
@@ -155,6 +156,13 @@ function App() {
         : localizedProjects,
     [localizedProjects, activeCategory]
   );
+
+  // Resaltadas: "full-stack" y la última palabra (prometen / pitch).
+  const heroTitle = keepHyphens(t.hero.title);
+  const heroHighlight = useMemo(() => {
+    const words = heroTitle.split(' ');
+    return words.map((w, i) => (/full/i.test(w) || i === words.length - 1 ? i : -1)).filter((i) => i >= 0);
+  }, [heroTitle]);
 
   const themeLabel = theme === 'light' ? t.themeToggle.toDark : t.themeToggle.toLight;
 
@@ -242,6 +250,13 @@ function App() {
           </div>
 
           <div className="hero__inner">
+            <ScrambleTitle
+              id="hero-title"
+              className="hero__title t-display"
+              text={heroTitle}
+              highlight={heroHighlight}
+            />
+
             <div className="hero__visual">
               <span className="hero__photo">
                 <AnimatePresence initial={false}>
@@ -271,13 +286,6 @@ function App() {
             </div>
 
             <div className="hero__content">
-              <h1 id="hero-title" className="hero__title t-display">
-                {keepHyphens(t.hero.title).split(' ').slice(0, -1).join(' ')}{' '}
-                <span className="nowrap">
-                  {keepHyphens(t.hero.title).split(' ').slice(-1)}
-                  <span className="blink-cursor" aria-hidden="true" />
-                </span>
-              </h1>
               <p className="hero__subtitle">{t.hero.intro}</p>
               <ul className="hero__highlights">
                 {t.hero.highlights(projects.length).map((line) => (

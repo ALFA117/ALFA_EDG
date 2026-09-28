@@ -109,42 +109,42 @@
   color-scheme: dark;
 }
 
-/* Tema claro — "papel de terminal": gris salvia apagado en vez de blanco.
-   El blanco #fff con texto casi negro deslumbraba (feedback de Edgar: "el
-   modo claro lastima la vista"); aquí ninguna superficie pasa de ~90% de
-   luminosidad y el texto es verde grafito, no negro puro. El verde de señal
-   y los acentos se oscurecen para seguir pasando 4.5:1 sobre este papel. */
+/* Tema claro — "atenuado" (tipo light dimmed). Segundo intento: el papel
+   #e3e7e0 seguía deslumbrando con el brillo del celular alto ("el modo
+   claro lastima"). Aquí el fondo baja a ~64% de luminancia relativa (antes
+   79%), las tarjetas apenas un paso arriba y el texto es grafito, no negro:
+   menos contraste bruto pero todo el texto sigue ≥ 4.8:1 y el cuerpo ≈ 10:1. */
 [data-theme='light'] {
-  --color-void: #e3e7e0;
-  --color-surface: #ecefe8;
-  --color-surface-2: #d9ded5;
-  --color-signal: #0c5f37;
-  --color-signal-rgb: 12, 95, 55;
-  --color-on-signal: #eef3ec;
-  --color-circuit: #aab6ac;
-  --color-ink: #1d2721;
-  --color-muted: #47554c;
-  --color-border: #c9d0c5;
-  --color-border-strong: #a9b4a8;
-  --color-scrim: rgba(227, 231, 224, 0.82);
-  --vignette-rgb: 227, 231, 224;
-  --color-danger: #a1202b;
-  --color-warning: #7a5500;
+  --color-void: #cdd3cb;
+  --color-surface: #d8ddd5;
+  --color-surface-2: #c3cac0;
+  --color-signal: #0b5530;
+  --color-signal-rgb: 11, 85, 48;
+  --color-on-signal: #dfe6dc;
+  --color-circuit: #9aa598;
+  --color-ink: #1f2a23;
+  --color-muted: #3d4a41;
+  --color-border: #b5beb2;
+  --color-border-strong: #97a294;
+  --color-scrim: rgba(205, 211, 203, 0.85);
+  --vignette-rgb: 205, 211, 203;
+  --color-danger: #8c1c26;
+  --color-warning: #5f4300;
 
-  --cat-infra: #035c8e;
-  --cat-infra-rgb: 3, 92, 142;
-  --cat-ia: #6d28d9;
-  --cat-ia-rgb: 109, 40, 217;
-  --cat-seguridad: #be123c;
-  --cat-seguridad-rgb: 190, 18, 60;
-  --cat-gaming: #a8154f;
-  --cat-gaming-rgb: 168, 21, 79;
-  --cat-freelance: #765300;
-  --cat-freelance-rgb: 118, 83, 0;
-  --cat-otros: #475569;
-  --cat-otros-rgb: 71, 85, 105;
-  --cat-web2: #046a4d;
-  --cat-web2-rgb: 4, 106, 77;
+  --cat-infra: #034a73;
+  --cat-infra-rgb: 3, 74, 115;
+  --cat-ia: #5b21b6;
+  --cat-ia-rgb: 91, 33, 182;
+  --cat-seguridad: #9f1239;
+  --cat-seguridad-rgb: 159, 18, 57;
+  --cat-gaming: #8e1244;
+  --cat-gaming-rgb: 142, 18, 68;
+  --cat-freelance: #5f4300;
+  --cat-freelance-rgb: 95, 67, 0;
+  --cat-otros: #3b4757;
+  --cat-otros-rgb: 59, 71, 87;
+  --cat-web2: #035a41;
+  --cat-web2-rgb: 3, 90, 65;
 
   --shadow-1: 0 1px 2px rgba(29, 39, 33, 0.08);
   --shadow-2: 0 8px 20px rgba(29, 39, 33, 0.1);
