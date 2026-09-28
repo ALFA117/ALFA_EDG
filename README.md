@@ -72,6 +72,18 @@ Audit and repair pass — 2026-09-27. Checked against production at 380px, 320px
 | Text arrows (← → ↑) as icons | Font-dependent glyphs | SVG icons with the same stroke as the rest |
 | `dl` stats with `dd` before `dt`; h1 → h3 jump in the ethos block | Invalid markup / skipped heading level | Valid `dt`/`dd`; ethos gets its h2 |
 
+### Second pass — 2026-09-27 (responsive, socials, light mode)
+
+| Found | Why it mattered | Fix |
+|---|---|---|
+| WhatsApp and Facebook icons were hand-drawn strokes that rendered as tiny squiggles next to the others | The social row looked broken | All social glyphs redrawn as filled 24px marks with the same optical weight |
+| No GitHub link | A developer portfolio without the code profile | GitHub (`@ALFA117`) added to the contact grid, the desktop rail and as a hero button |
+| Contact tiles: icon + name only, 7 items in an uneven grid | Last tile alone on its row; nothing told you the handle | 8 items → even 2×4 grid on phones, 4×2 on desktop; each tile shows the real handle in mono; WhatsApp stays the highlighted one |
+| Desktop social rail pinned to the bottom-left with a loose line | Floated away from the content, icons different sizes | Rail is a pill centered vertically, 44px round targets, hidden on short screens (< 560px tall) |
+| Light theme: `#f6f8f7` page, pure white cards, near-black text | Glare — "el modo claro lastima la vista" | "Terminal paper" palette: sage-grey `#e3e7e0` page, `#ecefe8` cards, graphite-green text; no surface above ~90% lightness; every accent re-checked ≥ 4.4:1 (body text 6.2–13:1) |
+| Phone hero: photo stuck to the left with empty space on the right, chips hidden | Looked unfinished at 380px | Photo centered, the three chips shown inside the side margins, buttons stack full-width under 480px |
+| Top nav border started 68px in on desktop (rail padding) | Visible offset line | Nav bleeds edge to edge |
+
 ## DESIGN_NOTES
 
 - **Identity kept, not replaced.** The site already had a system — terminal "signal green" on a near-black void, JetBrains Mono, category colors as ANSI codes, the α mark. This pass turns it into tokens and completes it rather than restyling.
@@ -82,6 +94,8 @@ Audit and repair pass — 2026-09-27. Checked against production at 380px, 320px
 - **Cards not cloned:** accent border per category, network chip, domain line; ethos cards are numbered `01/03` and the first one carries the signal border.
 - **Motion:** springs for anything touched (buttons, tabs, nav indicator via `layoutId`, theme icon swap); a single 300ms entrance on load; the hero photo crossfade is the one ambient motion. Everything collapses to a static scene under `prefers-reduced-motion`. Only `transform`/`opacity` are animated (the scroll bar uses `scaleX`).
 - **Mobile nav:** bottom tab bar ≤ 640px because the top row cannot fit brand + 3 labeled links + 2 toggles at 320px with 44px targets; it's reachable with the thumb and respects the home-indicator inset.
+- **3D background (second pass, die roll: recipe 5 — themed objects in CSS 3D).** Near layer: α coins with a real 16-segment edge (Web3), chain blocks as cubes (infra, in the Infra category blue), terminal cards that flip to show the α on the back (the brand's `~$`). Far layer: the existing node constellation. Pointer parallax on desktop and scroll parallax everywhere, scaled by depth; the object layer fades to 40% past the hero ("calm" variant) since this is a one-page site. Phones get 3 objects instead of 7. Pauses with the tab hidden, static under reduced motion, dimmed to 60% in light mode. Opacity lives on flat wrappers only — on a `preserve-3d` element it would flatten the 3D.
+- **Light mode is not white.** The palette is designed as paper under a terminal, not a negative of the dark theme.
 
 ## Checklist de 2 minutos en el celular
 
@@ -93,3 +107,7 @@ Audit and repair pass — 2026-09-27. Checked against production at 380px, 320px
 6. Toca el sol/luna: cambia de tema y todo sigue legible. Toca **EN**: cambia el idioma.
 7. Baja al fondo: el botón de volver arriba queda **encima** de la barra inferior, no tapado por ella.
 8. Toca **WhatsApp** en Contacto: abre el chat.
+9. En Contacto hay **8 tarjetas parejas** (2 por fila): GitHub, LinkedIn, WhatsApp (resaltada), Email, X, Telegram, Instagram, Facebook; cada una con su usuario abajo.
+10. En el hero toca **Mi GitHub**: abre github.com/ALFA117.
+11. Cambia a modo claro: el fondo es gris verdoso suave, no blanco; no debe deslumbrar con el brillo al máximo.
+12. Arriba, detrás del texto, flotan monedas α, bloques y tarjetas; al bajar se vuelven más tenues.
