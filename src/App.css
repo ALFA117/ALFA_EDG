@@ -576,7 +576,7 @@ section {
 .hero__visual {
   position: relative;
   z-index: var(--z-raised);
-  width: min(260px, 68vw);
+  width: min(240px, 62vw);
   margin: var(--space-10) auto var(--space-10);
 }
 
@@ -640,10 +640,75 @@ section {
   .hero__chip--2 { right: -6%; }
 }
 
+/* Móvil: título → foto → texto → cifras. El título va primero para que
+   lo primero que se lea sea la promesa, no la foto. */
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'title'
+    'visual'
+    'content'
+    'stats';
+}
+
+.hero__title { grid-area: title; }
+.hero__visual { grid-area: visual; }
+.hero__content { grid-area: content; }
+.hero__stats-wrap { grid-area: stats; }
+
 .hero__title {
-  margin: 0 0 var(--space-4);
+  margin: var(--space-6) 0 0;
   color: var(--color-ink);
-  max-width: 22ch;
+  max-width: 20ch;
+  font-size: clamp(1.75rem, 1.1rem + 3.4vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.scramble__word {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Palabras clave: verde de señal, un subrayado degradado que se dibuja al
+   terminar el descifrado y, en oscuro, un halo tenue de fósforo. */
+.scramble__word--hot {
+  color: var(--color-signal);
+  text-shadow: 0 0 24px rgba(var(--color-signal-rgb), 0.35);
+}
+
+[data-theme='light'] .scramble__word--hot {
+  text-shadow: none;
+}
+
+.scramble__word--hot::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.04em;
+  height: 0.09em;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-signal), var(--cat-infra));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 600ms var(--ease-out);
+}
+
+/* La última palabra lleva el cursor dentro: el subrayado no lo cubre. */
+.scramble__word--hot:last-child::after {
+  right: 0.6em;
+}
+
+.scramble__word--hot.is-drawn::after {
+  transform: scaleX(1);
+}
+
+.scramble .blink-cursor {
+  color: var(--color-signal);
 }
 
 .hero__subtitle {
@@ -731,16 +796,26 @@ section {
   .hero {
     padding-top: var(--space-16);
   }
+  /* Escritorio: título y texto a la izquierda, foto a la derecha ocupando
+     ambas filas, cifras abajo a todo lo ancho. */
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-areas:
+      'title visual'
+      'content visual'
+      'stats stats';
+    column-gap: var(--space-12);
+  }
   .hero__visual {
-    float: right;
     width: 300px;
-    margin: var(--space-6) var(--space-8) var(--space-5) var(--space-10);
+    margin: 0 var(--space-8) 0 0;
+    align-self: center;
+  }
+  .hero__title {
+    margin: var(--space-2) 0 var(--space-6);
   }
   .hero__chip--1 { left: -28px; }
   .hero__chip--2 { right: -32px; }
-  .hero__stats-wrap {
-    clear: both;
-  }
   .hero__stat-value {
     font-size: var(--text-3xl);
   }
