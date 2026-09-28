@@ -84,7 +84,14 @@ Audit and repair pass — 2026-09-27. Checked against production at 380px, 320px
 | Phone hero: photo stuck to the left with empty space on the right, chips hidden | Looked unfinished at 380px | Photo centered, the three chips shown inside the side margins, buttons stack full-width under 480px |
 | Top nav border started 68px in on desktop (rail padding) | Visible offset line | Nav bleeds edge to edge |
 
-## DESIGN_NOTES
+### Third pass — 2026-09-28 (hero title, light mode again)
+
+| Found | Why it mattered | Fix |
+|---|---|---|
+| The sage-paper light theme (`#e3e7e0`) still hurt at high phone brightness | Second report of glare | "Light dimmed" palette chosen by Edgar: page `#cdd3cb` (relative luminance 0.64, was 0.79), cards `#d8ddd5`, graphite text; every text pair re-checked (≥ 4.8:1, body ≈ 10:1) |
+| On phones the photo came before the headline, pushing it below the fold | The promise was the last thing you saw | Hero is a CSS grid: title → photo → copy → stats on phones; title + copy left and photo right on desktop (replaces the float) |
+| Static hero title | Edgar asked for motion on the whole headline | `ScrambleTitle`: letters decode from random glyphs in 1.4 s (mono font, so no layout shift), "full-stack" and the last word turn signal green with an underline that draws in, then a short glitch on one of them every 7 s. Real text in an `sr-only` span; final text at once under reduced motion |
+
 
 - **Identity kept, not replaced.** The site already had a system — terminal "signal green" on a near-black void, JetBrains Mono, category colors as ANSI codes, the α mark. This pass turns it into tokens and completes it rather than restyling.
 - **Three typefaces, three jobs.** JetBrains Mono ExtraBold for display (the brand's terminal voice), **IBM Plex Sans** for body copy (long project descriptions were hard to read set in mono), JetBrains Mono for data: networks, domains, counts, index numbers.
@@ -109,5 +116,6 @@ Audit and repair pass — 2026-09-27. Checked against production at 380px, 320px
 8. Toca **WhatsApp** en Contacto: abre el chat.
 9. En Contacto hay **8 tarjetas parejas** (2 por fila): GitHub, LinkedIn, WhatsApp (resaltada), Email, X, Telegram, Instagram, Facebook; cada una con su usuario abajo.
 10. En el hero toca **Mi GitHub**: abre github.com/ALFA117.
-11. Cambia a modo claro: el fondo es gris verdoso suave, no blanco; no debe deslumbrar con el brillo al máximo.
+11. Cambia a modo claro: el fondo es gris medio atenuado, no blanco; no debe deslumbrar con el brillo al máximo.
 12. Arriba, detrás del texto, flotan monedas α, bloques y tarjetas; al bajar se vuelven más tenues.
+13. Recarga la página: el título aparece como caracteres raros y en ~1.5 s se "descifra"; "full-stack" y "prometen" quedan en verde subrayado. En celular el título sale **antes** de la foto.
