@@ -1,11 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { socialIcons } from './Icons';
 
-/** Fixed vertical strip of icon-only social links along the left edge — desktop only (see CSS). */
+/** Riel vertical de íconos, centrado a la izquierda — solo escritorio (ver CSS). */
 function SocialRail({ items }) {
+  const reduce = useReducedMotion();
   return (
-    <nav className="social-rail" aria-label="Social">
+    <nav className="social-rail" aria-label="Redes sociales">
+      <span className="social-rail__label" aria-hidden="true">
+        social
+      </span>
       {items.map((item) => {
         const Icon = socialIcons[item.icon];
         return (
@@ -16,15 +20,15 @@ function SocialRail({ items }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={item.name}
-            title={item.name}
-            whileTap={{ scale: 0.92 }}
+            title={item.handle ? `${item.name} · ${item.handle}` : item.name}
+            whileHover={reduce ? undefined : { scale: 1.08 }}
+            whileTap={reduce ? undefined : { scale: 0.92 }}
             transition={{ type: 'spring', stiffness: 400, damping: 22 }}
           >
             <Icon />
           </motion.a>
         );
       })}
-      <span className="social-rail__line" aria-hidden="true" />
     </nav>
   );
 }

@@ -501,41 +501,56 @@ export const projects = [
   },
 ];
 
+// Orden: lo que más le sirve a quien contrata un dev va primero (código y
+// perfil), WhatsApp es la acción principal y se resalta en SocialBar.
 export const socials = [
   {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/alfa_edg.mou/',
-    icon: 'instagram',
-  },
-  {
-    name: 'X',
-    url: 'https://x.com/ALFA_EDG',
-    icon: 'x',
-  },
-  {
-    name: 'WhatsApp',
-    url: 'https://wa.me/525655102956?text=Hola%20Edgar%2C%20vi%20tu%20portafolio%20y%20quiero%20platicar%20de%20un%20proyecto',
-    icon: 'whatsapp',
-  },
-  {
-    name: 'Telegram',
-    url: 'https://t.me/ALFA_EDG',
-    icon: 'telegram',
-  },
-  {
-    name: 'Email',
-    url: 'mailto:edgarlopezbaeza.ing@gmail.com',
-    icon: 'mail',
-  },
-  {
-    name: 'Facebook',
-    url: 'https://www.facebook.com/edgar.lopez.58747?locale=es_LA',
-    icon: 'facebook',
+    name: 'GitHub',
+    url: 'https://github.com/ALFA117',
+    icon: 'github',
+    handle: '@ALFA117',
   },
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/edgar-lopez-baeza-6b5a22353',
     icon: 'linkedin',
+    handle: 'in/edgar-lopez-baeza',
+  },
+  {
+    name: 'WhatsApp',
+    url: 'https://wa.me/525655102956?text=Hola%20Edgar%2C%20vi%20tu%20portafolio%20y%20quiero%20platicar%20de%20un%20proyecto',
+    icon: 'whatsapp',
+    handle: '+52 56 5510 2956',
+  },
+  {
+    name: 'Email',
+    url: 'mailto:edgarlopezbaeza.ing@gmail.com',
+    icon: 'mail',
+    handle: 'edgarlopezbaeza.ing@gmail.com',
+  },
+  {
+    name: 'X',
+    url: 'https://x.com/ALFA_EDG',
+    icon: 'x',
+    handle: '@ALFA_EDG',
+  },
+  {
+    name: 'Telegram',
+    url: 'https://t.me/ALFA_EDG',
+    icon: 'telegram',
+    handle: '@ALFA_EDG',
+  },
+  {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/alfa_edg.mou/',
+    icon: 'instagram',
+    handle: '@alfa_edg.mou',
+  },
+  {
+    name: 'Facebook',
+    url: 'https://www.facebook.com/edgar.lopez.58747?locale=es_LA',
+    icon: 'facebook',
+    handle: 'edgar.lopez',
   },
 ];
 
