@@ -20,6 +20,7 @@
   --color-border: #1f2622;
   --color-border-strong: #33403a;
   --color-scrim: rgba(7, 9, 10, 0.72);
+  --vignette-rgb: 7, 9, 10;
   --color-danger: #ff7a85;
   --color-warning: #f5c542;
 
@@ -108,44 +109,46 @@
   color-scheme: dark;
 }
 
-/* Tema claro — mismo verde y mismas categorías; solo se invierte la pila
-   void/surface/ink. El verde baja un paso de luminosidad porque #3ee878 no
-   pasa contraste de texto sobre blanco; los acentos de categoría también se
-   oscurecen para que sus etiquetas pasen 4.5:1 sobre fondo claro. */
+/* Tema claro — "papel de terminal": gris salvia apagado en vez de blanco.
+   El blanco #fff con texto casi negro deslumbraba (feedback de Edgar: "el
+   modo claro lastima la vista"); aquí ninguna superficie pasa de ~90% de
+   luminosidad y el texto es verde grafito, no negro puro. El verde de señal
+   y los acentos se oscurecen para seguir pasando 4.5:1 sobre este papel. */
 [data-theme='light'] {
-  --color-void: #f6f8f7;
-  --color-surface: #ffffff;
-  --color-surface-2: #eef2f0;
-  --color-signal: #0f6b3e;
-  --color-signal-rgb: 15, 107, 62;
-  --color-on-signal: #ffffff;
-  --color-circuit: #b7c4bf;
-  --color-ink: #101612;
-  --color-muted: #4f5f56;
-  --color-border: #d6dfdb;
-  --color-border-strong: #b3c0ba;
-  --color-scrim: rgba(246, 248, 247, 0.8);
-  --color-danger: #b4232f;
-  --color-warning: #8a6100;
+  --color-void: #e3e7e0;
+  --color-surface: #ecefe8;
+  --color-surface-2: #d9ded5;
+  --color-signal: #0c5f37;
+  --color-signal-rgb: 12, 95, 55;
+  --color-on-signal: #eef3ec;
+  --color-circuit: #aab6ac;
+  --color-ink: #1d2721;
+  --color-muted: #47554c;
+  --color-border: #c9d0c5;
+  --color-border-strong: #a9b4a8;
+  --color-scrim: rgba(227, 231, 224, 0.82);
+  --vignette-rgb: 227, 231, 224;
+  --color-danger: #a1202b;
+  --color-warning: #7a5500;
 
-  --cat-infra: #0369a1;
-  --cat-infra-rgb: 3, 105, 161;
+  --cat-infra: #035c8e;
+  --cat-infra-rgb: 3, 92, 142;
   --cat-ia: #6d28d9;
   --cat-ia-rgb: 109, 40, 217;
   --cat-seguridad: #be123c;
   --cat-seguridad-rgb: 190, 18, 60;
-  --cat-gaming: #be185d;
-  --cat-gaming-rgb: 190, 24, 93;
-  --cat-freelance: #8a6100;
-  --cat-freelance-rgb: 138, 97, 0;
+  --cat-gaming: #a8154f;
+  --cat-gaming-rgb: 168, 21, 79;
+  --cat-freelance: #765300;
+  --cat-freelance-rgb: 118, 83, 0;
   --cat-otros: #475569;
   --cat-otros-rgb: 71, 85, 105;
-  --cat-web2: #047857;
-  --cat-web2-rgb: 4, 120, 87;
+  --cat-web2: #046a4d;
+  --cat-web2-rgb: 4, 106, 77;
 
-  --shadow-1: 0 1px 2px rgba(16, 22, 18, 0.08);
-  --shadow-2: 0 8px 20px rgba(16, 22, 18, 0.08);
-  --shadow-3: 0 20px 48px rgba(16, 22, 18, 0.12);
+  --shadow-1: 0 1px 2px rgba(29, 39, 33, 0.08);
+  --shadow-2: 0 8px 20px rgba(29, 39, 33, 0.1);
+  --shadow-3: 0 20px 48px rgba(29, 39, 33, 0.14);
   --glow-signal: 0 0 0 3px rgba(var(--color-signal-rgb), 0.15);
 
   color-scheme: light;
@@ -182,22 +185,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
+  /* El fondo 3D va en z-index -10: sin su propio contexto quedaría detrás
+     del lienzo del body. */
+  isolation: isolate;
   touch-action: manipulation;
-}
-
-/* Textura de scanlines — el único adorno del fondo, a propósito. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-bg);
-  pointer-events: none;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(var(--color-signal-rgb), 0.025) 0px,
-    transparent 1px,
-    transparent 3px
-  );
 }
 
 a {
