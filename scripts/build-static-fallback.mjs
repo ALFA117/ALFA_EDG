@@ -33,7 +33,7 @@ const contact = socials.map((s) => `<a href="${esc(s.url)}">${esc(s.name)}</a>`)
 const fallback = `<noscript>
       <main style="max-width:720px;margin:0 auto;padding:24px 16px;font-family:system-ui,sans-serif;line-height:1.6;color:#e8efe9;background:#07090a">
         <h1 style="font-family:monospace">ALFA-EDG — Builder Web3 + IA</h1>
-        <p>Desarrollador full-stack en México. ${count} proyectos con demo en vivo: Web3, agentes de IA, seguridad on-chain y sitios para negocios. Esta es la versión sin JavaScript; actívalo para ver el sitio completo.</p>
+        <p>Desarrollador full-stack en México. ${count} proyectos que puedes abrir y probar: Web3, agentes de IA, seguridad on-chain y sitios para negocios. Esta es la versión sin JavaScript; actívalo para ver el sitio completo.</p>
         <p>Contacto: ${contact}</p>
         <h2 style="font-family:monospace">Proyectos (${count})</h2>
         <ul>
@@ -42,7 +42,7 @@ const fallback = `<noscript>
       </main>
     </noscript>`;
 
-const description = `ALFA-EDG — desarrollador full-stack Web3 + IA en México: ${count} proyectos con demo en vivo, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain.`;
+const description = `ALFA-EDG — desarrollador full-stack Web3 + IA en México: ${count} proyectos que puedes abrir y probar, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain.`;
 
 let html = fs.readFileSync(htmlPath, 'utf8');
 html = html.replace(/<noscript>[\s\S]*?<\/noscript>/, fallback);
