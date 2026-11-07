@@ -11,7 +11,9 @@ function displayUrl(url) {
   return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 }
 
-function ProjectRow({ name, alias, tag, env, description, url, preview, bucket, showKnot, index }) {
+const STATUSES = ['live', 'demo', 'offline'];
+
+function ProjectRow({ name, alias, tag, env, status, description, url, preview, bucket, showKnot, index }) {
   const { t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const previewRef = useRef(null);
@@ -19,6 +21,9 @@ function ProjectRow({ name, alias, tag, env, description, url, preview, bucket, 
   // dejar un hueco mientras carga ni una imagen rota si falla.
   const [imgState, setImgState] = useState(preview ? 'loading' : 'error');
   const domain = displayUrl(url);
+  // Estado verificado del proyecto: en vivo, demo (simulación o vista sin
+  // llaves) o fuera de línea (lo principal no funciona hoy).
+  const state = STATUSES.includes(status) ? status : 'live';
 
   // Inclinación 3D sutil que sigue al puntero — solo con mouse (en touch no
   // hay hover hacia el cual inclinar) y nunca con movimiento reducido.
@@ -88,9 +93,9 @@ function ProjectRow({ name, alias, tag, env, description, url, preview, bucket, 
             {name}
             {alias && <span className="project-card__alias">{alias}</span>}
           </h3>
-          <span className="project-card__status">
+          <span className={`project-card__status project-card__status--${state}`}>
             <span className="project-card__dot" aria-hidden="true" />
-            {t.projectRow.live}
+            {t.projectRow.status[state]}
           </span>
         </span>
 

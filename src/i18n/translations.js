@@ -26,7 +26,7 @@ export const strings = {
     meta: {
       title: 'ALFA-EDG — Web3 + AI Builder',
       description:
-        'ALFA-EDG — full-stack Web3 + AI developer in Mexico: projects with live demos, from peso gateways on Stellar to AI agents and on-chain security bots.',
+        'ALFA-EDG — full-stack Web3 + AI developer in Mexico: projects you can open and try, from peso gateways on Stellar to AI agents and on-chain security bots.',
     },
     nav: { projects: 'Projects', photos: 'Photos', contact: 'Contact' },
     hero: {
@@ -37,7 +37,7 @@ export const strings = {
       highlights: (n) => [
         'Real Web3 — sealed-bid rounds with zero collusion, funds that move on-chain.',
         'AI with skin in the game — agents that stake capital and get penalized on-chain when wrong.',
-        `${n} projects with a live demo, backend to frontend, all built by me.`,
+        `${n} projects you can open today, backend to frontend, all built by me.`,
       ],
       closing: 'Need the developer who actually delivers? Let’s talk.',
       cta: 'See my projects',
@@ -59,7 +59,7 @@ export const strings = {
         },
         {
           title: 'Live demos, not mockups',
-          body: 'Every project in the registry opens at a link that works. If it runs on testnet, devnet or is a demo, its card says so.',
+          body: 'Every project in the registry opens at a link that works. Its card says whether it runs on testnet or devnet, whether it is a demo and whether any part is offline.',
         },
         {
           title: 'Real full-stack',
@@ -69,10 +69,10 @@ export const strings = {
     },
     registry: {
       heading: 'Project Registry',
-      lead: 'Newest first. The $ net label says which network each one runs on — testnet and devnet never move real money.',
+      lead: 'Newest first. The $ net label says which network each one runs on (testnet and devnet never move real money), and the status says whether it is live, a demo or offline.',
       empty: { title: 'Nothing in this category yet', body: 'Pick another category or see all projects.', action: 'See all' },
-      stamp: (n) => `${n} live`,
-      stampSuffix: 'live',
+      stamp: (n) => `${n} projects`,
+      stampSuffix: 'projects',
       columns: { index: '#', name: 'Project', tag: 'Stack', status: 'Status' },
     },
     field: {
@@ -85,7 +85,7 @@ export const strings = {
       heading: 'Contact',
       body: 'Follow me or message me directly on WhatsApp to talk about your project.',
     },
-    projectRow: { live: 'Live', flagship: 'Flagship project', previewError: 'Preview unavailable', opens: 'opens in a new tab' },
+    projectRow: { status: { live: 'Live', demo: 'Demo', offline: 'Offline' }, flagship: 'Flagship project', previewError: 'Preview unavailable', opens: 'opens in a new tab' },
     photoReel: {
       prev: 'Previous photo',
       next: 'Next photo',
@@ -103,7 +103,7 @@ export const strings = {
     meta: {
       title: 'ALFA-EDG — Builder Web3 + IA',
       description:
-        'ALFA-EDG — desarrollador full-stack Web3 + IA en México: proyectos con demo en vivo, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain.',
+        'ALFA-EDG — desarrollador full-stack Web3 + IA en México: proyectos que puedes abrir y probar, de gateways de pesos en Stellar a agentes de IA y bots de seguridad on-chain.',
     },
     nav: { projects: 'Proyectos', photos: 'Fotos', contact: 'Contacto' },
     hero: {
@@ -114,7 +114,7 @@ export const strings = {
       highlights: (n) => [
         'Web3 real — pujas selladas sin colusión, fondos que se mueven on-chain.',
         'IA con capital propio — agentes que arriesgan y son penalizados on-chain si fallan.',
-        `${n} proyectos con demo en vivo, de backend a frontend, todos hechos por mí.`,
+        `${n} proyectos que puedes abrir hoy, de backend a frontend, todos hechos por mí.`,
       ],
       closing: '¿Buscas al desarrollador que sí entrega? Hablemos.',
       cta: 'Ver mis proyectos',
@@ -136,7 +136,7 @@ export const strings = {
         },
         {
           title: 'Demos en vivo, no maquetas',
-          body: 'Cada proyecto del registro abre en un link que funciona. Si corre en testnet, devnet o es una demo, su tarjeta lo dice.',
+          body: 'Cada proyecto del registro abre en un link que funciona. Su tarjeta dice si corre en testnet o devnet, si es una demo y si alguna parte está fuera de línea.',
         },
         {
           title: 'Full-stack real',
@@ -146,10 +146,10 @@ export const strings = {
     },
     registry: {
       heading: 'Registro de proyectos',
-      lead: 'Del más reciente al más antiguo. La etiqueta $ net dice en qué red corre cada uno: testnet y devnet nunca mueven dinero real.',
+      lead: 'Del más reciente al más antiguo. La etiqueta $ net dice en qué red corre cada uno (testnet y devnet nunca mueven dinero real) y el estado dice si está en vivo, si es una demo o si está fuera de línea.',
       empty: { title: 'Aún no hay proyectos en esta categoría', body: 'Elige otra categoría o mira todos los proyectos.', action: 'Ver todos' },
-      stamp: (n) => `${n} activos`,
-      stampSuffix: 'activos',
+      stamp: (n) => `${n} proyectos`,
+      stampSuffix: 'proyectos',
       columns: { index: '#', name: 'Proyecto', tag: 'Stack', status: 'Estado' },
     },
     field: {
@@ -162,7 +162,7 @@ export const strings = {
       heading: 'Contacto',
       body: 'Sígueme o escríbeme directo por WhatsApp para hablar de tu proyecto.',
     },
-    projectRow: { live: 'En vivo', flagship: 'Proyecto insignia', previewError: 'Vista previa no disponible', opens: 'abre en otra pestaña' },
+    projectRow: { status: { live: 'En vivo', demo: 'Demo', offline: 'Fuera de línea' }, flagship: 'Proyecto insignia', previewError: 'Vista previa no disponible', opens: 'abre en otra pestaña' },
     photoReel: {
       prev: 'Foto anterior',
       next: 'Siguiente foto',

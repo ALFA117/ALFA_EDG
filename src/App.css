@@ -1175,6 +1175,21 @@ section {
   background: var(--accent);
 }
 
+/* Demo: anillo del acento (corre, pero con datos o red de ejemplo). */
+.project-card__status--demo .project-card__dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+/* Fuera de línea: punto apagado y texto en tinta, para que se lea. */
+.project-card__status--offline {
+  color: var(--color-ink);
+}
+
+.project-card__status--offline .project-card__dot {
+  background: var(--color-border-strong);
+}
+
 .project-card__description {
   flex: 1;
   margin: 0;
