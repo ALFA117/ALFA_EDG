@@ -58,6 +58,10 @@ export const projects = [
     preview: previewImg_kipu_anon,
     bucket: 'Seguridad',
     tag: { en: 'Data Privacy · API', es: 'Privacidad de datos · API' },
+    summary: {
+      en: 'Pseudonymizes the support chats of a fictional fintech: each customer gets a stable disguise across chats, documents and tables, so the data can train models without exposing anyone. Rule-based, no generative AI. Built with Elizabeth Cruz at Frontier CDMX/26.',
+      es: 'Seudonimiza los chats de soporte de una fintech ficticia: cada cliente recibe un disfraz estable en chats, documentos y tablas, para entrenar modelos sin exponer a nadie. Funciona con reglas, sin IA generativa. Hecho con Elizabeth Cruz en Frontier CDMX/26.',
+    },
     description: {
       en: 'A service that pseudonymizes the support conversations of a fictional fintech (Kipu Pay). Each customer gets a stable disguise (another name, ID number and email) that holds across chats, documents and tables, so the data can train models without exposing anyone. Rule-based, no generative AI. Built with Elizabeth Cruz at the Frontier CDMX/26 hackathon (lab10.ai); you can try it with a message on the page. When the sources grew mid-event (the incident: Kipu Pay bought Págalo), all 193 people kept their pseudonym, its own scanner found no leaks in 3,711 checked values and the local judge passed 2,337 of 2,337 cases.',
       es: 'Servicio que seudonimiza las conversaciones de soporte de una fintech ficticia (Kipu Pay). Cada cliente recibe un disfraz estable, con otro nombre, otra cédula y otro correo, que se mantiene en chats, documentos y tablas, para que los datos sirvan para entrenar modelos sin exponer a nadie. Funciona con reglas, sin IA generativa. Hecho con Elizabeth Cruz en el hackathon Frontier CDMX/26 (lab10.ai); en la página puedes probarlo con un mensaje. Cuando a media competencia crecieron las fuentes (el incidente: Kipu Pay compró Págalo), las 193 personas conservaron su seudónimo, el escáner propio no encontró fugas en 3.711 datos revisados y el juez local pasó 2.337 de 2.337 casos.',
@@ -74,6 +78,10 @@ export const projects = [
     preview: previewImg_kiopay,
     bucket: 'Infra',
     tag: { en: 'Fintech · PWA · CoDi', es: 'Fintech · PWA · CoDi' },
+    summary: {
+      en: 'A PWA for market vendors: charge with a CoDi QR, read tickets with OCR, keep payroll and debts in one place and sign in with your fingerprint. Credit and the AI assistant are a demo with simulated data. Try it without an account.',
+      es: 'PWA para comerciantes de mercado: cobras con QR CoDi, lees tickets con OCR, llevas nómina y deudas en un solo lugar y entras con tu huella. El crédito y el asistente con IA son demo con datos simulados. Se prueba sin cuenta.',
+    },
     description: {
       en: 'A financial-inclusion PWA for market vendors: charge with a CoDi QR (through Pey) from the Collect screen, read tickets with an OCR scanner, keep payroll and debts in one place, net debts between vendors and sign in with your fingerprint (WebAuthn). Sales-based credit and the AI assistant run in demo mode with simulated data. Born at a hackathon on Nov 7, 2026, built as a team; you can try the demo without an account.',
       es: 'PWA de inclusión financiera para comerciantes de mercado: cobras con QR CoDi (vía Pey) desde «Cobrar», lees tickets con un lector OCR, llevas nómina y deudas en un solo lugar, cruzas deudas entre comerciantes y entras con tu huella (WebAuthn). El crédito por ventas y el asistente con IA corren en modo demo con datos simulados. Nació en un hackathon el 7 de noviembre de 2026, hecha en equipo; puedes probar la demo sin crear cuenta.',
@@ -90,6 +98,10 @@ export const projects = [
     env: { en: 'Solana devnet · MagicBlock Private ER', es: 'Solana devnet · MagicBlock Private ER' },
     bucket: 'Infra',
     tag: { en: 'Web3 · Solana · Privacy', es: 'Web3 · Solana · Privacidad' },
+    summary: {
+      en: 'Blind stable matching on Solana: founders and builders rank each other privately and only the pairings come out. Runs in the browser without a wallet. Built for MagicBlock Solana Blitz v8.',
+      es: 'Matching estable a ciegas en Solana: founders y builders se rankean en privado y solo salen las parejas. Corre en el navegador sin wallet. Hecho para MagicBlock Solana Blitz v8.',
+    },
     description: {
       en: 'Blind stable matching on Solana: founders and builders rank each other, Gale–Shapley runs inside a MagicBlock Private Ephemeral Rollup with VRF randomness, and only the pairings come out; the preference lists are never published. You can run the algorithm in the browser without a wallet. Built for MagicBlock Solana Blitz v8.',
       es: 'Matching estable a ciegas en Solana: founders y builders se rankean entre sí, el algoritmo Gale–Shapley corre dentro de un Private Ephemeral Rollup de MagicBlock con aleatoriedad VRF y solo salen las parejas; las listas de preferencias nunca se publican. Puedes correr el algoritmo en el navegador sin wallet. Construido para MagicBlock Solana Blitz v8.',
@@ -105,6 +117,10 @@ export const projects = [
     preview: previewImg_mongli_pool,
     bucket: 'Infra',
     tag: { en: 'Web3 · Pool', es: 'Web3 · Pool' },
+    summary: {
+      en: 'A privacy pool on Stellar with compliance built in: deposit, then withdraw to another address without anyone linking the two. Try it without a wallet on testnet. Built for Stellar Hacks: ZK 2025.',
+      es: 'Pool de privacidad en Stellar con cumplimiento integrado: depositas y retiras a otra dirección sin que nadie vincule las dos. Se prueba sin wallet en testnet. Hecho para Stellar Hacks: ZK 2025.',
+    },
     description: {
       en: 'A privacy pool on Stellar with compliance built in: deposit, then withdraw to another address without anyone linking the two. The ZK proof (Groth16) is generated in your browser and verified by a Soroban contract. You can try it without a wallet using a temporary testnet account. Built for Stellar Hacks: ZK 2025.',
       es: 'Pool de privacidad en Stellar con cumplimiento integrado: depositas y retiras a otra dirección sin que nadie pueda vincular ambas operaciones. La prueba ZK (Groth16) se genera en tu navegador y la verifica un contrato Soroban. Se puede probar sin wallet con una cuenta temporal de testnet. Construido para Stellar Hacks: ZK 2025.',
@@ -120,6 +136,10 @@ export const projects = [
     env: { en: 'Static analysis · no wallet', es: 'Análisis estático · sin wallet' },
     bucket: 'Seguridad',
     tag: { en: 'Web3 · Security', es: 'Web3 · Seguridad' },
+    summary: {
+      en: 'A Solidity scanner: paste a contract and get the flagged vulnerabilities with a PDF report. An automated pattern check, not a replacement for an audit. Built for HackOWASP 8.0.',
+      es: 'Escáner de Solidity: pegas un contrato y recibes las vulnerabilidades marcadas con reporte en PDF. Es una revisión automática por patrones, no sustituye una auditoría. Hecho para HackOWASP 8.0.',
+    },
     description: {
       en: 'A Solidity contract scanner: paste the code and in under a second it flags 6 SWC vulnerability classes (reentrancy, tx.origin, overflow, unchecked calls, unprotected selfdestruct and missing visibility), with a PDF report. It\'s an automated pattern-based check, not a replacement for an audit. Built for HackOWASP 8.0.',
       es: 'Escáner de contratos Solidity: pegas el código y en menos de un segundo marca 6 tipos de vulnerabilidad del registro SWC (reentrancy, tx.origin, overflow, llamadas sin verificar, selfdestruct sin protección y visibilidad faltante), con reporte en PDF. Es una revisión automática por patrones, no sustituye una auditoría. Hecho para HackOWASP 8.0.',
@@ -136,6 +156,10 @@ export const projects = [
     env: { en: 'Gensyn testnet · competition over', es: 'Gensyn testnet · competencia terminada' },
     bucket: 'IA',
     tag: { en: 'AI · Trading Agent', es: 'IA · Agente de Trading' },
+    summary: {
+      en: 'An autonomous trading agent that only bet when a named public data source backed the number. The competition is over; the page shows its final record.',
+      es: 'Agente de trading autónomo que solo apostaba cuando un dato público con nombre respaldaba el número. La competencia terminó; la página muestra su registro final.',
+    },
     description: {
       en: 'An autonomous trading agent that only bet on a prediction market when a named public data source backed the number, and abstained otherwise. It competed in Gensyn\'s Delphi Agent Arena (Aug 14–24, 2026) and closed at 1,766.37 TST, 18th of 164; the page shows that final record.',
       es: 'Agente de trading autónomo que solo apostaba en un mercado de predicción cuando un dato público con nombre respaldaba el número, y se abstenía si no. Compitió en el Delphi Agent Arena de Gensyn (14–24 ago 2026) y cerró en 1,766.37 TST, puesto 18 de 164; la página muestra ese registro final.',
@@ -152,6 +176,10 @@ export const projects = [
     preview: previewImg_koalak_care,
     bucket: 'IA',
     tag: { en: 'AI · Self-improving agents', es: 'IA · Agentes que se automejoran' },
+    summary: {
+      en: "For low-income senior residences: two local agents watch each resident's vitals, tell the doctor who to check first and learn from the doctor's ratings. Demo with simulated data; decision support, not diagnosis. RSI Hackathon, team build.",
+      es: 'Para residencias de adultos mayores de bajos recursos: dos agentes locales siguen los signos de cada residente, avisan al médico a quién revisar primero y aprenden de sus calificaciones. Demo con datos simulados; apoyo a la decisión, no diagnóstico. RSI Hackathon, en equipo.',
+    },
     description: {
       en: 'For low-income senior residences: the nurse logs blood pressure, pulse, oxygen and weight, and two agents running on the residence\'s own computer track how each resident changes and tell the doctor who to check first. The doctor rates every alert as useful or not, and the agent rewrites its skills file with that feedback. In a simulated week with 20 residents, the learning agent reached 90.9% useful alerts versus 81.8% without learning. Demo with simulated data; clinical decision support, not diagnosis. Built as a team at the RSI Hackathon (Kavak × OpenAI × Primero AI).',
       es: 'Para residencias de adultos mayores de bajos recursos: el enfermero registra presión, pulso, saturación y peso, y dos agentes que corren en la computadora de la residencia ven cómo cambia cada residente y avisan al médico a quién revisar primero. El médico califica cada aviso como útil o no, y el agente reescribe su archivo de habilidades con eso. En una semana simulada con 20 residentes, aprendiendo llegó a 90.9 % de avisos útiles contra 81.8 % sin aprender. Demo con datos simulados; apoyo a la decisión clínica, no diagnóstico. Hecho en equipo en el RSI Hackathon (Kavak × OpenAI × Primero AI).',
@@ -697,4 +725,4 @@ export const socials = [
 // Última revisión manual de que cada link del registro responde (HTTP 200).
 // Se muestra tal cual en el hero junto con su fecha; actualízala al volver
 // a revisar, no la cambies sin revisar.
-export const linkCheck = { date: '2026-11-07', ok: 38, total: 38 };
+export const linkCheck = { date: '2026-11-15', ok: 40, total: 40 };
