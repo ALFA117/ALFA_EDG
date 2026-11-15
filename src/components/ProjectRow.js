@@ -24,6 +24,11 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
   // Estado verificado del proyecto: en vivo, demo (simulación o vista sin
   // llaves) o fuera de línea (lo principal no funciona hoy).
   const state = STATUSES.includes(status) ? status : 'live';
+  const compact = variant === 'compact';
+  const featured = variant === 'lead' || variant === 'featured';
+  // En las demos para negocios el giro («Clínica Dental») sustituye a la
+  // etiqueta de stack: todas son Web2 y repetirlo no aporta.
+  const kicker = compact ? alias || tag.replace(/^Web2\s*·\s*/, '') : null;
 
   // Inclinación 3D sutil que sigue al puntero — solo con mouse (en touch no
   // hay hover hacia el cual inclinar) y nunca con movimiento reducido.
@@ -46,7 +51,9 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
 
   return (
     <motion.a
-      className={`project-card${variant ? ` project-card--featured project-card--${variant}` : ''}`}
+      className={`project-card${
+        variant === 'lead' || variant === 'featured' ? ' project-card--featured' : ''
+      }${variant ? ` project-card--${variant}` : ''}`}
       data-cat={bucket}
       href={url}
       target="_blank"
@@ -91,7 +98,11 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
         <span className="project-card__head">
           <h3 className="project-card__name">
             {name}
-            {alias && <span className="project-card__alias">{alias}</span>}
+            {compact ? (
+              <span className="project-card__alias">{kicker}</span>
+            ) : (
+              alias && <span className="project-card__alias">{alias}</span>
+            )}
           </h3>
           <span className={`project-card__status project-card__status--${state}`}>
             <span className="project-card__dot" aria-hidden="true" />
@@ -99,7 +110,7 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
           </span>
         </span>
 
-        {variant && highlight && (
+        {featured && highlight && (
           <span className="project-card__result">
             <span className="project-card__result-label">{resultLabel}</span>
             <span className="project-card__result-value">{highlight}</span>
@@ -108,10 +119,10 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
 
         <span className="project-card__description">{description}</span>
 
-        {env && <span className="project-card__env">{env}</span>}
+        {env && !compact && <span className="project-card__env">{env}</span>}
 
         <span className="project-card__footer">
-          <span className="project-card__tag">{tag}</span>
+          {!compact && <span className="project-card__tag">{tag}</span>}
           <span className="project-card__domain">
             <MiddleTruncate text={domain} head={12} tail={8} />
             <ExternalLinkIcon className="project-card__link-icon" />

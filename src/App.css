@@ -97,7 +97,7 @@ section {
   inset: 0;
   background-image: repeating-linear-gradient(
     0deg,
-    rgba(var(--color-signal-rgb), 0.025) 0px,
+    rgba(var(--color-signal-rgb), 0.012) 0px,
     transparent 1px,
     transparent 3px
   );
@@ -111,7 +111,7 @@ section {
   width: 80vmax;
   height: 80vmax;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(var(--color-signal-rgb), 0.14), transparent 62%);
+  background: radial-gradient(circle, rgba(var(--color-signal-rgb), 0.07), transparent 62%);
 }
 
 .amb-glow.amb-animate {
@@ -130,7 +130,7 @@ section {
 .amb-network {
   position: absolute;
   inset: 0;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 [data-theme='light'] .amb-network {
@@ -145,13 +145,17 @@ section {
 
 /* En claro los objetos se atenúan para no competir con el texto. La
    opacidad va en capas planas: en un elemento preserve-3d aplanaría el 3D. */
+.amb-tint {
+  opacity: 0.7;
+}
+
 [data-theme='light'] .amb-tint {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 @media (max-width: 767px) {
-  .amb-tint { opacity: 0.75; }
-  [data-theme='light'] .amb-tint { opacity: 0.5; }
+  .amb-tint { opacity: 0.6; }
+  [data-theme='light'] .amb-tint { opacity: 0.45; }
 }
 
 .amb-float {
@@ -1169,16 +1173,17 @@ section {
 }
 
 .project-card__dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--color-signal);
 }
 
-/* Demo: anillo del acento (corre, pero con datos o red de ejemplo). */
+/* El punto habla del estado, nunca de la categoría: verde = en vivo,
+   anillo ámbar = demo (corre con datos o red de ejemplo), gris = caído. */
 .project-card__status--demo .project-card__dot {
   background: transparent;
-  box-shadow: inset 0 0 0 1.5px var(--accent);
+  box-shadow: inset 0 0 0 1.5px var(--color-warning);
 }
 
 /* Fuera de línea: punto apagado y texto en tinta, para que se lea. */
@@ -1285,13 +1290,6 @@ section {
   border-top: 1px solid var(--color-border-strong);
 }
 
-@media (min-width: 900px) {
-  .registry__group-head {
-    grid-template-columns: minmax(220px, 1fr) 2fr;
-    align-items: baseline;
-    gap: var(--space-8);
-  }
-}
 
 .registry__group-title {
   display: flex;
@@ -1315,7 +1313,7 @@ section {
 
 .registry__group-body {
   margin: 0;
-  max-width: 62ch;
+  max-width: 76ch;
   color: var(--color-muted);
 }
 
@@ -1346,26 +1344,14 @@ section {
     flex-direction: row;
   }
 
+  /* La captura llena su columna (anclada arriba, donde está el hero del
+     proyecto) en lugar de flotar chica sobre un fondo vacío. */
   .project-card--lead .project-card__preview {
-    flex: 0 0 56%;
+    flex: 0 0 54%;
     aspect-ratio: auto;
-    min-height: 360px;
+    min-height: 340px;
     border-bottom: 0;
     border-right: 1px solid var(--color-border);
-  }
-
-  .project-card--lead .project-card__preview {
-    background: var(--color-surface-2);
-  }
-
-  /* La captura entera, centrada sobre un fondo neutro: sin recortes aunque
-     el texto haga la tarjeta más alta. */
-  .project-card--lead .project-card__preview img {
-    inset: var(--space-6);
-    width: calc(100% - var(--space-6) * 2);
-    height: calc(100% - var(--space-6) * 2);
-    object-fit: contain;
-    object-position: center;
   }
 
   .project-card--lead .project-card__body {
@@ -1440,25 +1426,109 @@ section {
   align-self: flex-start;
 }
 
-/* Demos para negocios: retícula más densa, texto en 3 líneas (la etiqueta
-   «negocio ficticio» queda siempre visible abajo). */
-@media (min-width: 1100px) {
+/* Demos para negocios: índice en filas (miniatura + texto), dos columnas en
+   escritorio. Es otra forma a propósito: no compiten con los proyectos. */
+.registry__group--showcase .registry__list {
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 1000px) {
   .registry__group--showcase .registry__list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
   }
 }
 
-.registry__group--showcase .project-card__env {
-  margin-top: auto;
+.project-card--compact {
+  flex-direction: row;
+  align-items: stretch;
 }
 
-.registry__group--showcase .project-card__description {
-  flex: none;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.project-card--compact .project-card__preview {
+  flex: 0 0 34%;
+  aspect-ratio: auto;
+  min-height: 132px;
+  border-bottom: 0;
+  border-right: 1px solid var(--color-border);
+}
+
+.project-card--compact .project-card__preview img {
+  object-position: left top;
+}
+
+.project-card--compact .project-card__index {
+  display: none;
+}
+
+.project-card--compact .project-card__body {
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+}
+
+.project-card--compact .project-card__name {
+  font-size: var(--text-base);
+}
+
+.project-card--compact .project-card__alias {
+  margin-top: 2px;
+}
+
+.project-card--compact .project-card__description {
+  font-size: var(--text-base);
+}
+
+.project-card--compact .project-card__footer {
+  padding-top: var(--space-2);
+}
+
+@media (max-width: 479px) {
+  .project-card--compact {
+    flex-direction: column;
+  }
+
+  .project-card--compact .project-card__preview {
+    flex: none;
+    aspect-ratio: 8 / 5;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+}
+
+/* Grupo de un solo proyecto: tarjeta horizontal a todo el ancho en lugar de
+   una tarjeta sola en una fila de tres. */
+.registry__single {
+  display: grid;
+}
+
+@media (min-width: 760px) {
+  .project-card--wide {
+    flex-direction: row;
+  }
+
+  .project-card--wide .project-card__preview {
+    flex: 0 0 44%;
+    aspect-ratio: 8 / 5;
+    border-bottom: 0;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .project-card--wide .project-card__body {
+    justify-content: center;
+    padding: var(--space-6);
+    gap: var(--space-4);
+  }
+
+  .project-card--wide .project-card__description {
+    flex: none;
+    max-width: 58ch;
+  }
+
+  .project-card--wide .project-card__name {
+    font-size: var(--text-xl);
+  }
 }
 
 /* Fuera de línea: captura apagada para que no compita con lo que sí corre. */

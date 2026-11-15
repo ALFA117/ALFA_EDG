@@ -145,7 +145,9 @@ function App() {
         alias: typeof project.alias === 'object' ? project.alias[language] : project.alias,
         tag: project.tag[language],
         env: project.env ? project.env[language] : null,
-        description: project.description[language],
+        // Las tarjetas muestran el resumen corto cuando existe; el texto
+        // largo queda para el fallback sin JS.
+        description: (project.summary || project.description)[language],
         highlight: project.highlight ? project.highlight[language] : null,
       })),
     [language]
@@ -438,12 +440,22 @@ function App() {
                   </h3>
                   <p className="registry__group-body">{t.registry.tiers[tier].body}</p>
                 </header>
-                <div className={tier === 'featured' ? 'registry__featured' : 'registry__list'}>
+                <div className={tier === 'featured' ? 'registry__featured' : items.length === 1 ? 'registry__single' : 'registry__list'}>
                   {items.map(({ project, index }, i) => (
                     <ProjectRow
                       key={project.url + project.name}
                       index={index}
-                      variant={tier === 'featured' ? (i === 0 ? 'lead' : 'featured') : undefined}
+                      variant={
+                        tier === 'featured'
+                          ? i === 0
+                            ? 'lead'
+                            : 'featured'
+                          : tier === 'showcase'
+                            ? 'compact'
+                            : items.length === 1
+                              ? 'wide'
+                              : undefined
+                      }
                       resultLabel={t.registry.result}
                       {...project}
                     />
