@@ -38,6 +38,7 @@ import { useScrollSpy } from './hooks/useScrollSpy';
 import { useLanguage } from './i18n/LanguageContext';
 
 const BUCKET_ORDER = ['Infra', 'IA', 'Seguridad', 'Gaming', 'Web2', 'Freelance', 'Otros'];
+const TIER_ORDER = ['featured', 'more', 'client', 'showcase', 'offline'];
 const ETHOS_ICONS = [ShieldIcon, RocketIcon, LayersIcon];
 const NAV_ICONS = { proyectos: GridIcon, contacto: MessageIcon, fotos: CameraIcon };
 
@@ -145,6 +146,7 @@ function App() {
         tag: project.tag[language],
         env: project.env ? project.env[language] : null,
         description: project.description[language],
+        highlight: project.highlight ? project.highlight[language] : null,
       })),
     [language]
   );
@@ -155,6 +157,19 @@ function App() {
         ? localizedProjects.filter((p) => p.bucket === activeCategory)
         : localizedProjects,
     [localizedProjects, activeCategory]
+  );
+
+  // En «Todo» la lista se parte por grupos (destacados primero); con un
+  // filtro activo se ve plana. El número de cada tarjeta es su lugar global.
+  const tierGroups = useMemo(
+    () =>
+      TIER_ORDER.map((tier) => ({
+        tier,
+        items: localizedProjects
+          .map((project, index) => ({ project, index }))
+          .filter(({ project }) => project.tier === tier),
+      })).filter((group) => group.items.length > 0),
+    [localizedProjects]
   );
 
   // Resaltadas: "full-stack" y la última palabra (prometen / pitch).
@@ -399,17 +414,43 @@ function App() {
                 </Button>
               }
             />
-          ) : (
+          ) : activeCategory ? (
             <div className="registry__list">
               {filteredProjects.map((project, index) => (
                 <ProjectRow
                   key={project.url + project.name}
                   index={index}
-                  showKnot={project.name === 'AVAL'}
                   {...project}
                 />
               ))}
             </div>
+          ) : (
+            tierGroups.map(({ tier, items }) => (
+              <section
+                key={tier}
+                className={`registry__group registry__group--${tier}`}
+                aria-labelledby={`tier-${tier}`}
+              >
+                <header className="registry__group-head">
+                  <h3 id={`tier-${tier}`} className="registry__group-title">
+                    {t.registry.tiers[tier].title}
+                    <span className="registry__group-count">{items.length}</span>
+                  </h3>
+                  <p className="registry__group-body">{t.registry.tiers[tier].body}</p>
+                </header>
+                <div className={tier === 'featured' ? 'registry__featured' : 'registry__list'}>
+                  {items.map(({ project, index }, i) => (
+                    <ProjectRow
+                      key={project.url + project.name}
+                      index={index}
+                      variant={tier === 'featured' ? (i === 0 ? 'lead' : 'featured') : undefined}
+                      resultLabel={t.registry.result}
+                      {...project}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))
           )}
         </section>
       </main>

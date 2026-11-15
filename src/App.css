@@ -1266,6 +1266,206 @@ section {
   }
 }
 
+/* ---------- Grupos del registro (orden por impacto) ---------- */
+
+.registry__group {
+  margin-top: var(--space-12);
+  padding: 0;
+}
+
+.registry__group:first-of-type {
+  margin-top: var(--space-8);
+}
+
+.registry__group-head {
+  display: grid;
+  gap: var(--space-1);
+  margin-bottom: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 900px) {
+  .registry__group-head {
+    grid-template-columns: minmax(220px, 1fr) 2fr;
+    align-items: baseline;
+    gap: var(--space-8);
+  }
+}
+
+.registry__group-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+}
+
+.registry__group-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.registry__group-body {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-muted);
+}
+
+.registry__group--featured .registry__group-head {
+  border-top-color: var(--color-signal);
+}
+
+/* Destacados: retícula de 2 columnas, el primero a todo el ancho. */
+.registry__featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 760px) {
+  .registry__featured {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .project-card--lead {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1000px) {
+  .project-card--lead {
+    flex-direction: row;
+  }
+
+  .project-card--lead .project-card__preview {
+    flex: 0 0 56%;
+    aspect-ratio: auto;
+    min-height: 360px;
+    border-bottom: 0;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .project-card--lead .project-card__preview {
+    background: var(--color-surface-2);
+  }
+
+  /* La captura entera, centrada sobre un fondo neutro: sin recortes aunque
+     el texto haga la tarjeta más alta. */
+  .project-card--lead .project-card__preview img {
+    inset: var(--space-6);
+    width: calc(100% - var(--space-6) * 2);
+    height: calc(100% - var(--space-6) * 2);
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .project-card--lead .project-card__body {
+    padding: var(--space-6);
+    gap: var(--space-4);
+  }
+
+  .project-card--lead .project-card__name {
+    font-size: var(--text-2xl);
+  }
+}
+
+.project-card--featured {
+  border-color: var(--color-border-strong);
+}
+
+.project-card--featured .project-card__body {
+  padding: var(--space-5);
+}
+
+.project-card--featured .project-card__name {
+  font-size: var(--text-xl);
+}
+
+/* Resultado medible: una sola línea con peso, en mono. */
+.project-card__result {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid var(--color-signal);
+  background: var(--color-surface-2);
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+}
+
+.project-card__result-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.project-card__result-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+}
+
+/* Etiqueta de stack sobria: tinta neutra con un cuadro del color de la
+   categoría, en lugar de una pastilla de color por cada tarjeta. */
+.project-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-color: var(--color-border-strong);
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.project-card__tag::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+/* «$ net» nunca se parte en dos renglones en pantallas angostas. */
+.project-card__env::before {
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* Demos para negocios: retícula más densa, texto en 3 líneas (la etiqueta
+   «negocio ficticio» queda siempre visible abajo). */
+@media (min-width: 1100px) {
+  .registry__group--showcase .registry__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+}
+
+.registry__group--showcase .project-card__env {
+  margin-top: auto;
+}
+
+.registry__group--showcase .project-card__description {
+  flex: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Fuera de línea: captura apagada para que no compita con lo que sí corre. */
+.registry__group--offline .project-card__preview img {
+  filter: grayscale(1) brightness(0.75);
+}
+
 /* ---------- Carrete de fotos ---------- */
 
 .photo-reel {

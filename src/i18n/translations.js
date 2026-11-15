@@ -69,7 +69,15 @@ export const strings = {
     },
     registry: {
       heading: 'Project Registry',
-      lead: 'Newest first. The $ net label says which network each one runs on (testnet and devnet never move real money), and the status says whether it is live, a demo or offline.',
+      lead: 'Ordered by impact: what runs today and has results comes first, then solid demos, client work, the business demos and, last, what is offline. The $ net label says which network each one runs on (testnet and devnet never move real money).',
+      tiers: {
+        featured: { title: 'Featured', body: 'Live or with measured results: the work I would show first.' },
+        more: { title: 'More projects', body: 'Hackathon builds and solid demos; each card says what is real and what is simulated.' },
+        client: { title: 'Client work', body: 'Built for a real client.' },
+        showcase: { title: 'Business demos', body: 'Sites for fictional businesses, made to show what I can build for yours.' },
+        offline: { title: 'Offline today', body: 'The code is done, but a database or an outside API is down, so the main flow does not work right now.' },
+      },
+      result: 'Result',
       empty: { title: 'Nothing in this category yet', body: 'Pick another category or see all projects.', action: 'See all' },
       stamp: (n) => `${n} projects`,
       stampSuffix: 'projects',
@@ -146,7 +154,15 @@ export const strings = {
     },
     registry: {
       heading: 'Registro de proyectos',
-      lead: 'Del más reciente al más antiguo. La etiqueta $ net dice en qué red corre cada uno (testnet y devnet nunca mueven dinero real) y el estado dice si está en vivo, si es una demo o si está fuera de línea.',
+      lead: 'Ordenados por impacto: primero lo que funciona hoy y tiene resultados, luego demos sólidas, trabajos para clientes, las demos para negocios y, al final, lo que está fuera de línea. La etiqueta $ net dice en qué red corre cada uno (testnet y devnet nunca mueven dinero real).',
+      tiers: {
+        featured: { title: 'Destacados', body: 'En vivo o con resultados medidos: lo primero que enseñaría.' },
+        more: { title: 'Más proyectos', body: 'Hackathons y demos sólidas; cada tarjeta dice qué es real y qué es simulado.' },
+        client: { title: 'Para clientes', body: 'Hecho para un cliente real.' },
+        showcase: { title: 'Demos para negocios', body: 'Sitios de negocios ficticios, hechos para mostrar lo que puedo construir para el tuyo.' },
+        offline: { title: 'Fuera de línea hoy', body: 'El código está terminado, pero una base de datos o una API externa está caída, así que el flujo principal no funciona por ahora.' },
+      },
+      result: 'Resultado',
       empty: { title: 'Aún no hay proyectos en esta categoría', body: 'Elige otra categoría o mira todos los proyectos.', action: 'Ver todos' },
       stamp: (n) => `${n} proyectos`,
       stampSuffix: 'proyectos',

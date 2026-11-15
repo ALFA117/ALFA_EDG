@@ -13,7 +13,7 @@ function displayUrl(url) {
 
 const STATUSES = ['live', 'demo', 'offline'];
 
-function ProjectRow({ name, alias, tag, env, status, description, url, preview, bucket, showKnot, index }) {
+function ProjectRow({ name, alias, tag, env, status, description, url, preview, bucket, showKnot, index, variant, highlight, resultLabel }) {
   const { t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const previewRef = useRef(null);
@@ -46,7 +46,7 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
 
   return (
     <motion.a
-      className="project-card"
+      className={`project-card${variant ? ` project-card--featured project-card--${variant}` : ''}`}
       data-cat={bucket}
       href={url}
       target="_blank"
@@ -73,7 +73,7 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
           <img
             src={preview}
             alt=""
-            loading={index < 3 ? 'eager' : 'lazy'}
+            loading={index < 4 ? 'eager' : 'lazy'}
             decoding="async"
             width="640"
             height="400"
@@ -98,6 +98,13 @@ function ProjectRow({ name, alias, tag, env, status, description, url, preview, 
             {t.projectRow.status[state]}
           </span>
         </span>
+
+        {variant && highlight && (
+          <span className="project-card__result">
+            <span className="project-card__result-label">{resultLabel}</span>
+            <span className="project-card__result-value">{highlight}</span>
+          </span>
+        )}
 
         <span className="project-card__description">{description}</span>
 
