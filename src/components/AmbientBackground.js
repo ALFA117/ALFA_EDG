@@ -179,8 +179,9 @@ function AmbientBackground() {
   const smoothScroll = useSpring(scrollY, { stiffness: 80, damping: 24 });
   const still = useMotionValue(0);
   const scrollSource = reduce ? still : smoothScroll;
-  // Completa en el hero, tranquila en el resto de la página.
-  const stageOpacity = useTransform(scrollSource, [0, 700], [1, 0.4]);
+  // Completa en el hero; casi desaparece en el registro para no competir
+  // con las capturas.
+  const stageOpacity = useTransform(scrollSource, [0, 800], [1, 0.12]);
   const farX = useTransform(px, (v) => v * -8);
   const farY = useTransform([py, scrollSource], ([a, b]) => a * -6 - Math.min(b, 2400) * 0.03);
 
