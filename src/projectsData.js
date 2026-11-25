@@ -309,7 +309,7 @@ export const projects = [
   {
     name: 'Refugio',
     alias: 'Wall of Guardians',
-    url: 'https://wall-of-guardians.vercel.app/',
+    url: 'https://refugio-wall.vercel.app/',
     status: 'demo',
     preview: previewImg_refugio,
     env: { en: 'Decentraland SDK7 · web demo', es: 'Decentraland SDK7 · demo web' },
