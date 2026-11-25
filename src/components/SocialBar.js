@@ -11,9 +11,9 @@ function SocialBar({ items }) {
     <ul className="social-bar">
       {items.map((item) => {
         const Icon = socialIcons[item.icon];
-        const primary = item.icon === 'whatsapp';
+        const primary = item.icon === 'mail';
         return (
-          <li key={item.name}>
+          <li key={item.name} className={primary ? 'social-bar__item--primary' : undefined}>
             <motion.a
               className={'social-bar__link' + (primary ? ' social-bar__link--primary' : '')}
               href={item.url}

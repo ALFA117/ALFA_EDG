@@ -83,7 +83,7 @@ export const strings = {
     },
     contact: {
       heading: 'Contact',
-      body: 'Follow me or message me directly on WhatsApp to talk about your project.',
+      body: 'Follow me or send me an email to talk about your project.',
     },
     projectRow: { status: { live: 'Live', demo: 'Demo', offline: 'Offline' }, flagship: 'Flagship project', previewError: 'Preview unavailable', opens: 'opens in a new tab' },
     photoReel: {
@@ -160,7 +160,7 @@ export const strings = {
     },
     contact: {
       heading: 'Contacto',
-      body: 'Sígueme o escríbeme directo por WhatsApp para hablar de tu proyecto.',
+      body: 'Sígueme o escríbeme un correo para hablar de tu proyecto.',
     },
     projectRow: { status: { live: 'En vivo', demo: 'Demo', offline: 'Fuera de línea' }, flagship: 'Proyecto insignia', previewError: 'Vista previa no disponible', opens: 'abre en otra pestaña' },
     photoReel: {

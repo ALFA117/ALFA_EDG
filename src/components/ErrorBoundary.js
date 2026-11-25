@@ -50,8 +50,7 @@ class ErrorBoundary extends React.Component {
           fix={
             <>
               {c.fix}{' '}
-              <a href="mailto:edgarlopezbaeza.ing@gmail.com">edgarlopezbaeza.ing@gmail.com</a> ·{' '}
-              <a href="https://wa.me/525655102956">WhatsApp</a>
+              <a href="mailto:edgarlopezbaeza.ing@gmail.com">edgarlopezbaeza.ing@gmail.com</a>
             </>
           }
           onRetry={() => window.location.reload()}

@@ -65,8 +65,8 @@ Audit and repair pass — 2026-09-27. Checked against production at 380px, 320px
 5. Toca el filtro **Web2**: aparecen 12 demos, cada una con `Demo · negocio ficticio`.
 6. Toca el sol/luna: cambia de tema y todo sigue legible. Toca **EN**: cambia el idioma.
 7. Baja al fondo: el botón de volver arriba queda **encima** de la barra inferior, no tapado por ella.
-8. Toca **WhatsApp** en Contacto: abre el chat.
-9. En Contacto hay **8 tarjetas parejas** (2 por fila): GitHub, LinkedIn, WhatsApp (resaltada), Email, X, Telegram, Instagram, Facebook; cada una con su usuario abajo.
+8. Toca **Email** en Contacto: abre tu app de correo.
+9. En Contacto hay **7 tarjetas parejas** (2 por fila; Email, resaltada, ocupa la fila completa): GitHub, LinkedIn, Email, X, Telegram, Instagram, Facebook; cada una con su usuario abajo.
 10. En el hero toca **Mi GitHub**: abre github.com/ALFA117.
 11. Cambia a modo claro: el fondo es gris medio atenuado, no blanco; no debe deslumbrar con el brillo al máximo.
 12. Arriba, detrás del texto, flotan monedas α, bloques y tarjetas; al bajar se vuelven más tenues.

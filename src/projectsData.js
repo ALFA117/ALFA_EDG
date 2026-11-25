@@ -49,8 +49,8 @@ export const projects = [
     bucket: 'Seguridad',
     tag: { en: 'Data Privacy · API', es: 'Privacidad de datos · API' },
     description: {
-      en: 'A service that pseudonymizes the support conversations of a fictional fintech (Kipu Pay). Each customer gets a stable disguise (another name, ID number and email) that holds across chats, documents and tables, so the data can train models without exposing anyone. Rule-based, no generative AI. Built with Elizabeth Cruz at the Frontier CDMX/26 hackathon (lab10.ai); you can try it with a message on the page.',
-      es: 'Servicio que seudonimiza las conversaciones de soporte de una fintech ficticia (Kipu Pay). Cada cliente recibe un disfraz estable, con otro nombre, otra cédula y otro correo, que se mantiene en chats, documentos y tablas, para que los datos sirvan para entrenar modelos sin exponer a nadie. Funciona con reglas, sin IA generativa. Hecho con Elizabeth Cruz en el hackathon Frontier CDMX/26 (lab10.ai); en la página puedes probarlo con un mensaje.',
+      en: 'A service that pseudonymizes the support conversations of a fictional fintech (Kipu Pay). Each customer gets a stable disguise (another name, ID number and email) that holds across chats, documents and tables, so the data can train models without exposing anyone. Rule-based, no generative AI. Built with @ElizabethCruz-CM at the Frontier CDMX/26 hackathon (lab10.ai); you can try it with a message on the page.',
+      es: 'Servicio que seudonimiza las conversaciones de soporte de una fintech ficticia (Kipu Pay). Cada cliente recibe un disfraz estable, con otro nombre, otra cédula y otro correo, que se mantiene en chats, documentos y tablas, para que los datos sirvan para entrenar modelos sin exponer a nadie. Funciona con reglas, sin IA generativa. Hecho con @ElizabethCruz-CM en el hackathon Frontier CDMX/26 (lab10.ai); en la página puedes probarlo con un mensaje.',
     },
   },
   {
@@ -559,7 +559,8 @@ export const projects = [
 ];
 
 // Orden: lo que más le sirve a quien contrata un dev va primero (código y
-// perfil), WhatsApp es la acción principal y se resalta en SocialBar.
+// perfil); el correo es la acción principal y se resalta en SocialBar.
+// Regla del dueño: nada de apellidos ni teléfono en lo público.
 export const socials = [
   {
     name: 'GitHub',
@@ -571,13 +572,7 @@ export const socials = [
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/edgar-lopez-baeza-6b5a22353',
     icon: 'linkedin',
-    handle: 'in/edgar-lopez-baeza',
-  },
-  {
-    name: 'WhatsApp',
-    url: 'https://wa.me/525655102956?text=Hola%20Edgar%2C%20vi%20tu%20portafolio%20y%20quiero%20platicar%20de%20un%20proyecto',
-    icon: 'whatsapp',
-    handle: '+52 56 5510 2956',
+    handle: 'Edgar · ALFA',
   },
   {
     name: 'Email',
@@ -607,7 +602,7 @@ export const socials = [
     name: 'Facebook',
     url: 'https://www.facebook.com/edgar.lopez.58747?locale=es_LA',
     icon: 'facebook',
-    handle: 'edgar.lopez',
+    handle: 'Edgar · ALFA',
   },
 ];
 

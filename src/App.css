@@ -1418,7 +1418,13 @@ section {
   color: var(--color-signal);
 }
 
-/* WhatsApp es la acción principal del sitio: se distingue del resto. */
+/* El correo es la acción principal del sitio: se distingue del resto y
+   ocupa dos columnas, así 7 tarjetas quedan parejas (2 por fila en celular,
+   4 por fila en escritorio). */
+.social-bar__item--primary {
+  grid-column: span 2;
+}
+
 .social-bar__link--primary {
   border-color: rgba(var(--color-signal-rgb), 0.55);
 }
